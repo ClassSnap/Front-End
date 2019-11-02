@@ -44,8 +44,12 @@ const FormikLoginForm = withFormik({
   }),
 
   handleSubmit(values, { resetForm, props }) {
-    console.log("form submitted", values);
-    props.login(values, props.history);
+    let credentials = {
+      teacherEmail: values.username,
+      teacherPassword: values.password,
+    };
+    console.log("form submitted", credentials);
+    props.login(credentials, props.history);
     resetForm();
   },
 })(Login);
