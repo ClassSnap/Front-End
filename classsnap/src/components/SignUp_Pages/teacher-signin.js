@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Field, withFormik } from "formik";
 import { connect } from "react-redux";
 import { login } from "../../store/teacherAuth/authActions";
-import axios from "axios";
+
 import * as Yup from "yup";
 
 const Login = ({ errors, touched }) => {
@@ -44,8 +44,12 @@ const FormikLoginForm = withFormik({
   }),
 
   handleSubmit(values, { resetForm, props }) {
-    console.log("form submitted", values);
-    props.login(values, props.history);
+    let credentials = {
+      teacherEmail: values.username,
+      teacherPassword: values.password,
+    };
+
+    props.login(credentials, props.history);
     resetForm();
   },
 })(Login);
