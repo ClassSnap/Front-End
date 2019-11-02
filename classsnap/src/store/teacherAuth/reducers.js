@@ -35,6 +35,32 @@ const reducers = (state = initialState, action) => {
         error: action.payload,
         isLoading: false,
       };
+
+    case LOGOUT:
+      return {
+        ...state,
+        error: "",
+        isLoading: false,
+        isAuth: false,
+      };
+    case REGISTER_START:
+      return {
+        ...state,
+        error: "",
+        isLoading: true,
+      };
+    case REGISTER_SUCCESS:
+      return {
+        ...state,
+        errors: "",
+        isLoading: false,
+      };
+    case REGISTER_FAILURE:
+      return {
+        ...state,
+        errors: action.payload,
+        isLoading: false,
+      };
     default:
       return state;
   }

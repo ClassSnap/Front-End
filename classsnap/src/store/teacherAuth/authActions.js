@@ -32,4 +32,21 @@ export const login = (credentials, history) => {
   };
 };
 
-export const register = "";
+export const register = (credentials, history) => {
+  return dispatch => {
+    dispatch({ type: REGISTER_START });
+    axios
+      .post(
+        "https://class-snap.herokuapp.com/api/auth/teacher/register",
+        credentials,
+      )
+      .then(res => {
+        dispatch({ type: REGISTER_SUCCESS });
+        history.push("/teacherlogin");
+      })
+      .catch(err => {
+        dispatch({ type: REGISTER_FAILURE, payload: err.response });
+        console.log("authFailure", err.response);
+      });
+  };
+};

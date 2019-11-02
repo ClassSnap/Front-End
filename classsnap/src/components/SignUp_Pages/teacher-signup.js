@@ -128,8 +128,8 @@ const FormikTeacherRegistrationForm = withFormik({
 
 const mapPropsToState = state => {
   return {
-    // isLoading: state.auth.isLoading,
-    // error: state.auth.error,
+    isLoading: state.teacherAuth.isLoading,
+    error: state.teacherAuth.error,
   };
 };
 

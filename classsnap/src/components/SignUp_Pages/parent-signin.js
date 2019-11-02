@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { Form, Field, withFormik } from "formik";
 import { connect } from "react-redux";
-import { login } from "../../store/teacherAuth/authActions";
+import { login } from "../../store/parentAuth/authActions";
 import axios from "axios";
 import * as Yup from "yup";
 
 const Login = ({ errors, touched }) => {
-  const [credentials, setCredentials] = useState();
-
   return (
     <div className="sign-in-form">
       <Form>
@@ -46,16 +44,20 @@ const FormikLoginForm = withFormik({
   }),
 
   handleSubmit(values, { resetForm, props }) {
-    console.log("form submitted", values);
-    props.login(values, props.history);
+    let credentials = {
+      parentEmail: values.username,
+      parentPassword: values.password,
+    };
+    console.log("form submitted", credentials);
+    props.login(credentials, props.history);
     resetForm();
   },
 })(Login);
 
 const mapStateToProps = state => {
   return {
-    // isLoading: state.parentAuth.isLoading,
-    // error: state.parentAuth.error,
+    isLoading: state.parentAuth.isLoading,
+    error: state.parentAuth.error,
   };
 };
 
