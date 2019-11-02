@@ -6,8 +6,6 @@ import axios from "axios";
 import * as Yup from "yup";
 
 const Login = ({ errors, touched }) => {
-  const [credentials, setCredentials] = useState();
-
   return (
     <div className="sign-in-form">
       <Form>
