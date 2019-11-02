@@ -96,8 +96,8 @@ const FormikParentRegistrationForm = withFormik({
 
 const mapPropsToState = state => {
   return {
-    // isLoading: state.auth.isLoading,
-    // error: state.auth.error,
+    isLoading: state.parentAuth.isLoading,
+    error: state.parentAuth.error,
   };
 };
 
