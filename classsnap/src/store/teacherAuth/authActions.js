@@ -23,6 +23,7 @@ export const login = (credentials, history) => {
         dispatch({ type: LOGIN_SUCCESS, payload: res.data });
         console.log(res.data);
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("teacherId", res.data.id);
         history.push("/teacher/add-question");
       })
       .catch(err => {
@@ -32,6 +33,16 @@ export const login = (credentials, history) => {
   };
 };
 
+//Logout
+export const logout = () => {
+  return dispatch => {
+    dispatch({ type: LOGOUT });
+    localStorage.removeItem("token");
+    localStorage.removeItem("teacherId");
+  };
+};
+
+//Register
 export const register = (credentials, history) => {
   return dispatch => {
     dispatch({ type: REGISTER_START });

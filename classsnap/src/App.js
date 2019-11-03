@@ -8,6 +8,7 @@ import teacherLogin from "./components/SignUp_Pages/teacher-signin";
 import parentLogin from "./components/SignUp_Pages/parent-signin";
 import teacherReg from "./components/SignUp_Pages/teacher-signup";
 import parentReg from "./components/SignUp_Pages/parent-signup";
+import teacherDashboard from "./components/Teacher-Dashboard/dashboard";
 import AddQuestionForm from "./components/Teacher-Dashboard/AddQuestionForm";
 import ParentResponseForm from "./components//Parent-Dashboard/Parent-ResponseForm";
 import ParentNewQuestionList from "./components/Parent-Dashboard/Parent-NewQuestionList";
@@ -32,11 +33,18 @@ function App() {
             <NavBar />
             <Switch>
               <div className="container">
+                {/* Public Route */}
                 <Route exact path="/teacherlogin" component={teacherLogin} />
                 <Route exact path="/parentlogin" component={parentLogin} />
                 <Route exact path="/teachersignup" component={teacherReg} />
                 <Route exact path="/parentsignup" component={parentReg} />
 
+                {/* Private Route */}
+                <Route
+                  exact
+                  path="/teacher/dashboard"
+                  component={teacherDashboard}
+                />
                 <Route
                   exact
                   path="/teacher/add-question"
