@@ -4,57 +4,68 @@ import getAllClass from "../../store/teachers/action";
 
 //components
 import ClassCard from "./ClassCard";
+import axiosWithAuth from "../../utils/axiosWithAuth";
 
-// const ClassList = props => {
-//   useEffect(() => {
-//     props.getAllClass(localStorage.getItem("teacherId"));
-//   }, []);
+//Note: List is undefined despite the fact that it is fetched
+//correctly, the data is not being rendered to the page.
 
-//   const list = props.clase;
-//   console.log(list);
+const ClassList = props => {
+  const [list, setList] = useState([]);
 
-//   return (
-//     <div className="class-list">
-//       {list.map(info => (
-//         <ClassCard name={info.name} classCode={info.classCode} />
-//       ))}
-//     </div>
-//   );
-// };
+  useEffect(async () => {
+    const teacherId = localStorage.getItem("teacherId");
+    await axiosWithAuth()
+      .get(`/api/teacher/${teacherId}`)
+      .then(teacher => {
+        setList(teacher.data.classes);
+        console.log(list);
+      });
+  }, []);
 
-class ClassList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      list: [],
-    };
-  }
+  return (
+    <div className="class-list">
+      {list.map(info => (
+        <ClassCard key={info.id} name={info.name} classCode={info.classCode} />
+      ))}
+    </div>
+  );
+};
 
-  async componentDidMount() {
-    await this.props.getAllClass(localStorage.getItem("teacherId"));
-    this.state.list = this.props.clase;
-  }
+// class ClassList extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     // this.state = {
+//     //   list: [],
+//     // };
+//   }
 
-  render() {
-    return (
-      <div className="class-list">
-        {this.state.list.map(info => (
-          <ClassCard name={info.name} />
-        ))}
-      </div>
-    );
-  }
-}
+//   async componentDidMount() {
+//     await this.props.getAllClass(localStorage.getItem("teacherId"));
+//     // this.state.list = this.props.clase;
+//   }
 
-function mapStateToProps(state) {
-  return {
-    isLoading: state.teacher.isLoading,
-    error: state.teacher.error,
-    clase: state.teacher.clase,
-  };
-}
+//   render() {
+//     return (
+//       <div className="class-list">
+//         {this.props.clase.map(info => (
+//           <ClassCard name={info.name} />
+//         ))}
+//       </div>
+//     );
+//   }
+// }
 
-export default connect(
-  mapStateToProps,
-  { getAllClass },
-)(ClassList);
+// function mapStateToProps(state) {
+//   return {
+//     isLoading: state.teacher.isLoading,
+//     error: state.teacher.error,
+//     clase: state.teacher.clase,
+//   };
+// }
+
+// export default connect(
+//   mapStateToProps,
+//   { getAllClass },
+// )(ClassList);
+
+export default ClassList;
