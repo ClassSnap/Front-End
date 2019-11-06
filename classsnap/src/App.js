@@ -16,6 +16,7 @@ import ParentAnsweredQuestionList from "./components/Parent-Dashboard/Parent-Ans
 import QuestionResult from "./components/Teacher-Single-Class-Dashboard/QuestionResult";
 import QuestionResultList from "./components/Teacher-Single-Class-Dashboard/QuestionResultList";
 import NavBar from "./components/NavBar";
+import AddClassForm from "./components/Teacher-Dashboard/AddClassForm";
 
 //data
 import { sampleQuestions, sampleStudentData } from "./data";
@@ -59,6 +60,11 @@ function App() {
                   exact
                   path="/teacher/question-result"
                   component={QuestionResult}
+                />
+                <Route
+                  exact
+                  path="/teacher/addclass"
+                  component={AddClassForm}
                 />
                 <Route
                   exact
