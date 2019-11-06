@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Form, Field, withFormik } from "formik";
 import * as Yup from "yup";
-import { connect } from "react-redux";
+import axios from "axios";
 
-const AddQuestion = () => {
+const AddQuestionFormDemo = () => {
+  const [teacherClass, setTeacherClass] = useState([]);
   return (
-    <div className="add-question-form">
+    <div className="question-form">
       <Form className="form">
         <h2>Extend Your Impact to Outside the Classroom</h2>
         <h3>Send Your Question Here</h3>
@@ -18,6 +19,11 @@ const AddQuestion = () => {
               <option value="classOne">Class 1</option>
               <option value="classTwo">Class 2</option>
               <option value="classThree">Class 3</option>
+              <option value="classFour">Class 4</option>
+              <option value="classFive">Class 5</option>
+              <option value="classSix">Class 6</option>
+              <option value="classSeven">Class 7</option>
+              <option value="classEight">Class 8</option>
             </Field>
           </div>
           <div className="subject">
@@ -29,7 +35,7 @@ const AddQuestion = () => {
               <option value="sci">Science</option>
               <option value="socio">Social Studies</option>
               <option value="lang">Foreign Languages</option>
-              <option value="socialemotional">Social Emotional Learning</option>
+              <option value="socioEmotional">Social Emotional Learning</option>
             </Field>
           </div>
           <div className="date">
@@ -53,32 +59,29 @@ const AddQuestion = () => {
   );
 };
 
-// const FormikAddQuestionForm = withFormik({
-//   mapPropsToValues({ session, subject, question }) {
-//     return {
-//       session: session || "",
-//       subject: subject || "",
-//       question: question || "",
-//     };
-//   },
+const FormikAddQuestionFormDemo = withFormik({
+  mapPropsToValues({ session, subject, question }) {
+    return {
+      session: session || "",
+      subject: subject || "",
+      question: question || "",
+    };
+  },
 
-//   validationSchema: Yup.object().shape({
-//     session: Yup.required,
-//     subject: Yup.required,
-//     question: Yup.string(20).required,
-//   }),
+  validationSchema: Yup.object().shape({
+    session: Yup.required,
+    subject: Yup.required,
+    question: Yup.string(20).required,
+  }),
 
-//   handleSubmit(values, { resetForm }) {
-//     let question = {
-//       question: values.question,
-//       questionType: values.subject,
-//       date: values.date,
-//       classId: values.session.id, //should map class id and use it to pass results
-//     };
-//     //redux submit function here
-//   },
-// })(AddQuestionForm);
+  handleSubmit(values, { resetForm }) {
+    // let question = {
+    //       question: values.question,
+    //       questionType: values.subject,
+    //       date: values.date,
+    //       classId: values.session.id, //should map class id and use it to pass results
+    //     };
+  },
+})(AddQuestionFormDemo);
 
-// export default FormikAddQuestionForm;
-
-export default AddQuestion;
+export default FormikAddQuestionFormDemo;

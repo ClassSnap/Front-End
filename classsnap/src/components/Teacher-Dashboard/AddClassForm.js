@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Form, Field, withFormik, yupToFormErrors } from "formik";
+import { Form, Field, withFormik } from "formik";
 import * as Yup from "yup";
+import { connect } from "react-redux";
 
 const AddClassForm = ({ errors, touched, ...props }) => {
   return (
@@ -22,11 +23,34 @@ const AddClassForm = ({ errors, touched, ...props }) => {
           )}
         </label>
         <label>
-          Class Name
-          <Field type="text" name="gradeLevel" placeholder="Grade Level" />
-          {touched.gradeLevel && errors.gradeLevel && (
-            <p className="error">{errors.gradeLevel}</p>
-          )}
+          Grade Level
+          <Field component="select" name="gradeLevel" class="option">
+            <option value="default">Select</option>
+            <option value="Pre-K">Pre-K</option>
+            <option value="Kinder">Kindergarten</option>
+            <option value="1st">1st grade</option>
+            <option value="2nd">2nd grade</option>
+            <option value="3rd">3rd grade</option>
+            <option value="4th">4th grade</option>
+            <option value="5th">5th grade</option>
+            <option value="6th">6th grade</option>
+            <option value="7th">7th grade</option>
+            <option value="8th">8th grade</option>
+            <option value="9th">9th grade</option>
+            <option value="10th">10th grade</option>
+            <option value="11th">11th grade</option>
+            <option value="12th">12th grade</option>
+            <option value="mixed">--Mixed Grade Level--</option>
+            <option value="prek-k">PreK - K</option>
+            <option value="lowerEl">Lower Elementary</option>
+            <option value="upperEl">Upper Elementary</option>
+            <option value="middleSchool">Middle School</option>
+            <option value="highSchool">High School</option>
+          </Field>
+          {/* // <Field type="text" name="gradeLevel" placeholder="Grade Level" />
+          // {touched.gradeLevel && errors.gradeLevel && (
+          <p className="error">{errors.gradeLevel}</p>
+          )} */}
         </label>
         <label>
           Class Rigor (Example: Regular, College Prep, AP etc.)
@@ -50,7 +74,7 @@ const FormikAddClassForm = withFormik({
   validationSchema: Yup.object().shape({
     name: Yup.string().required("Please enter a class name"),
     subject: Yup.string().required("Please enter a subject"),
-    gradeLevel: Yup.string().required("Please enter a grade level"),
+    gradeLevel: Yup.string().required("Please select a grade level"),
   }),
   handleSubmit(values, { props }) {
     let newItem = {

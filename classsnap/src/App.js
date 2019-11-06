@@ -9,7 +9,8 @@ import parentLogin from "./components/SignUp_Pages/parent-signin";
 import teacherReg from "./components/SignUp_Pages/teacher-signup";
 import parentReg from "./components/SignUp_Pages/parent-signup";
 import teacherDashboard from "./components/Teacher-Dashboard/dashboard";
-import AddQuestionForm from "./components/Teacher-Dashboard/AddQuestionForm";
+import AddQuestionFormDemo from "./components/Teacher-Dashboard/AddQuestionFormDemo";
+import AddQuestion from "./components/Teacher-Dashboard/AddQuestionForm";
 import ParentResponseForm from "./components//Parent-Dashboard/Parent-ResponseForm";
 import ParentNewQuestionList from "./components/Parent-Dashboard/Parent-NewQuestionList";
 import ParentAnsweredQuestionList from "./components/Parent-Dashboard/Parent-AnsweredQuestionList";
@@ -48,8 +49,13 @@ function App() {
                 />
                 <Route
                   exact
-                  path="/teacher/add-question"
-                  component={AddQuestionForm}
+                  path="/teacher/add-question-demo"
+                  component={AddQuestionFormDemo}
+                />
+                <Route
+                  exact
+                  path="/teacher/add-quesiton"
+                  component={AddQuestion}
                 />
                 <Route
                   exact
