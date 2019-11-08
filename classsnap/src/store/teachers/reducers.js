@@ -70,14 +70,12 @@ const reducers = (state = initialState, action) => {
         isLoading: true,
       };
     case GET_QUESTIONS_BY_CLASS_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         error: "",
         isLoading: false,
         question: action.payload,
         testing: "Check",
-        // classId: action.payload.id,
       };
     case GET_QUESTIONS_BY_CLASS_FAILURE:
       return {
