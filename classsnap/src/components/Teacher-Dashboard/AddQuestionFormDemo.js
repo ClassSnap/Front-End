@@ -1,37 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Form, Field, withFormik } from "formik";
 import * as Yup from "yup";
-import axiosWithAuth from "../../utils/axiosWithAuth";
-import { addQuestion } from "../../store/teachers/action";
-import { connect } from "react-redux";
+import axios from "axios";
 
-const AddQuestionForm = () => {
-  const [list, setList] = useState([]);
-  useEffect(() => {
-    async function fetchClase() {
-      const teacherId = localStorage.getItem("teacherId");
-      await axiosWithAuth()
-        .get(`/api/class/${teacherId}`)
-        .then(clase => {
-          setList(clase.data.info);
-        });
-    }
-    fetchClase();
-  }, []);
-
+const AddQuestionFormDemo = () => {
+  const [teacherClass, setTeacherClass] = useState([]);
   return (
-    <div className="add-question-form">
+    <div className="question-form">
       <Form className="form">
         <h2>Extend Your Impact to Outside the Classroom</h2>
         <h3>Send Your Question Here</h3>
         <div className="basic-info">
           <div className="class">
             <label>Class</label>
+            {/* axios call fetch classes as option */}
             <Field component="select" name="session" class="option">
               <option value="default">Select</option>
-              {list.map(clase => (
-                <option value={clase.id}>{clase.name}</option>
-              ))}
+              <option value="classOne">Class 1</option>
+              <option value="classTwo">Class 2</option>
+              <option value="classThree">Class 3</option>
+              <option value="classFour">Class 4</option>
+              <option value="classFive">Class 5</option>
+              <option value="classSix">Class 6</option>
+              <option value="classSeven">Class 7</option>
+              <option value="classEight">Class 8</option>
             </Field>
           </div>
           <div className="subject">
@@ -43,12 +35,12 @@ const AddQuestionForm = () => {
               <option value="sci">Science</option>
               <option value="socio">Social Studies</option>
               <option value="lang">Foreign Languages</option>
-              <option value="socialemotional">Social Emotional Learning</option>
+              <option value="socioEmotional">Social Emotional Learning</option>
             </Field>
           </div>
           <div className="date">
             <label>Due Date</label>
-            <Field type="date" name="date" />
+            <Field type="date" name="duedate" />
           </div>
         </div>
 
@@ -67,7 +59,7 @@ const AddQuestionForm = () => {
   );
 };
 
-const FormikAddQuestionForm = withFormik({
+const FormikAddQuestionFormDemo = withFormik({
   mapPropsToValues({ session, subject, question }) {
     return {
       session: session || "",
@@ -82,28 +74,14 @@ const FormikAddQuestionForm = withFormik({
     question: Yup.string(20).required,
   }),
 
-  handleSubmit(values, { resetForm, props }) {
-    let question = {
-      question: values.question,
-      questionType: values.subject,
-      date: values.date,
-      classId: values.session, //should map class id and use it to pass results
-    };
-    console.log(question);
-    props.addQuestion(question, props.history);
-    resetForm();
-    //redux submit function here
+  handleSubmit(values, { resetForm }) {
+    // let question = {
+    //       question: values.question,
+    //       questionType: values.subject,
+    //       date: values.date,
+    //       classId: values.session.id, //should map class id and use it to pass results
+    //     };
   },
-})(AddQuestionForm);
+})(AddQuestionFormDemo);
 
-const mapStateToProps = state => {
-  return {
-    isLoading: state.teacher.isLoading,
-    error: state.teacher.error,
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  { addQuestion },
-)(FormikAddQuestionForm);
+export default FormikAddQuestionFormDemo;

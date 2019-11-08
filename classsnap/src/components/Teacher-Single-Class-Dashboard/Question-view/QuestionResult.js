@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 
 //context
-import { QuestionContext } from "../../contexts/QuestionContext";
-import { StudentDataContext } from "../../contexts/StudentDataContext";
+import { QuestionContext } from "../../../contexts/QuestionContext";
+import { StudentDataContext } from "../../../contexts/StudentDataContext";
 
 const QuestionResult = () => {
   const { sampleQuestions } = useContext(QuestionContext);

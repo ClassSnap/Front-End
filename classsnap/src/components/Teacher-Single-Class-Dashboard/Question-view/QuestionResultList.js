@@ -6,10 +6,10 @@ import { Route } from "react-router-dom";
 import QuestionResultCard from "./QuestionResultCard";
 
 //context
-import { StudentDataContext } from "../../contexts/StudentDataContext";
+import { StudentDataContext } from "../../../contexts/StudentDataContext";
 
 //data
-import { sampleStudentData } from "../../data";
+import { sampleStudentData } from "../../../data";
 
 const QuestionResultList = () => {
   const { sampleStudentData } = useContext(StudentDataContext);
