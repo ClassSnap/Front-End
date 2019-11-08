@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Field, withFormik } from "formik";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { register } from "../../store/teacherAuth/authActions";
 
@@ -9,7 +10,12 @@ const TeacherSignUpForm = ({ errors, touched, ...props }) => {
   return (
     <div className="teacher-reg-form">
       <Form>
-        <h1>Teacher Registration Here</h1>
+        <h1>
+          Teacher Registration
+          <h4>
+            (Not a teacher? Click <Link to="/">here</Link>)
+          </h4>
+        </h1>
         <label>
           Prefix
           <Field as="text" name="prefix" placeholder="Prefix" />
@@ -70,7 +76,9 @@ const TeacherSignUpForm = ({ errors, touched, ...props }) => {
         <button>Register</button>
       </Form>
 
-      <h4>Have an account already? Login In Here.</h4>
+      <h4>
+        Have an account already? Login In <Link to="/teacherlogin">Here</Link>.
+      </h4>
     </div>
   );
 };

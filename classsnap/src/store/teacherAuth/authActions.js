@@ -24,7 +24,7 @@ export const login = (credentials, history) => {
         console.log(res.data);
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("teacherId", res.data.id);
-        history.push("/teacher/add-question");
+        history.push("/teacher/dashboard");
       })
       .catch(err => {
         dispatch({ type: LOGIN_FAIL, payload: err.response });

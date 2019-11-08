@@ -19,6 +19,8 @@ import NavBar from "./components/NavBar";
 import AddClassForm from "./components/Teacher-Dashboard/AddClassForm";
 import AddQuestionForm from "./components/Teacher-Dashboard/AddQuestionForm";
 import SingleClassView from "./components/Teacher-Single-Class-Dashboard/SingleClassDashboard";
+import LandingPage from "./components/SignUp_Pages/landing";
+
 //data
 // import { sampleQuestions, sampleStudentData } from "./data";
 
@@ -36,6 +38,7 @@ function App() {
         <Switch>
           <div className="container">
             {/* Public Route */}
+            <Route exact path="/" component={LandingPage} />
             <Route exact path="/teacherlogin" component={teacherLogin} />
             <Route exact path="/parentlogin" component={parentLogin} />
             <Route exact path="/teachersignup" component={teacherReg} />
