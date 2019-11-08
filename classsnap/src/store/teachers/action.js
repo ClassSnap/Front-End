@@ -1,28 +1,25 @@
 import axiosWithAuth from "../../utils/axiosWithAuth";
 
-import {
-  GET_ALL_CLASSES_START,
-  GET_ALL_CLASSES_SUCCESS,
-  GET_ALL_CLASSES_FAILURE,
-} from "./types";
+import { ADD_CLASS_START, ADD_CLASS_SUCCESS, ADD_CLASS_FAILURE } from "./types";
 
 //1. Get class by teacher id
-const getAllClass = id => dispatch => {
-  //   dispatch({ type: GET_ALL_CLASSES_START });
-  axiosWithAuth()
-    .get(`/api/teacher/${id}`)
-    .then(res => {
-      dispatch({
-        type: GET_ALL_CLASSES_SUCCESS,
-        payload: res.data,
+export const addClass = (info, history) => {
+  return dispatch => {
+    dispatch({ type: ADD_CLASS_START });
+    axiosWithAuth()
+      .post(`/api/class`, info)
+      .then(res => {
+        dispatch({
+          type: ADD_CLASS_SUCCESS,
+          payload: res.data,
+        });
+        history.push("/teacher/dashboard");
+      })
+      .catch(err => {
+        dispatch({
+          type: ADD_CLASS_FAILURE,
+          payload: err.response,
+        });
       });
-    })
-    .catch(err => {
-      dispatch({
-        type: GET_ALL_CLASSES_FAILURE,
-        payload: err.response,
-      });
-    });
+  };
 };
-
-export default getAllClass;

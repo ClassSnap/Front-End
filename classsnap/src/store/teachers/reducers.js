@@ -1,11 +1,7 @@
-import {
-  GET_ALL_CLASSES_START,
-  GET_ALL_CLASSES_SUCCESS,
-  GET_ALL_CLASSES_FAILURE,
-} from "./types";
+import { ADD_CLASS_START, ADD_CLASS_FAILURE, ADD_CLASS_SUCCESS } from "./types";
 
 const initialState = {
-  clase: [],
+  newClass: [],
   error: "",
   isLoading: false,
   user: "",
@@ -13,22 +9,22 @@ const initialState = {
 
 const reducers = (state = initialState, action) => {
   switch (action.type) {
-    case GET_ALL_CLASSES_START:
+    case ADD_CLASS_START:
       return {
         ...state,
         error: "",
         isLoading: true,
       };
-    case GET_ALL_CLASSES_SUCCESS:
+    case ADD_CLASS_SUCCESS:
       console.log(action.payload);
       return {
         ...state,
         error: "",
         isLoading: true,
-        clase: action.payload.classes,
+        newClass: action.payload,
       };
 
-    case GET_ALL_CLASSES_FAILURE:
+    case ADD_CLASS_FAILURE:
       return {
         ...state,
         error: action.payload,

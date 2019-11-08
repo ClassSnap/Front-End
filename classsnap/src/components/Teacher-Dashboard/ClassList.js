@@ -12,18 +12,21 @@ import axiosWithAuth from "../../utils/axiosWithAuth";
 const ClassList = props => {
   const [list, setList] = useState([]);
 
-  useEffect(async () => {
-    const teacherId = localStorage.getItem("teacherId");
-    await axiosWithAuth()
-      .get(`/api/teacher/${teacherId}`)
-      .then(teacher => {
-        setList(teacher.data.classes);
-        console.log(list);
-      });
+  useEffect(() => {
+    async function fetchList() {
+      const teacherId = localStorage.getItem("teacherId");
+      await axiosWithAuth()
+        .get(`/api/teacher/${teacherId}`)
+        .then(teacher => {
+          setList(teacher.data.classes);
+          console.log(list);
+        });
+    }
+    fetchList();
   }, []);
 
   return (
-    <div className="class-list">
+    <div className="classlist">
       {list.map(info => (
         <ClassCard key={info.id} name={info.name} classCode={info.classCode} />
       ))}

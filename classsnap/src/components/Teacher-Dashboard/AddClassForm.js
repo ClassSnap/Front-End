@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Form, Field, withFormik } from "formik";
 import * as Yup from "yup";
+import { addClass } from "../../store/teachers/action";
 import { connect } from "react-redux";
 
 const AddClassForm = ({ errors, touched, ...props }) => {
   return (
-    <div className="add-class-form">
+    <div className="add-classform">
       <Form>
         <h1>Add A Class</h1>
         <label>
@@ -24,7 +25,7 @@ const AddClassForm = ({ errors, touched, ...props }) => {
         </label>
         <label>
           Grade Level
-          <Field component="select" name="gradeLevel" class="option">
+          <Field component="select" name="gradeLevel" className="option">
             <option value="default">Select</option>
             <option value="Pre-K">Pre-K</option>
             <option value="Kinder">Kindergarten</option>
@@ -56,7 +57,7 @@ const AddClassForm = ({ errors, touched, ...props }) => {
           Class Rigor (Example: Regular, College Prep, AP etc.)
           <Field type="text" name="classRigor" placeholder="Class Rigor" />
         </label>
-        <button>Submit</button>
+        <button type="submit">Submit</button>
       </Form>
     </div>
   );
@@ -76,17 +77,30 @@ const FormikAddClassForm = withFormik({
     subject: Yup.string().required("Please enter a subject"),
     gradeLevel: Yup.string().required("Please select a grade level"),
   }),
-  handleSubmit(values, { props }) {
+  handleSubmit(values, { resetForm, props }) {
     let newItem = {
       name: values.name,
       subject: values.subject,
       gradeLevel: values.gradeLevel,
       classRigor: values.classRigor,
-      classCode: "", //generate random number string here,,
+      classCode: Math.random()
+        .toString(36)
+        .slice(2),
       teacherId: localStorage.getItem("teacherId"),
     };
     props.addClass(newItem, props.history);
+    resetForm();
   },
 })(AddClassForm);
 
-export default FormikAddClassForm;
+const mapStateToProps = state => {
+  return {
+    isLoading: state.teacher.isLoading,
+    error: state.teacher.error,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { addClass },
+)(FormikAddClassForm);
