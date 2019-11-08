@@ -10,7 +10,6 @@ import teacherReg from "./components/SignUp_Pages/teacher-signup";
 import parentReg from "./components/SignUp_Pages/parent-signup";
 import teacherDashboard from "./components/Teacher-Dashboard/dashboard";
 import AddQuestionFormDemo from "./components/Teacher-Dashboard/AddQuestionFormDemo";
-import AddQuestion from "./components/Teacher-Dashboard/AddQuestionForm";
 import ParentResponseForm from "./components//Parent-Dashboard/Parent-ResponseForm";
 import ParentNewQuestionList from "./components/Parent-Dashboard/Parent-NewQuestionList";
 import ParentAnsweredQuestionList from "./components/Parent-Dashboard/Parent-AnsweredQuestionList";
@@ -18,7 +17,8 @@ import QuestionResult from "./components/Teacher-Single-Class-Dashboard/Question
 import QuestionResultList from "./components/Teacher-Single-Class-Dashboard/Question-view/QuestionResultList";
 import NavBar from "./components/NavBar";
 import AddClassForm from "./components/Teacher-Dashboard/AddClassForm";
-
+import AddQuestionForm from "./components/Teacher-Dashboard/AddQuestionForm";
+import SingleClassView from "./components/Teacher-Single-Class-Dashboard/SingleClassDashboard";
 //data
 // import { sampleQuestions, sampleStudentData } from "./data";
 
@@ -49,10 +49,19 @@ function App() {
             />
             <Route
               exact
+              path="/teacher/classdash"
+              component={SingleClassView}
+            />
+            <Route
+              exact
               path="/teacher/add-question-demo"
               component={AddQuestionFormDemo}
             />
-            <Route exact path="/teacher/add-quesiton" component={AddQuestion} />
+            <Route
+              exact
+              path="/teacher/addquestion"
+              component={AddQuestionForm}
+            />
             <Route
               exact
               path="/teacher/question-result-list"

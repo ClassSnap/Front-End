@@ -1,9 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Field, withFormik } from "formik";
 import * as Yup from "yup";
+import axiosWithAuth from "../../utils/axiosWithAuth";
+import { addQuestion } from "../../store/teachers/action";
 import { connect } from "react-redux";
 
-const AddQuestion = () => {
+const AddQuestionForm = () => {
+  const [list, setList] = useState([]);
+  useEffect(() => {
+    async function fetchClase() {
+      const teacherId = localStorage.getItem("teacherId");
+      await axiosWithAuth()
+        .get(`/api/class/${teacherId}`)
+        .then(clase => {
+          setList(clase.data.info);
+        });
+    }
+    fetchClase();
+  }, []);
+
   return (
     <div className="add-question-form">
       <Form className="form">
@@ -12,12 +27,11 @@ const AddQuestion = () => {
         <div className="basic-info">
           <div className="class">
             <label>Class</label>
-            {/* axios call fetch classes as option */}
             <Field component="select" name="session" class="option">
               <option value="default">Select</option>
-              <option value="classOne">Class 1</option>
-              <option value="classTwo">Class 2</option>
-              <option value="classThree">Class 3</option>
+              {list.map(clase => (
+                <option value={clase.id}>{clase.name}</option>
+              ))}
             </Field>
           </div>
           <div className="subject">
@@ -34,7 +48,7 @@ const AddQuestion = () => {
           </div>
           <div className="date">
             <label>Due Date</label>
-            <Field type="date" name="duedate" />
+            <Field type="date" name="date" />
           </div>
         </div>
 
@@ -53,32 +67,43 @@ const AddQuestion = () => {
   );
 };
 
-// const FormikAddQuestionForm = withFormik({
-//   mapPropsToValues({ session, subject, question }) {
-//     return {
-//       session: session || "",
-//       subject: subject || "",
-//       question: question || "",
-//     };
-//   },
+const FormikAddQuestionForm = withFormik({
+  mapPropsToValues({ session, subject, question }) {
+    return {
+      session: session || "",
+      subject: subject || "",
+      question: question || "",
+    };
+  },
 
-//   validationSchema: Yup.object().shape({
-//     session: Yup.required,
-//     subject: Yup.required,
-//     question: Yup.string(20).required,
-//   }),
+  validationSchema: Yup.object().shape({
+    session: Yup.required,
+    subject: Yup.required,
+    question: Yup.string(20).required,
+  }),
 
-//   handleSubmit(values, { resetForm }) {
-//     let question = {
-//       question: values.question,
-//       questionType: values.subject,
-//       date: values.date,
-//       classId: values.session.id, //should map class id and use it to pass results
-//     };
-//     //redux submit function here
-//   },
-// })(AddQuestionForm);
+  handleSubmit(values, { resetForm, props }) {
+    let question = {
+      question: values.question,
+      questionType: values.subject,
+      date: values.date,
+      classId: values.session, //should map class id and use it to pass results
+    };
+    console.log(question);
+    props.addQuestion(question, props.history);
+    resetForm();
+    //redux submit function here
+  },
+})(AddQuestionForm);
 
-// export default FormikAddQuestionForm;
+const mapStateToProps = state => {
+  return {
+    isLoading: state.teacher.isLoading,
+    error: state.teacher.error,
+  };
+};
 
-export default AddQuestion;
+export default connect(
+  mapStateToProps,
+  { addQuestion },
+)(FormikAddQuestionForm);

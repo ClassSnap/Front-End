@@ -36,7 +36,9 @@ const teacherDashboard = () => {
           <h3>Know that you are making an impact</h3>
           <h3>You are a hero</h3>
           <h3>Send a question now to continue your impact</h3>
-          <button>Add Question</button>
+          <Link to="/teacher/addquestion">
+            <button>Add Question</button>
+          </Link>
         </div>
       </RightBar>
     </Dashboard>
