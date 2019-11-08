@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import getAllClass from "../../store/teachers/action";
+import { getAllQuestions } from "../../store/teachers/action";
 
 //components
 import ClassCard from "./ClassCard";
@@ -19,56 +20,41 @@ const ClassList = props => {
         .get(`/api/teacher/${teacherId}`)
         .then(teacher => {
           setList(teacher.data.classes);
-          console.log(list);
         });
     }
     fetchList();
   }, []);
 
+  const handleClick = id => {
+    props.getAllQuestions(id, props.hist);
+  };
+
   return (
     <div className="classlist">
       {list.map(info => (
-        <ClassCard key={info.id} name={info.name} classCode={info.classCode} />
+        <ClassCard
+          key={info.id}
+          id={info.id}
+          name={info.name}
+          classCode={info.classCode}
+          onClick={handleClick}
+        />
       ))}
+      <Link to="/teacher/addclass">
+        <button>Add Class</button>
+      </Link>
     </div>
   );
 };
 
-// class ClassList extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     // this.state = {
-//     //   list: [],
-//     // };
-//   }
+function mapStateToProps(state) {
+  return {
+    isLoading: state.teacher.isLoading,
+    error: state.teacher.error,
+  };
+}
 
-//   async componentDidMount() {
-//     await this.props.getAllClass(localStorage.getItem("teacherId"));
-//     // this.state.list = this.props.clase;
-//   }
-
-//   render() {
-//     return (
-//       <div className="class-list">
-//         {this.props.clase.map(info => (
-//           <ClassCard name={info.name} />
-//         ))}
-//       </div>
-//     );
-//   }
-// }
-
-// function mapStateToProps(state) {
-//   return {
-//     isLoading: state.teacher.isLoading,
-//     error: state.teacher.error,
-//     clase: state.teacher.clase,
-//   };
-// }
-
-// export default connect(
-//   mapStateToProps,
-//   { getAllClass },
-// )(ClassList);
-
-export default ClassList;
+export default connect(
+  mapStateToProps,
+  { getAllQuestions },
+)(ClassList);

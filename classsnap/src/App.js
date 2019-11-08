@@ -8,7 +8,7 @@ import teacherLogin from "./components/SignUp_Pages/teacher-signin";
 import parentLogin from "./components/SignUp_Pages/parent-signin";
 import teacherReg from "./components/SignUp_Pages/teacher-signup";
 import parentReg from "./components/SignUp_Pages/parent-signup";
-import teacherDashboard from "./components/Teacher-Dashboard/dashboard";
+import TeacherDashboard from "./components/Teacher-Dashboard/dashboard";
 import AddQuestionFormDemo from "./components/Teacher-Dashboard/AddQuestionFormDemo";
 import ParentResponseForm from "./components//Parent-Dashboard/Parent-ResponseForm";
 import ParentNewQuestionList from "./components/Parent-Dashboard/Parent-NewQuestionList";
@@ -20,6 +20,7 @@ import AddClassForm from "./components/Teacher-Dashboard/AddClassForm";
 import AddQuestionForm from "./components/Teacher-Dashboard/AddQuestionForm";
 import SingleClassView from "./components/Teacher-Single-Class-Dashboard/SingleClassDashboard";
 import LandingPage from "./components/SignUp_Pages/landing";
+import ClassList from "./components/Teacher-Dashboard/ClassList";
 
 //data
 // import { sampleQuestions, sampleStudentData } from "./data";
@@ -43,12 +44,11 @@ function App() {
             <Route exact path="/parentlogin" component={parentLogin} />
             <Route exact path="/teachersignup" component={teacherReg} />
             <Route exact path="/parentsignup" component={parentReg} />
-
             {/* Private Route */}
             <Route
               exact
               path="/teacher/dashboard"
-              component={teacherDashboard}
+              render={props => <TeacherDashboard {...props} />}
             />
             <Route
               exact

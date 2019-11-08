@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 import ClassList from "./ClassList";
 
-const teacherDashboard = () => {
+const teacherDashboard = props => {
   const Dashboard = styled.div`
     display: flex;
     flex-direction: row;
@@ -24,10 +24,7 @@ const teacherDashboard = () => {
   return (
     <Dashboard>
       <LeftBar>
-        <ClassList />
-        <Link to="/teacher/addclass">
-          <button>Add Class</button>
-        </Link>
+        <ClassList hist={props.history} />
       </LeftBar>
       <RightBar>
         <h1>Hello Teacher!</h1>

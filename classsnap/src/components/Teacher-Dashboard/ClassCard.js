@@ -1,11 +1,15 @@
 import React from "react";
 import { Card } from "semantic-ui-react";
 
-const ClassCard = props => {
-  console.log("ClassCard");
+const ClassCard =props => {
   return (
     <div className="class-card">
-      <Card color="teal" header={props.name} meta={props.classCode} />
+      <Card
+        color="teal"
+        header={props.name}
+        meta={props.classCode}
+        onClick={() => props.onClick(props.id, props.history)}
+      />
     </div>
   );
 };
