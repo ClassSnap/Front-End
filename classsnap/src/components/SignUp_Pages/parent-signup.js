@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Field, withFormik } from "formik";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { register } from "../../store/parentAuth/authActions";
 import { connect } from "react-redux";
@@ -8,7 +9,12 @@ const ParentSignUpForm = ({ errors, touched, ...props }) => {
   return (
     <div className="parent-reg-form">
       <Form>
-        <h1>Parent Registration Here</h1>
+        <h1>
+          Parent Registration
+          <h4>
+            (Not a parent? Click <Link to="/">here</Link>)
+          </h4>
+        </h1>
         <label>
           Name
           <Field type="text" name="name" placeholder="Name" />
@@ -54,7 +60,9 @@ const ParentSignUpForm = ({ errors, touched, ...props }) => {
         <button>Register</button>
       </Form>
 
-      <h4>Have an account already? Login In Here.</h4>
+      <h4>
+        Have an account already? Login In <Link to="/parentlogin">here</Link>.
+      </h4>
     </div>
   );
 };
