@@ -25,8 +25,8 @@ const ClassList = props => {
     fetchList();
   }, []);
 
-  const handleClick = id => {
-    props.getAllQuestions(id, props.hist);
+  const handleClick = (id, name, classCode) => {
+    props.getAllQuestions(id, name, classCode, props.hist);
   };
 
   return (

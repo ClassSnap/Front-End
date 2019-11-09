@@ -45,6 +45,7 @@ function App() {
             <Route exact path="/teachersignup" component={teacherReg} />
             <Route exact path="/parentsignup" component={parentReg} />
             {/* Private Route */}
+            {/* <Route path="/teacher" render={props => <ClassList {...props} />} /> */}
             <Route
               exact
               path="/teacher/dashboard"
@@ -53,7 +54,7 @@ function App() {
             <Route
               exact
               path="/teacher/classdash"
-              component={SingleClassView}
+              render={props => <SingleClassView {...props} />}
             />
             <Route
               exact

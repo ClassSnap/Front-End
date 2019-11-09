@@ -57,7 +57,7 @@ export const addQuestion = (info, history) => {
 };
 
 //Get Question By Class Id
-export const getAllQuestions = (id, history) => {
+export const getAllQuestions = (id, name, classCode, history) => {
   return dispatch => {
     dispatch({ type: GET_QUESTIONS_BY_CLASS_START });
     axiosWithAuth()
@@ -68,6 +68,8 @@ export const getAllQuestions = (id, history) => {
           payload: res.data,
         });
         history.push("/teacher/classdash");
+        localStorage.setItem("className", name);
+        localStorage.setItem("classCode", classCode);
       })
       .catch(err => {
         dispatch({

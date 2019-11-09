@@ -8,18 +8,26 @@ import QuestionCard from "./QuestionCard";
 
 const QuestionList = props => {
   const [questionList, setQuestionList] = useState([]);
+  const [name, setName] = useState();
+  const [code, setCode] = useState();
   console.log(props);
   useEffect(() => {
     async function getQuest() {
       await setQuestionList(props.question);
+      setName(localStorage.className);
+      setCode(localStorage.classCode);
     }
     getQuest();
-  }, []);
+  }, [questionList]);
   //useEffect fetches question by class Id
   //classId should be passed by the card that is clicked on
   console.log(questionList);
   return (
     <div className="questionList">
+      <h2>
+        {name}
+        <h4>Class Code:{code}</h4>
+      </h2>
       {questionList.map(quest => (
         <QuestionCard question={quest.question} />
       ))}
