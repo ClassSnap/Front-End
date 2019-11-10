@@ -7,48 +7,48 @@ import { getAllQuestions } from "../../store/teachers/action";
 import QuestionCard from "./QuestionCard";
 
 const QuestionList = props => {
-  const [questionList, setQuestionList] = useState([]);
-  const [name, setName] = useState();
-  const [code, setCode] = useState();
-  console.log(props);
-  useEffect(() => {
-    async function getQuest() {
-      await setQuestionList(props.question);
-      setName(localStorage.className);
-      setCode(localStorage.classCode);
-    }
-    getQuest();
-  }, [questionList]);
+  // const [questionList, setQuestionList] = useState([]);
+  // const [name, setName] = useState();
+  // const [code, setCode] = useState();
+  // console.log(props);
+  // useEffect(() => {
+  //   async function getQuest() {
+  //     await setQuestionList(props.questionList);
+  //     setName(localStorage.className);
+  //     setCode(localStorage.classCode);
+  //   }
+  //   getQuest();
+  // }, []);
   //useEffect fetches question by class Id
   //classId should be passed by the card that is clicked on
-  console.log(questionList);
+
   return (
-    <div className="questionList">
-      <h2>
-        {name}
-        <h4>Class Code:{code}</h4>
-      </h2>
-      {questionList.map(quest => (
+    <div className={props.showQuestion ? "questionList" : "questionList off"}>
+      <h2>{props.name}</h2>
+      <h4>Class Code:{props.classCode}</h4>
+
+      {props.questionList.map(quest => (
         <QuestionCard question={quest.question} />
       ))}
     </div>
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    isLoading: state.teacher.isLoading,
-    error: state.teacher.error,
-    classId: state.teacher.classId,
-    question: state.teacher.question,
-  };
-};
+// const mapStateToProps = state => {
+//   return {
+//     isLoading: state.teacher.isLoading,
+//     error: state.teacher.error,
+//     classId: state.teacher.classId,
+//     question: state.teacher.question,
+//   };
+// };
 
-export default connect(
-  mapStateToProps,
-  { getAllQuestions },
-)(QuestionList);
+// export default connect(
+//   mapStateToProps,
+//   { getAllQuestions },
+// )(QuestionList);
 
+export default QuestionList;
 //To-do
 //1. Fetch data from either redux or useEffect axios call
 //2. Make sure that all cards populates

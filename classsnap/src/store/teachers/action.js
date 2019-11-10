@@ -57,7 +57,7 @@ export const addQuestion = (info, history) => {
 };
 
 //Get Question By Class Id
-export const getAllQuestions = (id, name, classCode, history) => {
+export const getAllQuestions = id => {
   return dispatch => {
     dispatch({ type: GET_QUESTIONS_BY_CLASS_START });
     axiosWithAuth()
@@ -67,9 +67,9 @@ export const getAllQuestions = (id, name, classCode, history) => {
           type: GET_QUESTIONS_BY_CLASS_SUCCESS,
           payload: res.data,
         });
-        history.push("/teacher/classdash");
-        localStorage.setItem("className", name);
-        localStorage.setItem("classCode", classCode);
+        // history.push("/teacher/classdash");
+        // localStorage.setItem("className", name);
+        // localStorage.setItem("classCode", classCode);
       })
       .catch(err => {
         dispatch({

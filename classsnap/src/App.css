@@ -189,3 +189,7 @@ Rating {
 .student-rate p {
   padding: 10px 0px;
 }
+
+.off {
+  display: none;
+}

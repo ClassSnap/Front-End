@@ -8,9 +8,7 @@ const ClassCard = props => {
         color="teal"
         header={props.name}
         meta={props.classCode}
-        onClick={() =>
-          props.onClick(props.id, props.name, props.classCode, props.history)
-        }
+        onClick={() => props.onClick(props.id, props.name, props.classCode)}
       />
     </div>
   );
