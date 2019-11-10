@@ -28,7 +28,13 @@ const QuestionList = props => {
       <h4>Class Code:{props.classCode}</h4>
 
       {props.questionList.map(quest => (
-        <QuestionCard question={quest.question} />
+        <QuestionCard
+          key={quest.id}
+          id={quest.id}
+          question={quest.question}
+          date={quest.date}
+          onClick={props.handleClick}
+        />
       ))}
     </div>
   );

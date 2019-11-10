@@ -17,6 +17,7 @@ const TeacherDashboard = props => {
   const [name, setName] = useState();
   const [classCode, setClassCode] = useState();
   const [showQuestion, setShowQuestion] = useState(false);
+  const [result, setResult] = useState([]);
 
   useEffect(() => {
     async function fetchList() {
@@ -34,13 +35,24 @@ const TeacherDashboard = props => {
     await axiosWithAuth()
       .get(`/api/question/class/${id}`)
       .then(res => {
-        setQuestionList(res.data);
+        const reverse = res.data.reverse();
+        setQuestionList(reverse);
         setName(name);
         setClassCode(classCode);
         console.log(name, classCode);
         setShowQuestion(true);
       });
   };
+
+  const handleQuestionClick = async id => {
+    await axiosWithAuth()
+      .get(`/api/rating/question/${id}`)
+      .then(res => {
+        console.log(res.data);
+        setResult(res.data);
+      });
+  };
+
   const Dashboard = styled.div`
     display: flex;
     flex-direction: row;
@@ -66,10 +78,9 @@ const TeacherDashboard = props => {
           name={name}
           classCode={classCode}
           showQuestion={showQuestion}
+          handleClick={handleQuestionClick}
         />
-        {/* {questionList.map(info => (
-          <QuestionCard question={info.question} />
-        ))} */}
+
         <div
           className={showQuestion ? "welcome-teacher off" : "welcome-teacher"}
         >
@@ -103,3 +114,7 @@ const TeacherDashboard = props => {
 // )(TeacherDashboard);
 
 export default TeacherDashboard;
+
+//11-10-2019
+//Question Card Click works
+//Need to work on BE to fix what data the `/api/
