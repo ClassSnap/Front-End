@@ -51,11 +51,11 @@ function App() {
               path="/teacher/dashboard"
               render={props => <TeacherDashboard {...props} />}
             />
-            <Route
+            {/* <Route
               exact
               path="/teacher/classdash"
               render={props => <SingleClassView {...props} />}
-            />
+            /> */}
             <Route
               exact
               path="/teacher/add-question-demo"
@@ -66,16 +66,16 @@ function App() {
               path="/teacher/addquestion"
               component={AddQuestionForm}
             />
-            <Route
+            {/* <Route
               exact
               path="/teacher/question-result-list"
               component={QuestionResultList}
-            />
-            <Route
+            /> */}
+            {/* <Route
               exact
               path="/teacher/question-result"
               component={QuestionResult}
-            />
+            /> */}
             <Route exact path="/teacher/addclass" component={AddClassForm} />
             <Route
               exact

@@ -8,6 +8,8 @@ import axiosWithAuth from "../../utils/axiosWithAuth";
 import ClassList from "./ClassList";
 import QuestionList from "../Teacher-Single-Class-Dashboard/QuestionList";
 import QuestionCard from "../Teacher-Single-Class-Dashboard/QuestionCard";
+import Results from "../Teacher-Single-Class-Dashboard/Results";
+
 //action
 // import { getAllQuestions } from "../../store/teachers/action";
 
@@ -17,7 +19,8 @@ const TeacherDashboard = props => {
   const [name, setName] = useState();
   const [classCode, setClassCode] = useState();
   const [showQuestion, setShowQuestion] = useState(false);
-  const [result, setResult] = useState([]);
+  const [results, setResults] = useState([]);
+  const [showRsult, setShowResult] = useState(false);
 
   useEffect(() => {
     async function fetchList() {
@@ -41,6 +44,7 @@ const TeacherDashboard = props => {
         setClassCode(classCode);
         console.log(name, classCode);
         setShowQuestion(true);
+        setShowResult(false);
       });
   };
 
@@ -49,7 +53,9 @@ const TeacherDashboard = props => {
       .get(`/api/rating/question/${id}`)
       .then(res => {
         console.log(res.data);
-        setResult(res.data);
+        // setResult(res.data);
+        setShowQuestion(false);
+        setShowResult(true);
       });
   };
 
@@ -69,10 +75,14 @@ const TeacherDashboard = props => {
 
   return (
     <Dashboard>
+      {/* Left Sidebar is a constant. It will show up at all times */}
       <LeftBar>
         <ClassList list={list} handleClick={handleClick} />
       </LeftBar>
+
+      {/* Right sidebar will change based on user's click */}
       <RightBar>
+        {/* Display List of Questions */}
         <QuestionList
           questionList={questionList}
           name={name}
@@ -81,6 +91,7 @@ const TeacherDashboard = props => {
           handleClick={handleQuestionClick}
         />
 
+        {/* Display Welcome Message */}
         <div
           className={showQuestion ? "welcome-teacher off" : "welcome-teacher"}
         >
@@ -94,6 +105,9 @@ const TeacherDashboard = props => {
               <button>Add Question</button>
             </Link>
           </div>
+
+          {/* Display Results  */}
+          <Results />
         </div>
       </RightBar>
     </Dashboard>
