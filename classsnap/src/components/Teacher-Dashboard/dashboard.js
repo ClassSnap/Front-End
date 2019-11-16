@@ -7,7 +7,6 @@ import axiosWithAuth from "../../utils/axiosWithAuth";
 //component
 import ClassList from "./ClassList";
 import QuestionList from "../Teacher-Single-Class-Dashboard/QuestionList";
-import QuestionCard from "../Teacher-Single-Class-Dashboard/QuestionCard";
 import Results from "../Teacher-Single-Class-Dashboard/Results";
 
 //action
@@ -18,9 +17,10 @@ const TeacherDashboard = props => {
   const [questionList, setQuestionList] = useState([]);
   const [name, setName] = useState();
   const [classCode, setClassCode] = useState();
+  const [showWelcome, setShowWelcome] = useState(true);
   const [showQuestion, setShowQuestion] = useState(false);
   const [results, setResults] = useState([]);
-  const [showRsult, setShowResult] = useState(false);
+  const [showResult, setShowResult] = useState(false);
 
   useEffect(() => {
     async function fetchList() {
@@ -43,6 +43,7 @@ const TeacherDashboard = props => {
         setName(name);
         setClassCode(classCode);
         console.log(name, classCode);
+        setShowWelcome(false);
         setShowQuestion(true);
         setShowResult(false);
       });
@@ -52,11 +53,21 @@ const TeacherDashboard = props => {
     await axiosWithAuth()
       .get(`/api/rating/question/${id}`)
       .then(res => {
-        console.log(res.data);
-        // setResult(res.data);
+        setResults(res.data);
+        setShowWelcome(false);
         setShowQuestion(false);
         setShowResult(true);
+        console.log(results);
       });
+
+    // setShowResult(true);
+    // .then(res => {
+    //   console.log(res.data);
+    //   setResults(res.data);
+    //   console.log(results);
+    //   setShowResult(true);
+    //   console.log(showResult);
+    // });
   };
 
   const Dashboard = styled.div`
@@ -90,10 +101,9 @@ const TeacherDashboard = props => {
           showQuestion={showQuestion}
           handleClick={handleQuestionClick}
         />
-
         {/* Display Welcome Message */}
         <div
-          className={showQuestion ? "welcome-teacher off" : "welcome-teacher"}
+          className={showWelcome ? "welcome-teacher " : "welcome-teacher off"}
         >
           <h1>Hello Teacher!</h1>
           <div className="dash-button">
@@ -105,10 +115,9 @@ const TeacherDashboard = props => {
               <button>Add Question</button>
             </Link>
           </div>
-
-          {/* Display Results  */}
-          <Results />
         </div>
+        {/* Display Results  */}
+        <Results showResult={showResult} results={results} />
       </RightBar>
     </Dashboard>
   );
@@ -128,7 +137,3 @@ const TeacherDashboard = props => {
 // )(TeacherDashboard);
 
 export default TeacherDashboard;
-
-//11-10-2019
-//Question Card Click works
-//Need to work on BE to fix what data the `/api/

@@ -1,48 +1,84 @@
-import React, { useState, useEffect } from "react";
-var CanvasJSReact = require("../../canvasjs.react");
-var CanvasJS = CanvasJSReact.CanvasJS;
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+import React from "react";
+import { CanvasJSChart } from "../../canvasjs.react";
+import { CanvasJS } from "../../canvasjs.react";
 
-const ResultGraph = props => {
-  const [one, setOne] = useState(0);
-  const [two, setTwo] = useState(0);
-  const [three, setThree] = useState(0);
-  const [four, setFour] = useState(0);
-  const [five, setFive] = useState(0);
+class Graph extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-  useEffect(() => {
-    setOne(props.oneStar.length);
-    setTwo(props.twoStar.length);
-    setThree(props.threeStar.length);
-    setFour(props.fourStar.length);
-    setFive(props.fiveStar.length);
-  }, []);
-
-  const options = {
-    title: { text: "Parent Rating Bar Chart" },
-    data: {
-      type: "column",
-      dataPoints: [
-        { label: "1", y: one },
-        { label: "2", y: two },
-        { label: "3", y: three },
-        { label: "4", y: four },
-        { label: "5", y: five }
+  render() {
+    const options = {
+      title: {
+        text: "Parent Rating Bar Chart"
+      },
+      data: [
+        {
+          type: "column",
+          dataPoints: [
+            { label: "1", y: this.props.oneStar.length },
+            { label: "2", y: this.props.twoStar.length },
+            { label: "3", y: this.props.threeStar.length },
+            { label: "4", y: this.props.fourStar.length },
+            { label: "5", y: this.props.fiveStar.length }
+          ]
+        }
       ]
-    }
-  };
-  return (
-    <div className="graph">
-      <CanvasJSChart options={options} />
-    </div>
-  );
-};
+    };
+
+    return (
+      <div>
+        <CanvasJSChart
+          options={options}
+          /* onRef = {ref => this.chart = ref} */
+        />
+      </div>
+    );
+  }
+}
+
+export default Graph;
+
+// const ResultGraph = props => {
+//   const [one, setOne] = useState(0);
+//   const [two, setTwo] = useState(0);
+//   const [three, setThree] = useState(0);
+//   const [four, setFour] = useState(0);
+//   const [five, setFive] = useState(0);
+
+//   useEffect(() => {
+//     setOne(props.oneStar.length);
+//     setTwo(props.twoStar.length);
+//     setThree(props.threeStar.length);
+//     setFour(props.fourStar.length);
+//     setFive(props.fiveStar.length);
+//   }, []);
+
+//   const options = {
+//     title: { text: "Parent Rating Bar Chart" },
+//     data: {
+//       type: "column",
+//       dataPoints: [
+//         { label: "1", y: one },
+//         { label: "2", y: two },
+//         { label: "3", y: three },
+//         { label: "4", y: four },
+//         { label: "5", y: five }
+//       ]
+//     }
+//   };
+//   return (
+//     <div className="graph">
+//       <CanvasJSChart options={options} />
+//     </div>
+//   );
+// };
 
 // class ResultGraph extends Component {
-//   render() {
-//     const options = {
-//       title: { text: "Parent Rating Bar Chart" },
-//       data: {
+//   options = {
+//     title: { text: "Parent Rating Bar Chart" },
+//     data: [
+//       {
 //         type: "column",
 //         dataPoints: [
 //           { label: "1", y: 10 },
@@ -52,13 +88,15 @@ const ResultGraph = props => {
 //           { label: "5", y: 10 }
 //         ]
 //       }
-//     };
+//     ]
+//   };
+//   render() {
 //     return (
 //       <div className="graph">
-//         <CanvasJSChart options={options} />
+//         <CanvasJSChart options={this.options} />
 //       </div>
 //     );
 //   }
 // }
 
-export default ResultGraph;
+// export default ResultGraph;
