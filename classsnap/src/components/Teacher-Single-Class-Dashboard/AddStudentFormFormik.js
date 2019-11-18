@@ -1,10 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { Button } from "semantic-ui-react";
 import { Form, Field, withFormik, yupToFormErrors } from "formik";
 import * as Yup from "yup";
+import { connect } from "react-redux";
 
 const AddStudentForm = ({ errors, touched, ...props }) => {
   return (
     <div classname="add-student-form">
+      <Link to="/teacher/dashboard">
+        <Button>Return to Dashboard</Button>
+      </Link>
       <Form>
         <label>
           First Name
@@ -21,9 +27,8 @@ const AddStudentForm = ({ errors, touched, ...props }) => {
           )}
         </label>
         <label>
-          Student ID
-          <Field type="text" name="learnerCode" placeholder="Student ID" />
-          )}
+          Birthdate
+          <Field type="date" name="birthdate" />
         </label>
         <button type="">Add More Students</button>
       </Form>
@@ -32,18 +37,22 @@ const AddStudentForm = ({ errors, touched, ...props }) => {
 };
 
 const FormikAddStudentForm = withFormik({
-  mapPropsToValues({ firstName, lastName, learnerCode }) {
+  mapPropsToValues({ firstName, lastName, birthdate }) {
     return {
       firstName: firstName || "",
       lastName: lastName || "",
-      learnerCode: learnerCode || ""
+      birthdate: birthdate || ""
     };
   },
-  validationSchema: yupToFormErrors.object().shape({
+  validationSchema: Yup.object().shape({
     firstName: Yup.string().required("Please enter student's first name"),
     lastName: Yup.string().required("Please enter student's last name")
   })
-});
-export default AddStudentForm;
+})(AddStudentForm);
+
+const mapStateToProps = state => {
+  return {};
+};
+export default connect(mapStateToProps)(FormikAddStudentForm);
 
 //?? How to build a build-on form so that teachers can submit all students at once

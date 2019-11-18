@@ -15,7 +15,6 @@ const Results = props => {
 
   useEffect(() => {
     setShow(props.showResult);
-    console.log(props.results[0]);
   }, []);
 
   return (
@@ -25,8 +24,15 @@ const Results = props => {
 
     <div className={show ? "resultList" : "resultList off"}>
       <Button onClick={props.clickReturn}>Back to Questions</Button>
+      <Button
+        color="red"
+        onClick={() => props.handleDeleteQuestion(props.questionId)}
+      >
+        Delete Question
+      </Button>
       <div className="question">
-        {props.results[0] ? <h1>{props.results[0].question}</h1> : null}
+        {/* {props.results[0] ? <h1>{props.results[0].question}</h1> : null} */}
+        <h2>{props.question}</h2>
       </div>
       <div className="result-graph">
         <Graph

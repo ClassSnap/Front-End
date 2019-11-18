@@ -9,7 +9,10 @@ import {
   ADD_QUESTION_FAILURE,
   GET_QUESTIONS_BY_CLASS_START,
   GET_QUESTIONS_BY_CLASS_SUCCESS,
-  GET_QUESTIONS_BY_CLASS_FAILURE
+  GET_QUESTIONS_BY_CLASS_FAILURE,
+  DELETE_QUESTION_BY_ID_START,
+  DELETE_QUESTION_BY_ID_SUCCESS,
+  DELETE_QUESTION_BY_ID_FAILURE
 } from "./types";
 
 //1. Add Class
@@ -77,6 +80,21 @@ export const getAllQuestions = id => {
           type: GET_QUESTIONS_BY_CLASS_FAILURE,
           payload: err.response
         });
+      });
+  };
+};
+
+//Delete Question By Id
+export const deleteQuestion = id => {
+  return dispatch => {
+    dispatch({ type: DELETE_QUESTION_BY_ID_START });
+    axiosWithAuth()
+      .delete(`/api/question/${id}`)
+      .then(res => {
+        dispatch({
+          type: DELETE_QUESTION_BY_ID_SUCCESS
+        });
+        console.log("deleted");
       });
   };
 };

@@ -13,15 +13,17 @@ import AddQuestionFormDemo from "./components/Teacher-Dashboard/AddQuestionFormD
 import ParentResponseForm from "./components//Parent-Dashboard/Parent-ResponseForm";
 import ParentNewQuestionList from "./components/Parent-Dashboard/Parent-NewQuestionList";
 import ParentAnsweredQuestionList from "./components/Parent-Dashboard/Parent-AnsweredQuestionList";
-import QuestionResult from "./components/Teacher-Single-Class-Dashboard/Question-view/QuestionResult";
-import QuestionResultList from "./components/Teacher-Single-Class-Dashboard/Question-view/QuestionResultList";
+
 import NavBar from "./components/NavBar";
 import AddClassForm from "./components/Teacher-Dashboard/AddClassForm";
 import AddQuestionForm from "./components/Teacher-Dashboard/AddQuestionForm";
-import SingleClassView from "./components/Teacher-Single-Class-Dashboard/SingleClassDashboard";
 import LandingPage from "./components/SignUp_Pages/landing";
+import AddStudentForm from "./components/Teacher-Single-Class-Dashboard/AddStudentFormFormik";
 import ClassList from "./components/Teacher-Dashboard/ClassList";
+import AddStudentFormFormik from "./components/Teacher-Single-Class-Dashboard/AddStudentFormFormik";
 
+//Parent components
+import ParentDashboard from "./components/Parent-Dashboard/parent-dashboard";
 //data
 // import { sampleQuestions, sampleStudentData } from "./data";
 
@@ -62,17 +64,17 @@ function App() {
               path="/teacher/addquestion"
               component={AddQuestionForm}
             />
-            {/* <Route
+            <Route
               exact
-              path="/teacher/question-result-list"
-              component={QuestionResultList}
-            /> */}
-            {/* <Route
-              exact
-              path="/teacher/question-result"
-              component={QuestionResult}
-            /> */}
+              path="/teacher/addstudent"
+              component={AddStudentFormFormik}
+            />
             <Route exact path="/teacher/addclass" component={AddClassForm} />
+            <Route
+              exact
+              path="/parent/dashboard"
+              render={props => <ParentDashboard {...props} />}
+            />
             <Route
               exact
               path="/parent/response-form"

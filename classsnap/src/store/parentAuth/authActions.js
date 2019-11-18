@@ -7,7 +7,7 @@ import {
   LOGOUT,
   REGISTER_START,
   REGISTER_SUCCESS,
-  REGISTER_FAILURE,
+  REGISTER_FAILURE
 } from "./types";
 
 //login action
@@ -17,13 +17,13 @@ export const login = (credentials, history) => {
     axios
       .post(
         "https://class-snap.herokuapp.com/api/auth/parent/login",
-        credentials,
+        credentials
       )
       .then(res => {
         dispatch({ type: LOGIN_SUCCESS, payload: res.data });
         console.log(res.data);
         localStorage.setItem("parentToken", res.data.parentToken);
-        history.push("/parent/response-form");
+        history.push("/parent/dashboard");
       })
       .catch(err => {
         dispatch({ type: LOGIN_FAIL, payload: err.response });

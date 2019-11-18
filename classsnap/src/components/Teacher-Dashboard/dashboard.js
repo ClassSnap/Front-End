@@ -24,6 +24,7 @@ const TeacherDashboard = props => {
   const [showResult, setShowResult] = useState(false);
   const [currentClassId, setCurrentClassId] = useState();
   const [targetQuestion, setTargetQuestion] = useState();
+  const [targetQuestionId, setTargetQuestionId] = useState();
 
   useEffect(() => {
     async function fetchList() {
@@ -54,7 +55,7 @@ const TeacherDashboard = props => {
       });
   };
 
-  const handleQuestionClick = async id => {
+  const handleQuestionClick = async (id, question) => {
     await axiosWithAuth()
       .get(`/api/rating/question/${id}`)
       .then(res => {
@@ -62,8 +63,9 @@ const TeacherDashboard = props => {
         setShowWelcome(false);
         setShowQuestion(false);
         setShowResult(true);
-
-        console.log(results);
+        setTargetQuestion(question);
+        setTargetQuestionId(id);
+        console.log(targetQuestion);
       });
   };
 
@@ -78,6 +80,21 @@ const TeacherDashboard = props => {
       });
     setShowWelcome(false);
     setShowQuestion(true);
+  };
+
+  const handleDeleteQuestion = async id => {
+    await axiosWithAuth()
+      .delete(`/api/question/${id}`)
+      .then(res => {
+        axiosWithAuth()
+          .get(`/api/question/class/${currentClassId}`)
+          .then(res => {
+            const reverse = res.data.reverse();
+            setQuestionList(reverse);
+            setShowQuestion(true);
+            setShowResult(false);
+          });
+      });
   };
 
   const Dashboard = styled.div`
@@ -129,8 +146,11 @@ const TeacherDashboard = props => {
         {/* Display Results  */}
         <Results
           showResult={showResult}
+          question={targetQuestion}
+          questionId={targetQuestionId}
           results={results}
           clickReturn={handleReturnClick}
+          handleDeleteQuestion={handleDeleteQuestion}
         />
       </RightBar>
     </Dashboard>
