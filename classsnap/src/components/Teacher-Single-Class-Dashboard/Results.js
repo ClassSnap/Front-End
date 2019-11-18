@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Button } from "semantic-ui-react";
 
 //components
 import Graph from "./Result-graph";
@@ -23,6 +24,7 @@ const Results = props => {
     //3. Render List of Students
 
     <div className={show ? "resultList" : "resultList off"}>
+      <Button onClick={props.clickReturn}>Back to Questions</Button>
       <div className="question">
         {props.results[0] ? <h1>{props.results[0].question}</h1> : null}
       </div>

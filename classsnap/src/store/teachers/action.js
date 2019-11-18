@@ -9,26 +9,27 @@ import {
   ADD_QUESTION_FAILURE,
   GET_QUESTIONS_BY_CLASS_START,
   GET_QUESTIONS_BY_CLASS_SUCCESS,
-  GET_QUESTIONS_BY_CLASS_FAILURE,
+  GET_QUESTIONS_BY_CLASS_FAILURE
 } from "./types";
 
-//1. Get class by teacher id
+//1. Add Class
 export const addClass = (info, history) => {
   return dispatch => {
     dispatch({ type: ADD_CLASS_START });
     axiosWithAuth()
       .post(`/api/class`, info)
       .then(res => {
+        console.log("fired");
         dispatch({
           type: ADD_CLASS_SUCCESS,
-          payload: res.data,
+          payload: res.data
         });
         history.push("/teacher/dashboard");
       })
       .catch(err => {
         dispatch({
           type: ADD_CLASS_FAILURE,
-          payload: err.response,
+          payload: err.response
         });
       });
   };
@@ -43,14 +44,14 @@ export const addQuestion = (info, history) => {
       .then(res => {
         dispatch({
           type: ADD_QUESTION_SUCCESS,
-          payload: res.data,
+          payload: res.data
         });
-        history.push("/teacher/classdash");
+        history.push("/teacher/dashboard");
       })
       .catch(err => {
         dispatch({
           type: ADD_QUESTION_FAILURE,
-          payload: err.response,
+          payload: err.response
         });
       });
   };
@@ -65,7 +66,7 @@ export const getAllQuestions = id => {
       .then(res => {
         dispatch({
           type: GET_QUESTIONS_BY_CLASS_SUCCESS,
-          payload: res.data,
+          payload: res.data
         });
         // history.push("/teacher/classdash");
         // localStorage.setItem("className", name);
@@ -74,7 +75,7 @@ export const getAllQuestions = id => {
       .catch(err => {
         dispatch({
           type: GET_QUESTIONS_BY_CLASS_FAILURE,
-          payload: err.response,
+          payload: err.response
         });
       });
   };

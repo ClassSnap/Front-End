@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getAllQuestions } from "../../store/teachers/action";
@@ -11,24 +12,6 @@ import axiosWithAuth from "../../utils/axiosWithAuth";
 //correctly, the data is not being rendered to the page.
 
 const ClassList = props => {
-  // const [list, setList] = useState([]);
-
-  // useEffect(() => {
-  //   async function fetchList() {
-  //     const teacherId = localStorage.getItem("teacherId");
-  //     await axiosWithAuth()
-  //       .get(`/api/teacher/${teacherId}`)
-  //       .then(teacher => {
-  //         setList(teacher.data.classes);
-  //       });
-  //   }
-  //   fetchList();
-  // }, []);
-
-  // const handleClick = (id, name, classCode) => {
-  //   props.getAllQuestions(id, name, classCode, props.hist);
-  // };
-
   return (
     <div className="classlist">
       {props.list.map(info => (
@@ -41,7 +24,7 @@ const ClassList = props => {
         />
       ))}
       <Link to="/teacher/addclass">
-        <button>Add Class</button>
+        <Button>Add Class</Button>
       </Link>
     </div>
   );

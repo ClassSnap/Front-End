@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Button } from "semantic-ui-react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import axiosWithAuth from "../../utils/axiosWithAuth";
@@ -21,6 +22,8 @@ const TeacherDashboard = props => {
   const [showQuestion, setShowQuestion] = useState(false);
   const [results, setResults] = useState([]);
   const [showResult, setShowResult] = useState(false);
+  const [currentClassId, setCurrentClassId] = useState();
+  const [targetQuestion, setTargetQuestion] = useState();
 
   useEffect(() => {
     async function fetchList() {
@@ -28,6 +31,7 @@ const TeacherDashboard = props => {
       await axiosWithAuth()
         .get(`/api/teacher/${teacherId}`)
         .then(teacher => {
+          console.log(teacher);
           setList(teacher.data.classes);
         });
     }
@@ -46,6 +50,7 @@ const TeacherDashboard = props => {
         setShowWelcome(false);
         setShowQuestion(true);
         setShowResult(false);
+        setCurrentClassId(id);
       });
   };
 
@@ -57,17 +62,22 @@ const TeacherDashboard = props => {
         setShowWelcome(false);
         setShowQuestion(false);
         setShowResult(true);
+
         console.log(results);
       });
+  };
 
-    // setShowResult(true);
-    // .then(res => {
-    //   console.log(res.data);
-    //   setResults(res.data);
-    //   console.log(results);
-    //   setShowResult(true);
-    //   console.log(showResult);
-    // });
+  const handleReturnClick = async () => {
+    await axiosWithAuth()
+      .get(`/api/question/class/${currentClassId}`)
+      .then(res => {
+        console.log("clicked");
+        setShowWelcome(false);
+        setShowQuestion(true);
+        setShowResult(false);
+      });
+    setShowWelcome(false);
+    setShowQuestion(true);
   };
 
   const Dashboard = styled.div`
@@ -112,12 +122,16 @@ const TeacherDashboard = props => {
             <h3>You are a hero</h3>
             <h3>Send a question now to continue your impact</h3>
             <Link to="/teacher/addquestion">
-              <button>Add Question</button>
+              <Button>Add Question</Button>
             </Link>
           </div>
         </div>
         {/* Display Results  */}
-        <Results showResult={showResult} results={results} />
+        <Results
+          showResult={showResult}
+          results={results}
+          clickReturn={handleReturnClick}
+        />
       </RightBar>
     </Dashboard>
   );

@@ -10,17 +10,19 @@ class Graph extends React.Component {
   render() {
     const options = {
       title: {
-        text: "Parent Rating Bar Chart"
+        text: "Parent Rating Bar Chart",
+        subtitle: ["x-axis = rating, y-axis = number of students"]
       },
+
       data: [
         {
           type: "column",
           dataPoints: [
-            { label: "1", y: this.props.oneStar.length },
-            { label: "2", y: this.props.twoStar.length },
-            { label: "3", y: this.props.threeStar.length },
-            { label: "4", y: this.props.fourStar.length },
-            { label: "5", y: this.props.fiveStar.length }
+            { label: "1-star", y: this.props.oneStar.length },
+            { label: "2-star", y: this.props.twoStar.length },
+            { label: "3-star", y: this.props.threeStar.length },
+            { label: "4-star", y: this.props.fourStar.length },
+            { label: "5-star", y: this.props.fiveStar.length }
           ]
         }
       ]

@@ -51,11 +51,7 @@ function App() {
               path="/teacher/dashboard"
               render={props => <TeacherDashboard {...props} />}
             />
-            {/* <Route
-              exact
-              path="/teacher/classdash"
-              render={props => <SingleClassView {...props} />}
-            /> */}
+
             <Route
               exact
               path="/teacher/add-question-demo"

@@ -4,10 +4,11 @@ import {
   LOGIN_START,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT,
+  LOGOUT_START,
+  LOGOUT_SUCCESS,
   REGISTER_START,
   REGISTER_SUCCESS,
-  REGISTER_FAILURE,
+  REGISTER_FAILURE
 } from "./types";
 
 //login action
@@ -17,7 +18,7 @@ export const login = (credentials, history) => {
     axios
       .post(
         "https://class-snap.herokuapp.com/api/auth/teacher/login",
-        credentials,
+        credentials
       )
       .then(res => {
         dispatch({ type: LOGIN_SUCCESS, payload: res.data });
@@ -34,11 +35,13 @@ export const login = (credentials, history) => {
 };
 
 //Logout
-export const logout = () => {
-  return dispatch => {
-    dispatch({ type: LOGOUT });
+export const logout = history => {
+  return async dispatch => {
+    await dispatch({ type: LOGOUT_START });
     localStorage.removeItem("token");
     localStorage.removeItem("teacherId");
+    dispatch({ type: LOGOUT_SUCCESS });
+    console.log("worked");
   };
 };
 
@@ -49,7 +52,7 @@ export const register = (credentials, history) => {
     axios
       .post(
         "https://class-snap.herokuapp.com/api/auth/teacher/register",
-        credentials,
+        credentials
       )
       .then(res => {
         dispatch({ type: REGISTER_SUCCESS });

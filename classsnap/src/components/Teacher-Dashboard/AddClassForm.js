@@ -1,12 +1,18 @@
 import React from "react";
 import { Form, Field, withFormik } from "formik";
+import { Button } from "semantic-ui-react";
 import * as Yup from "yup";
 import { addClass } from "../../store/teachers/action";
 import { connect } from "react-redux";
 
-const AddClassForm = ({ errors, touched, ...props }) => {
+const AddClassForm = ({ errors, touched, history, ...props }) => {
+  const clickReturn = () => {
+    history.push("/teacher/dashboard");
+  };
   return (
     <div className="add-classform">
+      <Button onClick={clickReturn}>Back to Dashboard</Button>
+
       <Form>
         <h1>Add A Class</h1>
         <label>
@@ -69,13 +75,13 @@ const FormikAddClassForm = withFormik({
       name: name || "",
       subject: subject || "",
       gradeLevel: gradeLevel || "",
-      classRigor: classRigor || "",
+      classRigor: classRigor || ""
     };
   },
   validationSchema: Yup.object().shape({
     name: Yup.string().required("Please enter a class name"),
     subject: Yup.string().required("Please enter a subject"),
-    gradeLevel: Yup.string().required("Please select a grade level"),
+    gradeLevel: Yup.string().required("Please select a grade level")
   }),
   handleSubmit(values, { resetForm, props }) {
     let newItem = {
@@ -85,22 +91,19 @@ const FormikAddClassForm = withFormik({
       classRigor: values.classRigor,
       classCode: Math.random()
         .toString(36)
-        .slice(2),
-      teacherId: localStorage.getItem("teacherId"),
+        .substring(6),
+      teacherId: localStorage.getItem("teacherId")
     };
     props.addClass(newItem, props.history);
     resetForm();
-  },
+  }
 })(AddClassForm);
 
 const mapStateToProps = state => {
   return {
     isLoading: state.teacher.isLoading,
-    error: state.teacher.error,
+    error: state.teacher.error
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { addClass },
-)(FormikAddClassForm);
+export default connect(mapStateToProps, { addClass })(FormikAddClassForm);

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { getAllQuestions } from "../../store/teachers/action";
 
@@ -11,7 +13,12 @@ const QuestionList = props => {
     <div className={props.showQuestion ? "questionList" : "questionList off"}>
       <h2>{props.name}</h2>
       <h4>Class Code:{props.classCode}</h4>
-
+      <Link to="/teacher/addquestion">
+        <Button>Add Question</Button>
+      </Link>
+      <Link to="/teacher/addstudent">
+        <Button>Add Students</Button>
+      </Link>
       {props.questionList.map(quest => (
         <QuestionCard
           key={quest.id}

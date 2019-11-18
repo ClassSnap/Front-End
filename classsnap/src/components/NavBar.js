@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { logout } from "../store/teacherAuth/authActions";
+const NavBar = props => {
+  const [token, setToken] = useState();
 
-const NavBar = () => {
+  useEffect(async () => {
+    await setToken(localStorage.getItem("token"));
+  }, []);
+
   const Nav = styled.div`
     display: flex;
     justify-content: space-between;
@@ -27,13 +35,25 @@ const NavBar = () => {
       <a href="">
         <Logo>ClassSnap</Logo>
       </a>
-      <Icon>
-        <FontAwesomeIcon icon={faHome} />
-        <span>Home</span>
-        <FontAwesomeIcon icon={faInfoCircle} />
-        <span>Help</span>
-      </Icon>
+      {props.isAuth ? (
+        <Icon>
+          {/* <a href="/#/teacher/dashboard">
+            <FontAwesomeIcon icon={faHome} />
+            <span>Dashboard</span>
+          </a> */}
+          <Link to="/" onClick={props.logout}>
+            <FontAwesomeIcon icon={faSignOutAlt} />
+            <span>Logout</span>
+          </Link>
+        </Icon>
+      ) : null}
     </Nav>
   );
 };
-export default NavBar;
+
+const mapStateToProps = state => {
+  return {
+    isAuth: state.teacherAuth.isAuth
+  };
+};
+export default connect(mapStateToProps, { logout })(NavBar);
