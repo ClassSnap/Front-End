@@ -8,6 +8,8 @@ import teacherLogin from "./components/SignUp_Pages/teacher-signin";
 import parentLogin from "./components/SignUp_Pages/parent-signin";
 import teacherReg from "./components/SignUp_Pages/teacher-signup";
 import parentReg from "./components/SignUp_Pages/parent-signup";
+import parentloginspn from "./components/SignUp_Pages/parent-signin-spn";
+import parentregspn from "./components/SignUp_Pages/parent-signup-spn";
 import TeacherDashboard from "./components/Teacher-Dashboard/dashboard";
 import AddQuestionFormDemo from "./components/Teacher-Dashboard/AddQuestionFormDemo";
 import ParentResponseForm from "./components//Parent-Dashboard/Parent-ResponseForm";
@@ -18,7 +20,7 @@ import NavBar from "./components/NavBar";
 import AddClassForm from "./components/Teacher-Dashboard/AddClassForm";
 import AddQuestionForm from "./components/Teacher-Dashboard/AddQuestionForm";
 import LandingPage from "./components/SignUp_Pages/landing";
-import AddStudentForm from "./components/Teacher-Single-Class-Dashboard/AddStudentFormFormik";
+import AddStudentForm from "./components/Teacher-Single-Class-Dashboard/AddStudentForm";
 import ClassList from "./components/Teacher-Dashboard/ClassList";
 import AddStudentFormFormik from "./components/Teacher-Single-Class-Dashboard/AddStudentFormFormik";
 
@@ -46,6 +48,8 @@ function App() {
             <Route exact path="/parentlogin" component={parentLogin} />
             <Route exact path="/teachersignup" component={teacherReg} />
             <Route exact path="/parentsignup" component={parentReg} />
+            <Route exact path="/parentloginspn" component={parentloginspn} />
+            <Route exact path="/parentsignupspn" component={parentregspn} />
             {/* Private Route */}
             {/* <Route path="/teacher" render={props => <ClassList {...props} />} /> */}
             <Route
@@ -66,8 +70,13 @@ function App() {
             />
             <Route
               exact
-              path="/teacher/addstudent"
+              path="/teacher/addstudentformik"
               component={AddStudentFormFormik}
+            />
+            <Route
+              exact
+              path="/teacher/addstudent"
+              component={AddStudentForm}
             />
             <Route exact path="/teacher/addclass" component={AddClassForm} />
             <Route

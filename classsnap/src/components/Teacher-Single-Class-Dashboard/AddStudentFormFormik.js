@@ -50,9 +50,10 @@ const FormikAddStudentForm = withFormik({
   })
 })(AddStudentForm);
 
-const mapStateToProps = state => {
-  return {};
-};
-export default connect(mapStateToProps)(FormikAddStudentForm);
+export default FormikAddStudentForm;
+// const mapStateToProps = state => {
+//   return {};
+// };
+// export default connect(mapStateToProps)(FormikAddStudentForm);
 
 //?? How to build a build-on form so that teachers can submit all students at once
