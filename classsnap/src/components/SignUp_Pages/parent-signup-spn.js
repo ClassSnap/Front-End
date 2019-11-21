@@ -10,7 +10,7 @@ const ParentSignUpFormSPN = ({ errors, touched, ...props }) => {
   return (
     <div className="parent-reg-form">
       <Link to="/parentsignup">
-        <Button>English</Button>
+        <Button>Switch to English</Button>
       </Link>
       <Form>
         <h1>Registro de padres</h1>

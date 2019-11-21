@@ -1,16 +1,15 @@
 import React from "react";
 
-const AddStudentForm = () => {
+const AddStudentForm = props => {
   return (
     <div className="add-student-form">
-      <h1>Add Student Form</h1>
       <form>
         Student First Name:
-        <input type="text" name="firstname" />
+        <input type="text" name="firstname" onChange={props.onChange} />
         Student Last Name:
-        <input type="text" name="lastname" />
+        <input type="text" name="lastname" onChange={props.onChange} />
         Student Birthdate:
-        <input type="date" name="date" />
+        <input type="date" name="date" onChange={props.onChange} />
       </form>
     </div>
   );

@@ -23,6 +23,7 @@ import LandingPage from "./components/SignUp_Pages/landing";
 import AddStudentForm from "./components/Teacher-Single-Class-Dashboard/AddStudentForm";
 import ClassList from "./components/Teacher-Dashboard/ClassList";
 import AddStudentFormFormik from "./components/Teacher-Single-Class-Dashboard/AddStudentFormFormik";
+import AddStudentView from "./components//Teacher-Single-Class-Dashboard/AddStudent";
 
 //Parent components
 import ParentDashboard from "./components/Parent-Dashboard/parent-dashboard";
@@ -76,7 +77,7 @@ function App() {
             <Route
               exact
               path="/teacher/addstudent"
-              component={AddStudentForm}
+              component={AddStudentView}
             />
             <Route exact path="/teacher/addclass" component={AddClassForm} />
             <Route

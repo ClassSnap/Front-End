@@ -10,7 +10,7 @@ const ParentSignUpForm = ({ errors, touched, ...props }) => {
   return (
     <div className="parent-reg-form">
       <Link to="/parentsignupspn">
-        <Button>Español</Button>
+        <Button>En Español</Button>
       </Link>
       <Form>
         <h1>
@@ -64,7 +64,6 @@ const ParentSignUpForm = ({ errors, touched, ...props }) => {
 
         <label>Preferred Language</label>
         <Field component="select" name="language" class="option">
-          <option value="default">Select</option>
           <option value="English">English</option>
           <option value="Spanish">Español</option>
         </Field>
