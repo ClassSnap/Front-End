@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getAllQuestions } from "../../store/teachers/action";
@@ -11,50 +12,33 @@ import axiosWithAuth from "../../utils/axiosWithAuth";
 //correctly, the data is not being rendered to the page.
 
 const ClassList = props => {
-  const [list, setList] = useState([]);
-
-  useEffect(() => {
-    async function fetchList() {
-      const teacherId = localStorage.getItem("teacherId");
-      await axiosWithAuth()
-        .get(`/api/teacher/${teacherId}`)
-        .then(teacher => {
-          setList(teacher.data.classes);
-        });
-    }
-    fetchList();
-  }, []);
-
-  const handleClick = id => {
-    props.getAllQuestions(id, props.hist);
-  };
-
   return (
     <div className="classlist">
-      {list.map(info => (
+      {props.list.map(info => (
         <ClassCard
           key={info.id}
           id={info.id}
           name={info.name}
           classCode={info.classCode}
-          onClick={handleClick}
+          onClick={props.handleClick}
         />
       ))}
       <Link to="/teacher/addclass">
-        <button>Add Class</button>
+        <Button>Add Class</Button>
       </Link>
     </div>
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    isLoading: state.teacher.isLoading,
-    error: state.teacher.error,
-  };
-}
+export default ClassList;
+// function mapStateToProps(state) {
+//   return {
+//     isLoading: state.teacher.isLoading,
+//     error: state.teacher.error,
+//   };
+// }
 
-export default connect(
-  mapStateToProps,
-  { getAllQuestions },
-)(ClassList);
+// export default connect(
+//   mapStateToProps,
+//   { getAllQuestions },
+// )(ClassList);

@@ -8,6 +8,9 @@ import {
   GET_QUESTIONS_BY_CLASS_START,
   GET_QUESTIONS_BY_CLASS_SUCCESS,
   GET_QUESTIONS_BY_CLASS_FAILURE,
+  DELETE_QUESTION_BY_ID_START,
+  DELETE_QUESTION_BY_ID_SUCCESS,
+  DELETE_QUESTION_BY_ID_FAILURE
 } from "./types";
 
 const initialState = {
@@ -16,7 +19,7 @@ const initialState = {
   error: "",
   isLoading: false,
   user: "",
-  classId: null,
+  classId: null
 };
 
 const reducers = (state = initialState, action) => {
@@ -25,7 +28,7 @@ const reducers = (state = initialState, action) => {
       return {
         ...state,
         error: "",
-        isLoading: true,
+        isLoading: true
       };
     case ADD_CLASS_SUCCESS:
       console.log(action.payload);
@@ -33,41 +36,41 @@ const reducers = (state = initialState, action) => {
         ...state,
         error: "",
         isLoading: true,
-        newClass: action.payload,
+        newClass: action.payload
       };
 
     case ADD_CLASS_FAILURE:
       return {
         ...state,
         error: action.payload,
-        isLoading: false,
+        isLoading: false
       };
     case ADD_QUESTION_START:
       return {
         ...state,
         error: "",
-        isLoading: true,
+        isLoading: true
       };
     case ADD_QUESTION_SUCCESS:
       console.log(action.payload);
       return {
         ...state,
         error: "",
-        isLoading: true,
+        isLoading: true
       };
 
     case ADD_QUESTION_FAILURE:
       return {
         ...state,
         error: action.payload,
-        isLoading: false,
+        isLoading: false
       };
 
     case GET_QUESTIONS_BY_CLASS_START:
       return {
         ...state,
         error: "",
-        isLoading: true,
+        isLoading: true
       };
     case GET_QUESTIONS_BY_CLASS_SUCCESS:
       return {
@@ -75,13 +78,30 @@ const reducers = (state = initialState, action) => {
         error: "",
         isLoading: false,
         question: action.payload,
-        testing: "Check",
+        testing: "Check"
       };
     case GET_QUESTIONS_BY_CLASS_FAILURE:
       return {
         ...state,
         error: action.payload,
-        isLoading: false,
+        isLoading: false
+      };
+
+    case DELETE_QUESTION_BY_ID_START:
+      return {
+        ...state,
+        isLoading: true,
+        error: ""
+      };
+    case DELETE_QUESTION_BY_ID_SUCCESS:
+      return {
+        ...state,
+        isLoading: false
+      };
+    case DELETE_QUESTION_BY_ID_FAILURE:
+      return {
+        ...state,
+        isLoading: false
       };
     default:
       return state;

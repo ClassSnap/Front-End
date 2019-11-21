@@ -10,25 +10,29 @@ import {
   GET_QUESTIONS_BY_CLASS_START,
   GET_QUESTIONS_BY_CLASS_SUCCESS,
   GET_QUESTIONS_BY_CLASS_FAILURE,
+  DELETE_QUESTION_BY_ID_START,
+  DELETE_QUESTION_BY_ID_SUCCESS,
+  DELETE_QUESTION_BY_ID_FAILURE
 } from "./types";
 
-//1. Get class by teacher id
+//1. Add Class
 export const addClass = (info, history) => {
   return dispatch => {
     dispatch({ type: ADD_CLASS_START });
     axiosWithAuth()
       .post(`/api/class`, info)
       .then(res => {
+        console.log("fired");
         dispatch({
           type: ADD_CLASS_SUCCESS,
-          payload: res.data,
+          payload: res.data
         });
         history.push("/teacher/dashboard");
       })
       .catch(err => {
         dispatch({
           type: ADD_CLASS_FAILURE,
-          payload: err.response,
+          payload: err.response
         });
       });
   };
@@ -43,21 +47,21 @@ export const addQuestion = (info, history) => {
       .then(res => {
         dispatch({
           type: ADD_QUESTION_SUCCESS,
-          payload: res.data,
+          payload: res.data
         });
-        history.push("/teacher/classdash");
+        history.push("/teacher/dashboard");
       })
       .catch(err => {
         dispatch({
           type: ADD_QUESTION_FAILURE,
-          payload: err.response,
+          payload: err.response
         });
       });
   };
 };
 
 //Get Question By Class Id
-export const getAllQuestions = (id, history) => {
+export const getAllQuestions = id => {
   return dispatch => {
     dispatch({ type: GET_QUESTIONS_BY_CLASS_START });
     axiosWithAuth()
@@ -65,15 +69,32 @@ export const getAllQuestions = (id, history) => {
       .then(res => {
         dispatch({
           type: GET_QUESTIONS_BY_CLASS_SUCCESS,
-          payload: res.data,
+          payload: res.data
         });
-        history.push("/teacher/classdash");
+        // history.push("/teacher/classdash");
+        // localStorage.setItem("className", name);
+        // localStorage.setItem("classCode", classCode);
       })
       .catch(err => {
         dispatch({
           type: GET_QUESTIONS_BY_CLASS_FAILURE,
-          payload: err.response,
+          payload: err.response
         });
+      });
+  };
+};
+
+//Delete Question By Id
+export const deleteQuestion = id => {
+  return dispatch => {
+    dispatch({ type: DELETE_QUESTION_BY_ID_START });
+    axiosWithAuth()
+      .delete(`/api/question/${id}`)
+      .then(res => {
+        dispatch({
+          type: DELETE_QUESTION_BY_ID_SUCCESS
+        });
+        console.log("deleted");
       });
   };
 };
