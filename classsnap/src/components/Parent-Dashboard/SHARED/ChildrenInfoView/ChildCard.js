@@ -4,7 +4,10 @@ import { Card } from "semantic-ui-react";
 const ChildCard = props => {
   return (
     <div className="child-card">
-      <Card header={(props.firstName, props.lastName)} />
+      <h1>Card</h1>
+      <Card header={(props.firstName, props.lastName) || "test"} />
     </div>
   );
 };
+
+export default ChildCard;

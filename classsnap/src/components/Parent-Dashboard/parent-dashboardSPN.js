@@ -4,10 +4,10 @@ import styled from "styled-components";
 import axiosWithAuth from "../../utils/axiosWithAuth";
 
 //component
-import ChildList from "./SHARED/ChildrenInfoView/ChildList";
-import AddChildForm from "./ENG/AddChildForm";
+import ChildList from "./ChildrenInfoView/ChildList";
+import AddChildForm from "./AddChildForm";
 
-const ParentDashboard = props => {
+const ParentDashboardSPN = props => {
   const [children, setChildren] = useState([]);
   useEffect(() => {
     async function fetchChildren() {
@@ -41,11 +41,11 @@ const ParentDashboard = props => {
         <LeftBar>{/* <ChildList /> */}</LeftBar>
         <RightBar>
           <h1>Parent Dashboard</h1>
-          <Button>Add Child</Button>
+          <Button>Ingresa alumno</Button>
         </RightBar>
       </Dashboard>
     </div>
   );
 };
 
-export default ParentDashboard;
+export default ParentDashboardSPN;
