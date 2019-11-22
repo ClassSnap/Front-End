@@ -23,6 +23,8 @@ import LandingPage from "./components/SignUp_Pages/landing";
 import ClassList from "./components/Teacher-Dashboard/ClassList";
 import ParentDashboard from "./components/Parent-Dashboard/parent-dashboard";
 import ParentRatingForm from "./components/Parent-Dashboard/ENG/RatingForm";
+
+import AddChildForm from "./components/Parent-Dashboard/ENG/AddChildForm";
 //data
 // import { sampleQuestions, sampleStudentData } from "./data";
 
@@ -83,7 +85,7 @@ function App() {
               path="/parent/ratingform"
               component={ParentRatingForm}
             />
-
+            <Route exact path="/parent/addchild" component={AddChildForm} />
             {/* <Route
               exact
               path="/parent/response-form"

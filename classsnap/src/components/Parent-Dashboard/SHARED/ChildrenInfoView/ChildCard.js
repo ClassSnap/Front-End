@@ -4,8 +4,14 @@ import { Card } from "semantic-ui-react";
 const ChildCard = props => {
   return (
     <div className="child-card">
-      <h1>Card</h1>
-      <Card header={(props.firstName, props.lastName) || "test"} />
+      <Card
+        color="teal"
+        header={props.firstName}
+        meta={props.lastName}
+        onClick={() => {
+          props.onClick(props.learnerId);
+        }}
+      />
     </div>
   );
 };

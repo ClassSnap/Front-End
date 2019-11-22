@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "semantic-ui-react";
 import styled from "styled-components";
 import axiosWithAuth from "../../utils/axiosWithAuth";
@@ -14,12 +15,21 @@ const ParentDashboard = props => {
       const parentId = localStorage.getItem("parentId");
       await axiosWithAuth()
         .get(`/api/parent/${parentId}`)
-        .then(children => {
-          setChildren(children);
+        .then(res => {
+          console.log(res.data);
+          setChildren(res.data);
         });
     }
     fetchChildren();
   }, []);
+
+  const handleClick = async (learnerId, name) => {
+    await axiosWithAuth()
+      .get(`/api/learnerclass/${learnerId}`)
+      .then(res => {
+        console.log(res.data);
+      });
+  };
 
   const Dashboard = styled.div`
     display: flex;
@@ -38,10 +48,14 @@ const ParentDashboard = props => {
   return (
     <div ClassName="parent-dashboard">
       <Dashboard>
-        <LeftBar>{/* <ChildList /> */}</LeftBar>
+        <LeftBar>
+          <ChildList children={children} handleClick={handleClick} />
+        </LeftBar>
         <RightBar>
           <h1>Parent Dashboard</h1>
-          <Button>Add Child</Button>
+          <Link to="/parent/addchild">
+            <Button>Add Child</Button>
+          </Link>
         </RightBar>
       </Dashboard>
     </div>

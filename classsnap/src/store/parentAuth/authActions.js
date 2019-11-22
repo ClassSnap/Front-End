@@ -23,6 +23,7 @@ export const login = (credentials, history) => {
         dispatch({ type: LOGIN_SUCCESS, payload: res.data });
         console.log(res.data);
         localStorage.setItem("parentToken", res.data.parentToken);
+        localStorage.setItem("parentId", res.data.parentId);
         history.push("/parent/dashboard");
       })
       .catch(err => {

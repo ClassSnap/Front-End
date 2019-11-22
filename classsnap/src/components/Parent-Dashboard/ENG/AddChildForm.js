@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Form, Field, withFormik } from "formik";
 import { Button } from "semantic-ui-react";
 import * as Yup from "yup";
@@ -9,7 +10,9 @@ const AddChildForm = ({ errors, touched, history, ...props }) => {
   //   };
   return (
     <div className="add-child-form">
-      <Button>Back to Dashboard</Button>
+      <Link to="/parent/dashboard">
+        <Button>Back to Dashboard</Button>
+      </Link>
       <Form>
         <h1>Add Your Child</h1>
         <label>
