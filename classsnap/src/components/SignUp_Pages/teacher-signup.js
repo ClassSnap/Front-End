@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Field, withFormik } from "formik";
 import { Link } from "react-router-dom";
+import { Button } from "semantic-ui-react";
 import * as Yup from "yup";
 import { register } from "../../store/teacherAuth/authActions";
 
@@ -73,7 +74,12 @@ const TeacherSignUpForm = ({ errors, touched, ...props }) => {
         {touched.confirmPassword && errors.confirmPassword && (
           <p className="error">{errors.confirmPassword}</p>
         )}
-        <button>Register</button>
+        {/* <button>Register</button> */}
+        {props.isLoading ? (
+          <Button loading>Loading</Button>
+        ) : (
+          <Button type="submit">Register</Button>
+        )}
       </Form>
 
       <h4>
@@ -93,7 +99,7 @@ const FormikTeacherRegistrationForm = withFormik({
     state,
     email,
     password,
-    confirmPassword,
+    confirmPassword
   }) {
     return {
       prefix: prefix || "",
@@ -104,7 +110,7 @@ const FormikTeacherRegistrationForm = withFormik({
       state: state || "",
       email: email || "",
       password: password || "",
-      confirmPassword: confirmPassword || "",
+      confirmPassword: confirmPassword || ""
     };
   },
 
@@ -117,7 +123,7 @@ const FormikTeacherRegistrationForm = withFormik({
       .required("Please enter at least 8 characters"),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Password must match")
-      .required("Password confirm is required"),
+      .required("Password confirm is required")
   }),
   handleSubmit(values, { props }) {
     let teacher = {
@@ -128,20 +134,19 @@ const FormikTeacherRegistrationForm = withFormik({
       teacherPassword: values.password,
       schoolName: values.schoolName,
       city: values.city,
-      state: values.state,
+      state: values.state
     };
     props.register(teacher, props.history);
-  },
+  }
 })(TeacherSignUpForm);
 
 const mapPropsToState = state => {
   return {
     isLoading: state.teacherAuth.isLoading,
-    error: state.teacherAuth.error,
+    error: state.teacherAuth.error
   };
 };
 
-export default connect(
-  mapPropsToState,
-  { register },
-)(FormikTeacherRegistrationForm);
+export default connect(mapPropsToState, { register })(
+  FormikTeacherRegistrationForm
+);

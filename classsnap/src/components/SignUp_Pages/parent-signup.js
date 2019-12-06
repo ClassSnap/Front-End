@@ -70,7 +70,11 @@ const ParentSignUpForm = ({ errors, touched, ...props }) => {
         {touched.language && errors.language && (
           <p className="error">{errors.language}</p>
         )}
-        <button>Register</button>
+        {props.isLoading ? (
+          <Button loading>Loading</Button>
+        ) : (
+          <Button type="submit">Register</Button>
+        )}
       </Form>
 
       <h4>
