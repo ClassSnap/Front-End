@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "semantic-ui-react";
 import styled from "styled-components";
-import axiosWithAuth from "../../utils/axiosWithAuth";
+import axiosWithParentAuth from "../../utils/axiosWithParentAuth";
 
 //component
 import ChildList from "./SHARED/ChildrenInfoView/ChildList";
@@ -13,10 +13,10 @@ const ParentDashboard = props => {
   useEffect(() => {
     async function fetchChildren() {
       const parentId = localStorage.getItem("parentId");
-      await axiosWithAuth()
+
+      await axiosWithParentAuth()
         .get(`/api/parent/${parentId}`)
         .then(res => {
-          console.log(res.data);
           setChildren(res.data);
         });
     }
@@ -24,7 +24,7 @@ const ParentDashboard = props => {
   }, []);
 
   const handleClick = async (learnerId, name) => {
-    await axiosWithAuth()
+    await axiosWithParentAuth()
       .get(`/api/learnerclass/${learnerId}`)
       .then(res => {
         console.log(res.data);

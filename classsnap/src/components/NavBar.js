@@ -9,7 +9,9 @@ const NavBar = props => {
   const [token, setToken] = useState();
 
   useEffect(async () => {
-    await setToken(localStorage.getItem("token"));
+    await setToken(
+      localStorage.getItem("token") || localStorage.getItem("parentToken")
+    );
   }, []);
 
   const Nav = styled.div`
@@ -53,7 +55,7 @@ const NavBar = props => {
 
 const mapStateToProps = state => {
   return {
-    isAuth: state.teacherAuth.isAuth
+    isAuth: state.teacherAuth.isAuth || state.parentAuth.isAuth
   };
 };
 export default connect(mapStateToProps, { logout })(NavBar);
