@@ -8,6 +8,8 @@ import teacherLogin from "./components/SignUp_Pages/teacher-signin";
 import parentLogin from "./components/SignUp_Pages/parent-signin";
 import teacherReg from "./components/SignUp_Pages/teacher-signup";
 import parentReg from "./components/SignUp_Pages/parent-signup";
+import parentloginspn from "./components/SignUp_Pages/parent-signin-spn";
+import parentregspn from "./components/SignUp_Pages/parent-signup-spn";
 import TeacherDashboard from "./components/Teacher-Dashboard/dashboard";
 import AddQuestionFormDemo from "./components/Teacher-Dashboard/AddQuestionFormDemo";
 // import ParentResponseForm from "./components/Parent-Dashboard/Demo/Parent-ResponseForm";
@@ -47,6 +49,8 @@ function App() {
             <Route exact path="/parentlogin" component={parentLogin} />
             <Route exact path="/teachersignup" component={teacherReg} />
             <Route exact path="/parentsignup" component={parentReg} />
+            <Route exact path="/parentloginspn" component={parentloginspn} />
+            <Route exact path="/parentsignupspn" component={parentregspn} />
             {/* Private Route */}
             <Route
               exact
