@@ -2,16 +2,17 @@ import {
   LOGIN_START,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT,
+  LOGOUT_START,
+  LOGOUT_SUCCESS,
   REGISTER_START,
   REGISTER_SUCCESS,
-  REGISTER_FAILURE,
+  REGISTER_FAILURE
 } from "./types";
 
 const initialState = {
   error: "",
   isLoading: false,
-  isAuth: localStorage.getItem("token") ? true : false,
+  isAuth: localStorage.getItem("token") ? true : false
 };
 
 const reducers = (state = initialState, action) => {
@@ -20,45 +21,52 @@ const reducers = (state = initialState, action) => {
       return {
         ...state,
         error: "",
-        isLoading: true,
+        isLoading: true
       };
     case LOGIN_SUCCESS:
       return {
         ...state,
         error: "",
         isLoading: false,
-        isAuth: true,
+        isAuth: true
       };
     case LOGIN_FAIL:
       return {
         ...state,
         error: action.payload,
-        isLoading: false,
+        isLoading: false
       };
-    case LOGOUT:
+    case LOGOUT_START:
       return {
         ...state,
         error: "",
-        isLoading: false,
-        isAuth: false,
+        isLoading: true,
+        isAuth: false
+      };
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        error: "",
+        isLoading: true,
+        isAuth: false
       };
     case REGISTER_START:
       return {
         ...state,
         error: "",
-        isLoading: true,
+        isLoading: true
       };
     case REGISTER_SUCCESS:
       return {
         ...state,
         errors: "",
-        isLoading: false,
+        isLoading: false
       };
     case REGISTER_FAILURE:
       return {
         ...state,
         errors: action.payload,
-        isLoading: false,
+        isLoading: false
       };
 
     default:

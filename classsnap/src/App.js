@@ -12,21 +12,21 @@ import parentloginspn from "./components/SignUp_Pages/parent-signin-spn";
 import parentregspn from "./components/SignUp_Pages/parent-signup-spn";
 import TeacherDashboard from "./components/Teacher-Dashboard/dashboard";
 import AddQuestionFormDemo from "./components/Teacher-Dashboard/AddQuestionFormDemo";
-import ParentResponseForm from "./components//Parent-Dashboard/Parent-ResponseForm";
-import ParentNewQuestionList from "./components/Parent-Dashboard/Parent-NewQuestionList";
-import ParentAnsweredQuestionList from "./components/Parent-Dashboard/Parent-AnsweredQuestionList";
-
+// import ParentResponseForm from "./components/Parent-Dashboard/Demo/Parent-ResponseForm";
+// import ParentNewQuestionList from "./components/Parent-Dashboard/Parent-NewQuestionList";
+// import ParentAnsweredQuestionList from "./components/Parent-Dashboard/Demo/Parent-AnsweredQuestionList";
+import QuestionResult from "./components/Teacher-Single-Class-Dashboard/Question-view/QuestionResult";
+import QuestionResultList from "./components/Teacher-Single-Class-Dashboard/Question-view/QuestionResultList";
 import NavBar from "./components/NavBar";
 import AddClassForm from "./components/Teacher-Dashboard/AddClassForm";
 import AddQuestionForm from "./components/Teacher-Dashboard/AddQuestionForm";
+import SingleClassView from "./components/Teacher-Single-Class-Dashboard/SingleClassDashboard";
 import LandingPage from "./components/SignUp_Pages/landing";
-import AddStudentForm from "./components/Teacher-Single-Class-Dashboard/AddStudentForm";
 import ClassList from "./components/Teacher-Dashboard/ClassList";
-import AddStudentFormFormik from "./components/Teacher-Single-Class-Dashboard/AddStudentFormFormik";
-import AddStudentView from "./components//Teacher-Single-Class-Dashboard/AddStudent";
-
-//Parent components
 import ParentDashboard from "./components/Parent-Dashboard/parent-dashboard";
+import ParentRatingForm from "./components/Parent-Dashboard/ENG/RatingForm";
+
+import AddChildForm from "./components/Parent-Dashboard/ENG/AddChildForm";
 //data
 // import { sampleQuestions, sampleStudentData } from "./data";
 
@@ -52,13 +52,16 @@ function App() {
             <Route exact path="/parentloginspn" component={parentloginspn} />
             <Route exact path="/parentsignupspn" component={parentregspn} />
             {/* Private Route */}
-            {/* <Route path="/teacher" render={props => <ClassList {...props} />} /> */}
             <Route
               exact
               path="/teacher/dashboard"
               render={props => <TeacherDashboard {...props} />}
             />
-
+            <Route
+              exact
+              path="/teacher/classdash"
+              component={SingleClassView}
+            />
             <Route
               exact
               path="/teacher/add-question-demo"
@@ -71,21 +74,23 @@ function App() {
             />
             <Route
               exact
-              path="/teacher/addstudentformik"
-              component={AddStudentFormFormik}
+              path="/teacher/question-result-list"
+              component={QuestionResultList}
             />
             <Route
               exact
-              path="/teacher/addstudent"
-              component={AddStudentView}
+              path="/teacher/question-result"
+              component={QuestionResult}
             />
             <Route exact path="/teacher/addclass" component={AddClassForm} />
+            <Route exact path="/parent/dashboard" component={ParentDashboard} />
             <Route
               exact
-              path="/parent/dashboard"
-              render={props => <ParentDashboard {...props} />}
+              path="/parent/ratingform"
+              component={ParentRatingForm}
             />
-            <Route
+            <Route exact path="/parent/addchild" component={AddChildForm} />
+            {/* <Route
               exact
               path="/parent/response-form"
               component={ParentResponseForm}
@@ -99,7 +104,7 @@ function App() {
               exact
               path="/parent/answered-question-list"
               component={ParentAnsweredQuestionList}
-            />
+            /> */}
           </div>
         </Switch>
       </div>

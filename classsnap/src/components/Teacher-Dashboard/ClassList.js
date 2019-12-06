@@ -6,7 +6,6 @@ import { getAllQuestions } from "../../store/teachers/action";
 
 //components
 import ClassCard from "./ClassCard";
-import axiosWithAuth from "../../utils/axiosWithAuth";
 
 //Note: List is undefined despite the fact that it is fetched
 //correctly, the data is not being rendered to the page.
