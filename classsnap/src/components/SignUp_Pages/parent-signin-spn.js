@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Form, Field, withFormik } from "formik";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { Button } from "semantic-ui-react";
 import { login } from "../../store/parentAuth/authActions";
 import axios from "axios";
 import * as Yup from "yup";
 
-const LoginSPN = ({ errors, touched }) => {
+const LoginSPN = ({ errors, touched, ...props }) => {
   return (
     <div className="sign-in-form">
       <Form>
@@ -20,7 +21,11 @@ const LoginSPN = ({ errors, touched }) => {
         {touched.password && errors.password && (
           <p className="error">{errors.password}</p>
         )}
-        <button type="submit">Enviar</button>
+        {props.isLoading ? (
+          <Button loading>Loading</Button>
+        ) : (
+          <Button type="submit">Enviar</Button>
+        )}
       </Form>
 
       <h4>

@@ -53,12 +53,11 @@ export const register = (parent, history) => {
 };
 
 //Logout
-export const logout = history => {
+export const parentlogout = history => {
   return async dispatch => {
     await dispatch({ type: LOGOUT_START });
     localStorage.removeItem("parentToken");
     localStorage.removeItem("parentId");
     dispatch({ type: LOGOUT_SUCCESS });
-    console.log("worked");
   };
 };

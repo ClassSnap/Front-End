@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Form, Field, withFormik } from "formik";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { Button } from "semantic-ui-react";
 import { login } from "../../store/parentAuth/authActions";
 import axios from "axios";
 import * as Yup from "yup";
 
-const Login = ({ errors, touched }) => {
+const Login = ({ errors, touched, ...props }) => {
   return (
     <div className="sign-in-form">
       <Form>
@@ -25,7 +26,11 @@ const Login = ({ errors, touched }) => {
         {touched.password && errors.password && (
           <p className="error">{errors.password}</p>
         )}
-        <button type="submit">Submit</button>
+        {props.isLoading ? (
+          <Button loading>Loading</Button>
+        ) : (
+          <Button type="submit">Submit</Button>
+        )}
       </Form>
 
       <h4>
@@ -40,7 +45,7 @@ const FormikLoginForm = withFormik({
   mapPropsToValues({ username, password }) {
     return {
       username: username || "",
-      password: password || "",
+      password: password || ""
     };
   },
 
@@ -48,28 +53,25 @@ const FormikLoginForm = withFormik({
     username: Yup.string().required("Username is required"),
     password: Yup.string()
       .min(6)
-      .required("Password with at least 6 characters is required."),
+      .required("Password with at least 6 characters is required.")
   }),
 
   handleSubmit(values, { resetForm, props }) {
     let credentials = {
       parentEmail: values.username,
-      parentPassword: values.password,
+      parentPassword: values.password
     };
     console.log("form submitted", credentials);
     props.login(credentials, props.history);
     resetForm();
-  },
+  }
 })(Login);
 
 const mapStateToProps = state => {
   return {
     isLoading: state.parentAuth.isLoading,
-    error: state.parentAuth.error,
+    error: state.parentAuth.error
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { login },
-)(FormikLoginForm);
+export default connect(mapStateToProps, { login })(FormikLoginForm);
