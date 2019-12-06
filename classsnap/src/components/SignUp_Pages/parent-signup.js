@@ -64,6 +64,7 @@ const ParentSignUpForm = ({ errors, touched, ...props }) => {
 
         <label>Preferred Language</label>
         <Field component="select" name="language" class="option">
+          <option value="default">Please select</option>
           <option value="English">English</option>
           <option value="Spanish">Español</option>
         </Field>
@@ -124,6 +125,7 @@ const FormikParentRegistrationForm = withFormik({
       parentPassword: values.password,
       relationship: values.relationship
     };
+    console.log(parent);
     props.register(parent, props.history);
   }
 })(ParentSignUpForm);

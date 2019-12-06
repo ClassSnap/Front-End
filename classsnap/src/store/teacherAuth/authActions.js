@@ -40,6 +40,8 @@ export const logout = history => {
     await dispatch({ type: LOGOUT_START });
     localStorage.removeItem("token");
     localStorage.removeItem("teacherId");
+    localStorage.removeItem("parentToken");
+    localStorage.removeItem("parentId");
     dispatch({ type: LOGOUT_SUCCESS });
     console.log("worked");
   };

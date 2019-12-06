@@ -5,6 +5,7 @@ import { faHome, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { logout } from "../store/teacherAuth/authActions";
+import { parentlogout } from "../store/parentAuth/authActions";
 const NavBar = props => {
   const [token, setToken] = useState();
 
