@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form, Field, withFormik } from "formik";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import axiosWithAuth from "../../utils/axiosWithAuth";
 import { addQuestion } from "../../store/teachers/action";
@@ -63,6 +64,9 @@ const AddQuestionForm = () => {
           Submit
         </button>
       </Form>
+      <Link to="/teacher/dashboard">
+        <h4>Back to Dashboard</h4>
+      </Link>
     </div>
   );
 };
@@ -72,14 +76,14 @@ const FormikAddQuestionForm = withFormik({
     return {
       session: session || "",
       subject: subject || "",
-      question: question || "",
+      question: question || ""
     };
   },
 
   validationSchema: Yup.object().shape({
     session: Yup.required,
     subject: Yup.required,
-    question: Yup.string(20).required,
+    question: Yup.string(20).required
   }),
 
   handleSubmit(values, { resetForm, props }) {
@@ -87,23 +91,20 @@ const FormikAddQuestionForm = withFormik({
       question: values.question,
       questionType: values.subject,
       date: values.date,
-      classId: values.session, //should map class id and use it to pass results
+      classId: values.session //should map class id and use it to pass results
     };
     console.log(question);
     props.addQuestion(question, props.history);
     resetForm();
     //redux submit function here
-  },
+  }
 })(AddQuestionForm);
 
 const mapStateToProps = state => {
   return {
     isLoading: state.teacher.isLoading,
-    error: state.teacher.error,
+    error: state.teacher.error
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { addQuestion },
-)(FormikAddQuestionForm);
+export default connect(mapStateToProps, { addQuestion })(FormikAddQuestionForm);
