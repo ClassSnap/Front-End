@@ -1,14 +1,22 @@
 import React from "react";
 
 //components
-import ClassCard from "./ClassCard";
+import ChildClassCard from "./ClassCard";
 
-const ClassList = () => {
+const ChildClassList = props => {
+  console.log(props.session);
   return (
-    <div className="class-list">
-      <ClassCard />
+    <div className={props.showSession ? "classList" : "classList off"}>
+      <h2>{props.firstName}'s Classes</h2>
+      {props.session.map(info => (
+        <ChildClassCard
+          key={info.id}
+          id={info.id}
+          className={info.name}
+          teacher={info.teacherLastName}
+        />
+      ))}
     </div>
   );
 };
-
-export default ClassList;
+export default ChildClassList;

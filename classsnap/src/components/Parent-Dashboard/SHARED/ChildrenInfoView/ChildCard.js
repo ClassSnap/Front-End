@@ -9,7 +9,7 @@ const ChildCard = props => {
         header={props.firstName}
         meta={props.lastName}
         onClick={() => {
-          props.onClick(props.learnerId);
+          props.onClick(props.learnerId, props.firstName);
         }}
       />
     </div>
