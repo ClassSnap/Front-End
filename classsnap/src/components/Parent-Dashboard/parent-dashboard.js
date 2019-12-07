@@ -42,6 +42,16 @@ const ParentDashboard = props => {
       });
   };
 
+  const handleClassClick = async classId => {
+    console.log("clicked");
+    console.log(classId);
+    await axiosWithParentAuth()
+      .get(`/api/learnerclass/questions/${classId}`)
+      .then(res => {
+        console.log(res.data);
+      });
+  };
+
   const Dashboard = styled.div`
     display: flex;
     flex-direction: row;
@@ -73,6 +83,7 @@ const ParentDashboard = props => {
             session={session}
             showSession={showSession}
             firstName={childFirstName}
+            handleClick={handleClassClick}
           />
         </RightBar>
       </Dashboard>
