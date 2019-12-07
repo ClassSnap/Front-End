@@ -7,9 +7,15 @@ import axiosWithParentAuth from "../../utils/axiosWithParentAuth";
 //component
 import ChildList from "./SHARED/ChildrenInfoView/ChildList";
 import AddChildForm from "./ENG/AddChildForm";
+import ClassList from "./SHARED/ClassInfoView/ClassList";
 
 const ParentDashboard = props => {
   const [children, setChildren] = useState([]);
+  const [session, setSession] = useState([]);
+  const [showSession, setShowSession] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [childFirstName, setChildFirstName] = useState("");
+
   useEffect(() => {
     async function fetchChildren() {
       const parentId = localStorage.getItem("parentId");
@@ -18,16 +24,21 @@ const ParentDashboard = props => {
         .get(`/api/parent/${parentId}`)
         .then(res => {
           setChildren(res.data);
+          setShowWelcome(true);
         });
     }
     fetchChildren();
   }, []);
 
-  const handleClick = async (learnerId, name) => {
+  const handleClick = async (learnerId, firstName) => {
     await axiosWithParentAuth()
       .get(`/api/learnerclass/${learnerId}`)
       .then(res => {
         console.log(res.data);
+        setSession(res.data);
+        setShowSession(true);
+        setShowWelcome(false);
+        setChildFirstName(firstName);
       });
   };
 
@@ -52,10 +63,17 @@ const ParentDashboard = props => {
           <ChildList children={children} handleClick={handleClick} />
         </LeftBar>
         <RightBar>
-          <h1>Parent Dashboard</h1>
-          <Link to="/parent/addchild">
-            <Button>Add Child</Button>
-          </Link>
+          <div className={showWelcome ? "welcome" : "welcome off"}>
+            <h1>Parent Dashboard</h1>
+            <Link to="/parent/addchild">
+              <Button>Add Child</Button>
+            </Link>
+          </div>
+          <ClassList
+            session={session}
+            showSession={showSession}
+            firstName={childFirstName}
+          />
         </RightBar>
       </Dashboard>
     </div>
