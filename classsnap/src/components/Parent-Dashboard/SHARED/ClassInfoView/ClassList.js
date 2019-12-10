@@ -12,6 +12,7 @@ const ChildClassList = props => {
           key={info.classCode}
           id={info.classId}
           className={info.name}
+          teacherLastName={info.teacherLastName}
           teacher={info.teacherLastName}
           onClick={props.handleClick}
         />
