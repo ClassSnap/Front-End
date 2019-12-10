@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import axiosWithAuth from "../../utils/axiosWithAuth";
 import { addQuestion } from "../../store/teachers/action";
 import { connect } from "react-redux";
+import createBlankRatings from "./createBlankRatings";
 
 const AddQuestionForm = () => {
   const [list, setList] = useState([]);
@@ -93,10 +94,8 @@ const FormikAddQuestionForm = withFormik({
       date: values.date,
       classId: values.session //should map class id and use it to pass results
     };
-    console.log(question);
     props.addQuestion(question, props.history);
-    const students = axiosWithAuth().get(`/api/student/class/${values.session}`);
-    console.log(students);
+    createBlankRatings(values.session, values.question.id);
     resetForm();
     //redux submit function here
   }
