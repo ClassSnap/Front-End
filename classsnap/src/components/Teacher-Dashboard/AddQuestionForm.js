@@ -95,6 +95,8 @@ const FormikAddQuestionForm = withFormik({
     };
     console.log(question);
     props.addQuestion(question, props.history);
+    const students = axiosWithAuth().get(`/api/student/class/${values.session}`);
+    console.log(students);
     resetForm();
     //redux submit function here
   }
