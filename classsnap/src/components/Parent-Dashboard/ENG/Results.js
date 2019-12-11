@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Rating } from "semantic-ui-react";
-import Results from "../../Teacher-Single-Class-Dashboard/Results";
 
 const QuestionResult = props => {
-  const [learnerId, setLearnerId] = useState();
-  const [target, setTarget] = useState();
-
-  const getRating = () => {
-    const target = props.results.filter(info => info.learnerId === learnerId);
-  };
-
-  getRating();
+  const getRating = props.results.filter(
+    info => info.learnerId === props.learnerId
+  )[0];
 
   return (
     <div
@@ -18,12 +12,16 @@ const QuestionResult = props => {
         props.showResult ? "parent-response-form" : "parent-response-form off"
       }
     >
-      {/* <h2>{`${questionOne.subject} Question of ${questionOne.date}`}</h2> */}
       <div className="question-from-teacher">
         <p>{props.question}</p>
       </div>
       <h4>Your child's rating</h4>
-      <Rating maxRating={5} defaultRating={4} size="massive" disabled />
+      <Rating
+        maxRating={5}
+        rating={getRating === undefined ? 0 : getRating.rating}
+        size="massive"
+        disabled
+      />
     </div>
   );
 };

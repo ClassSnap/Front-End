@@ -15,7 +15,7 @@ const ParentDashboard = props => {
   const [children, setChildren] = useState([]);
   const [questionList, setQuestionList] = useState([]);
   const [name, setName] = useState();
-  const [learnerId, setLearnerId] = useState();
+  const [learnerId, setLearnerId] = useState("");
   const [teacherLastName, setTeacher] = useState();
   const [session, setSession] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState();
@@ -51,6 +51,7 @@ const ParentDashboard = props => {
         setShowSession(true);
         setShowWelcome(false);
         setShowQuestion(false);
+        setShowResults(false);
         setChildFirstName(firstName);
       });
   };
