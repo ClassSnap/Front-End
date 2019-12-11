@@ -4,16 +4,17 @@ import React from "react";
 import ChildClassCard from "./ClassCard";
 
 const ChildClassList = props => {
-  console.log(props.session);
   return (
     <div className={props.showSession ? "classList" : "classList off"}>
       <h2>{props.firstName}'s Classes</h2>
       {props.session.map(info => (
         <ChildClassCard
-          key={info.id}
-          id={info.id}
+          key={info.classCode}
+          id={info.classId}
           className={info.name}
+          teacherLastName={info.teacherLastName}
           teacher={info.teacherLastName}
+          onClick={props.handleClick}
         />
       ))}
     </div>
