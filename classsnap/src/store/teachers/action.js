@@ -43,7 +43,7 @@ export const addQuestion = (info, history) => {
   return dispatch => {
     dispatch({ type: ADD_QUESTION_START });
     axiosWithAuth()
-      .post(`/api/question/`, info)
+      .post(`/api/question`, info)
       .then(res => {
         dispatch({
           type: ADD_QUESTION_SUCCESS,

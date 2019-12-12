@@ -66,6 +66,7 @@ const TeacherDashboard = props => {
         setTargetQuestion(question);
         setTargetQuestionId(id);
         console.log(targetQuestion);
+        const target = localStorage.setItem("targetQuestion", id);
       });
   };
 
