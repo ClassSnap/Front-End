@@ -9,26 +9,27 @@ const UnansweredQuestionList = () => {
   useEffect(() => {
     //get learner_parent IDs
     const parentId = localStorage.getItem("parentId");
-    axiosWithParentAuth()
-      .get(`/api/parent/${parentId}`)
-      .then(res => {
-        setLearners(res.data);
-        learners.forEach(learner =>
-          axiosWithParentAuth()
-            .get(`/api/ssrating/learnerParent/${learner.id}`)
-            .then(ratings =>
-              setBlankRatings([
-                ...blankRatings,
-                ratings.filter(rating => !rating.rating)
-              ])
-            )
-        );
-      });
-
+    async function getUnansweredQuestions() {
+      await axiosWithParentAuth()
+        .get(`/api/parent/${parentId}`)
+        .then(res => {
+          setLearners(res.data);
+          res.data.forEach(learner =>
+            axiosWithParentAuth()
+              .get(`/api/ssrating/learnerParent/${learner.id}`)
+              .then(ratings => {
+                console.log(ratings.data);
+                const filterRating = ratings.data.filter(
+                  rating => !rating.rating
+                );
+                setBlankRatings(...blankRatings, filterRating);
+              })
+          );
+        });
+    }
+    getUnansweredQuestions();
     // get blank ratings with question data for each learner
   }, []);
-  console.log(learners);
-  console.log(blankRatings);
 
   return (
     <div>
