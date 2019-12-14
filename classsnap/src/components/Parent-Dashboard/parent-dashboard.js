@@ -7,6 +7,7 @@ import axiosWithParentAuth from "../../utils/axiosWithParentAuth";
 //component
 import ChildList from "./SHARED/ChildrenInfoView/ChildList";
 import AddChildForm from "./ENG/AddChildForm";
+import UnansweredQuestionList from "../Parent-Dashboard/SHARED/UnansweredQuestionList";
 
 const ParentDashboard = props => {
   const [children, setChildren] = useState([]);
@@ -56,6 +57,7 @@ const ParentDashboard = props => {
           <Link to="/parent/addchild">
             <Button>Add Child</Button>
           </Link>
+          <UnansweredQuestionList />
         </RightBar>
       </Dashboard>
     </div>
