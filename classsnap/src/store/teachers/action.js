@@ -12,7 +12,10 @@ import {
   GET_QUESTIONS_BY_CLASS_FAILURE,
   DELETE_QUESTION_BY_ID_START,
   DELETE_QUESTION_BY_ID_SUCCESS,
-  DELETE_QUESTION_BY_ID_FAILURE
+  DELETE_QUESTION_BY_ID_FAILURE,
+  UPDATE_QUESTION_START,
+  UPDATE_QUESTION_SUCCESS,
+  UPDATE_QUESTION_FAILURE
 } from "./types";
 
 //1. Add Class
@@ -95,6 +98,22 @@ export const deleteQuestion = id => {
           type: DELETE_QUESTION_BY_ID_SUCCESS
         });
         console.log("deleted");
+      });
+  };
+};
+
+//Update Question By Id
+export const updateQuestion = (id, question, history) => {
+  return dispatch => {
+    dispatch({ type: UPDATE_QUESTION_START });
+    axiosWithAuth()
+      .put(`/api/question/${id}`, question)
+      .then(res => {
+        dispatch({
+          type: UPDATE_QUESTION_SUCCESS
+        });
+
+        console.log("edit question");
       });
   };
 };

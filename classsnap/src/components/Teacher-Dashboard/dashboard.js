@@ -47,7 +47,7 @@ const TeacherDashboard = props => {
         setQuestionList(reverse);
         setName(name);
         setClassCode(classCode);
-        console.log(name, classCode);
+
         setShowWelcome(false);
         setShowQuestion(true);
         setShowResult(false);
