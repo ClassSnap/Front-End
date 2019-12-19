@@ -47,7 +47,7 @@ const reducers = (state = initialState, action) => {
       return {
         ...state,
         error: "",
-        isLoading: true,
+        isLoading: false,
         isAuth: false
       };
     case REGISTER_START:

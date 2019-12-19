@@ -16,6 +16,8 @@ import {
 const initialState = {
   newClass: [],
   question: [],
+  questionId: null,
+  classId: null,
   error: "",
   isLoading: false,
   user: "",
@@ -52,10 +54,13 @@ const reducers = (state = initialState, action) => {
         isLoading: true
       };
     case ADD_QUESTION_SUCCESS:
-      console.log(action.payload);
+      console.log(action.payload.question.id);
       return {
         ...state,
         error: "",
+        question: action.payload.question,
+        questionId: action.payload.question.id,
+        classId: action.payload.question.classId,
         isLoading: true
       };
 
