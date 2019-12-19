@@ -52,7 +52,28 @@ export const addQuestion = (info, history) => {
           type: ADD_QUESTION_SUCCESS,
           payload: res.data
         });
+        const newQuestion = res.data;
         history.push("/teacher/dashboard");
+        axiosWithAuth()
+          .get(`/api/student/classparents/${res.data.question.classId}`)
+          .then(info => {
+            console.log(info.data);
+            info.data.forEach(parent => {
+              const newRating = {
+                questionId: newQuestion.question.id,
+                learnerParentId: parent.id,
+                classId: parent.classId
+              };
+              axiosWithAuth()
+                .post("/api/rating", newRating)
+                .then(rating => {
+                  console.log("Blank Created", rating);
+                })
+                .catch(error => {
+                  console.log("Post Rating", error);
+                });
+            });
+          });
       })
       .catch(err => {
         dispatch({

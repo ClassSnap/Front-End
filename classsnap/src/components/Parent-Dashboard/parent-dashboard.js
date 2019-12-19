@@ -7,9 +7,13 @@ import axiosWithParentAuth from "../../utils/axiosWithParentAuth";
 //component
 import ChildList from "./SHARED/ChildrenInfoView/ChildList";
 import AddChildForm from "./ENG/AddChildForm";
+
+import UnansweredQuestionList from "../Parent-Dashboard/SHARED/UnansweredQuestionList";
+
 import ClassList from "./SHARED/ClassInfoView/ClassList";
 import QuestionList from "./SHARED/QuestionsView/QuestionList";
 import QuestionResult from "./ENG/Results";
+
 
 const ParentDashboard = props => {
   const [children, setChildren] = useState([]);
@@ -105,6 +109,8 @@ const ParentDashboard = props => {
           <ChildList children={children} handleClick={handleClick} />
         </LeftBar>
         <RightBar>
+
+
           <div className={showWelcome ? "welcome" : "welcome off"}>
             <h1>Parent Dashboard</h1>
             <Link to="/parent/addchild">
@@ -131,6 +137,8 @@ const ParentDashboard = props => {
             question={currentQuestion}
             learnerId={learnerId}
           />
+    <UnansweredQuestionList />
+
         </RightBar>
       </Dashboard>
     </div>

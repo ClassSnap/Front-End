@@ -86,15 +86,14 @@ const FormikAddQuestionForm = withFormik({
     question: Yup.string(20).required
   }),
 
-  handleSubmit(values, { resetForm, props }) {
+  async handleSubmit(values, { resetForm, props }) {
     let question = {
       question: values.question,
       questionType: values.subject,
       date: values.date,
       classId: values.session //should map class id and use it to pass results
     };
-    console.log(question);
-    props.addQuestion(question, props.history);
+    await props.addQuestion(question, props.history);
     resetForm();
     //redux submit function here
   }
@@ -103,7 +102,10 @@ const FormikAddQuestionForm = withFormik({
 const mapStateToProps = state => {
   return {
     isLoading: state.teacher.isLoading,
-    error: state.teacher.error
+    error: state.teacher.error,
+    questionId: state.teacher.questionId,
+    classId: state.teacher.classId,
+    question: state.teacher.question
   };
 };
 
