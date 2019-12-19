@@ -10,7 +10,10 @@ import {
   GET_QUESTIONS_BY_CLASS_FAILURE,
   DELETE_QUESTION_BY_ID_START,
   DELETE_QUESTION_BY_ID_SUCCESS,
-  DELETE_QUESTION_BY_ID_FAILURE
+  DELETE_QUESTION_BY_ID_FAILURE,
+  UPDATE_QUESTION_START,
+  UPDATE_QUESTION_SUCCESS,
+  UPDATE_QUESTION_FAILURE
 } from "./types";
 
 const initialState = {
@@ -106,6 +109,26 @@ const reducers = (state = initialState, action) => {
     case DELETE_QUESTION_BY_ID_FAILURE:
       return {
         ...state,
+        isLoading: false
+      };
+    case UPDATE_QUESTION_START:
+      return {
+        ...state,
+        error: "",
+        isLoading: true
+      };
+    case UPDATE_QUESTION_SUCCESS:
+      console.log(action.payload);
+      return {
+        ...state,
+        error: "",
+        isLoading: true
+      };
+
+    case UPDATE_QUESTION_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
         isLoading: false
       };
     default:

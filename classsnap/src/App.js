@@ -20,6 +20,7 @@ import QuestionResultList from "./components/Teacher-Single-Class-Dashboard/Ques
 import NavBar from "./components/NavBar";
 import AddClassForm from "./components/Teacher-Dashboard/AddClassForm";
 import AddQuestionForm from "./components/Teacher-Dashboard/AddQuestionForm";
+import EditQuestionForm from "./components/Teacher-Dashboard/EditQuestionForm";
 import SingleClassView from "./components/Teacher-Single-Class-Dashboard/SingleClassDashboard";
 import LandingPage from "./components/SignUp_Pages/landing";
 import ClassList from "./components/Teacher-Dashboard/ClassList";
@@ -72,6 +73,11 @@ function App() {
               path="/teacher/addquestion"
               component={AddQuestionForm}
             />
+            <Route
+              exact
+              path="/teacher/editquestion"
+              component={EditQuestionForm}
+            />{" "}
             <Route
               exact
               path="/teacher/question-result-list"
