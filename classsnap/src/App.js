@@ -90,11 +90,11 @@ function App() {
             />
             <Route exact path="/teacher/addclass" component={AddClassForm} />
             <Route exact path="/parent/dashboard" component={ParentDashboard} />
-            <Route
+            {/* <Route
               exact
               path="/parent/ratingform"
               component={ParentRatingForm}
-            />
+            /> */}
             <Route exact path="/parent/addchild" component={AddChildForm} />
             {/* <Route
               exact

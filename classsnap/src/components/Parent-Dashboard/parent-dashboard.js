@@ -13,7 +13,7 @@ import UnansweredQuestionList from "../Parent-Dashboard/SHARED/UnansweredQuestio
 import ClassList from "./SHARED/ClassInfoView/ClassList";
 import QuestionList from "./SHARED/QuestionsView/QuestionList";
 import QuestionResult from "./ENG/Results";
-
+import ParentRatingForm from "./ENG/RatingForm";
 
 const ParentDashboard = props => {
   const [children, setChildren] = useState([]);
@@ -27,9 +27,12 @@ const ParentDashboard = props => {
   const [results, setResults] = useState([]);
   const [showSession, setShowSession] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
+  const [showUnanswered, setUnanswered] = useState(true);
   const [showQuestion, setShowQuestion] = useState(false);
   const [showResults, setShowResults] = useState(false);
+  const [showRatingForm, setShowRatingForm] = useState(false);
   const [childFirstName, setChildFirstName] = useState("");
+  const [updateRatingInfo, setUpdateRatingInfo] = useState({});
 
   useEffect(() => {
     async function fetchChildren() {
@@ -40,6 +43,7 @@ const ParentDashboard = props => {
         .then(res => {
           setChildren(res.data);
           setShowWelcome(true);
+          setUnanswered(true);
         });
     }
     fetchChildren();
@@ -54,8 +58,10 @@ const ParentDashboard = props => {
         setLearnerId(learnerId);
         setShowSession(true);
         setShowWelcome(false);
+        setUnanswered(false);
         setShowQuestion(false);
         setShowResults(false);
+        setShowRatingForm(false);
         setChildFirstName(firstName);
       });
   };
@@ -71,6 +77,7 @@ const ParentDashboard = props => {
         setShowQuestion(true);
         setShowSession(false);
         setShowResults(false);
+        setShowRatingForm(false);
         setName(name);
         setTeacher(teacherLastName);
       });
@@ -85,7 +92,22 @@ const ParentDashboard = props => {
         setCurrentQuestion(question);
         setShowResults(true);
         setShowQuestion(false);
+        setShowRatingForm(false);
       });
+  };
+
+  const handleUnansweredClick = async (
+    id,
+    question,
+    questionId,
+    classId,
+    learnerParentId
+  ) => {
+    const updateRating = { id, question, questionId, classId, learnerParentId };
+    setUpdateRatingInfo(updateRating);
+    setShowRatingForm(true);
+    setUnanswered(false);
+    setShowWelcome(false);
   };
 
   const Dashboard = styled.div`
@@ -109,8 +131,6 @@ const ParentDashboard = props => {
           <ChildList children={children} handleClick={handleClick} />
         </LeftBar>
         <RightBar>
-
-
           <div className={showWelcome ? "welcome" : "welcome off"}>
             <h1>Parent Dashboard</h1>
             <Link to="/parent/addchild">
@@ -137,8 +157,27 @@ const ParentDashboard = props => {
             question={currentQuestion}
             learnerId={learnerId}
           />
-    <UnansweredQuestionList />
+          <UnansweredQuestionList
+            showUnanswered={showUnanswered}
+            handleUnansweredClick={handleUnansweredClick}
+          />
 
+          <ParentRatingForm
+            showRatingForm={showRatingForm}
+            question={
+              updateRatingInfo.question ? updateRatingInfo.question : null
+            }
+            classId={updateRatingInfo.classId ? updateRatingInfo.classId : null}
+            learnerParentId={
+              updateRatingInfo.learnerParentId
+                ? updateRatingInfo.learnerParentId
+                : null
+            }
+            ratingId={updateRatingInfo.id ? updateRatingInfo.id : null}
+            questionId={
+              updateRatingInfo.questionId ? updateRatingInfo.questionId : null
+            }
+          />
         </RightBar>
       </Dashboard>
     </div>
