@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 //components
 import ChildClassCard from "./ClassCard";
@@ -17,6 +18,8 @@ const ChildClassList = props => {
           onClick={props.handleClick}
         />
       ))}
+
+      <button onClick={props.dashboard}>Back to Dashboard</button>
     </div>
   );
 };

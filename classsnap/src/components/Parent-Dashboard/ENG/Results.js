@@ -12,16 +12,19 @@ const QuestionResult = props => {
         props.showResult ? "parent-response-form" : "parent-response-form off"
       }
     >
-      <div className="question-from-teacher">
-        <p>{props.question}</p>
+      <div>
+        <div className="question-from-teacher">
+          <p>{props.question}</p>
+        </div>
+        <h4>Your child's rating</h4>
+        <Rating
+          maxRating={5}
+          rating={getRating === undefined ? 0 : getRating.rating}
+          size="massive"
+          disabled
+        />
       </div>
-      <h4>Your child's rating</h4>
-      <Rating
-        maxRating={5}
-        rating={getRating === undefined ? 0 : getRating.rating}
-        size="massive"
-        disabled
-      />
+      <button onClick={props.dashboard}>Back to Dashboard</button>
     </div>
   );
 };
