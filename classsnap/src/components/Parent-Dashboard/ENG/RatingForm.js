@@ -22,17 +22,20 @@ const ParentRatingForm = props => {
         props.showRatingForm ? "parent-rating-form" : "parent-rating-form off"
       }
     >
-      <h2>{props.question}</h2>
+      <div>
+        <h2>{props.question}</h2>
 
-      <h4>How clear is your child's response?</h4>
-      <Rating
-        maxRating={5}
-        clearable
-        size="massive"
-        onRate={handleChange}
-        value={parentRating}
-      />
-      <Button>Submit</Button>
+        <h4>How clear is your child's response?</h4>
+        <Rating
+          maxRating={5}
+          clearable
+          size="massive"
+          onRate={handleChange}
+          value={parentRating}
+        />
+        <Button>Submit</Button>
+      </div>
+      <button onClick={props.dashboard}>Back to Dashboard</button>
     </div>
   );
 };

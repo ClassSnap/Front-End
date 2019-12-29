@@ -19,6 +19,7 @@ const QuestionList = props => {
           onClick={props.handleClick}
         />
       ))}
+      <button onClick={props.dashboard}>Back to Dashboard</button>
     </div>
   );
 };

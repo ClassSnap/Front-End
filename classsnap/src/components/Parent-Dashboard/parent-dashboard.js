@@ -110,6 +110,15 @@ const ParentDashboard = props => {
     setShowWelcome(false);
   };
 
+  const returnToDashboard = () => {
+    setShowSession(false);
+    setShowWelcome(true);
+    setUnanswered(true);
+    setShowQuestion(false);
+    setShowResults(false);
+    setShowRatingForm(false);
+  };
+
   const Dashboard = styled.div`
     display: flex;
     flex-direction: row;
@@ -142,6 +151,7 @@ const ParentDashboard = props => {
             showSession={showSession}
             firstName={childFirstName}
             handleClick={handleClassClick}
+            dashboard={returnToDashboard}
           />
           <QuestionList
             questionList={questionList}
@@ -149,6 +159,7 @@ const ParentDashboard = props => {
             teacherLastName={teacherLastName}
             showQuestion={showQuestion}
             handleClick={handleQuestionClick}
+            dashboard={returnToDashboard}
           />
 
           <QuestionResult
@@ -156,6 +167,7 @@ const ParentDashboard = props => {
             showResult={showResults}
             question={currentQuestion}
             learnerId={learnerId}
+            dashboard={returnToDashboard}
           />
           <UnansweredQuestionList
             showUnanswered={showUnanswered}
@@ -177,6 +189,7 @@ const ParentDashboard = props => {
             questionId={
               updateRatingInfo.questionId ? updateRatingInfo.questionId : null
             }
+            dashboard={returnToDashboard}
           />
         </RightBar>
       </Dashboard>

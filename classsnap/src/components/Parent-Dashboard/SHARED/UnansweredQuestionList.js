@@ -36,6 +36,7 @@ const UnansweredQuestionList = props => {
         props.showUnanswered ? "unanswered-list" : "unanswered-list off"
       }
     >
+      <h3>Unanswered Questions</h3>
       {blankRatings.map(rating => (
         <QuestionCard
           id={rating.id}
