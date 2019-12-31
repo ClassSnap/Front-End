@@ -1,19 +1,31 @@
 import React, { useState } from "react";
 import { Rating, Button } from "semantic-ui-react";
+import { connect } from "react-redux";
+import { editRating } from "../../../store/parents/action";
 
 const ParentRatingForm = props => {
+  const [rating, setRating] = useState(0);
   const [parentRating, setParentRating] = useState({
     questionId: props.questionId,
     classId: props.classId,
     learnerParentId: props.learnerParentId,
-    rating: 0,
+    rating: rating,
     completed: true
   });
-  const [rating, setRating] = useState(0);
 
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showSubmit, setShowSubmit] = useState(true);
   const handleChange = (e, { rating, maxRating }) => {
     setRating(rating);
     setParentRating({ ...parentRating, rating: rating });
+  };
+
+  const handleSubmit = () => {
+    console.log("Submitted info", parentRating);
+    props.editRating(parentRating, props.ratingId);
+    setShowSubmit(false);
+    console.log("clicked");
+    setShowSuccess(true);
   };
 
   return (
@@ -33,11 +45,25 @@ const ParentRatingForm = props => {
           onRate={handleChange}
           value={parentRating}
         />
-        <Button>Submit</Button>
+        <Button
+          className={showSubmit ? "submit" : "submit off"}
+          onClick={handleSubmit}
+        >
+          {showSuccess ? "Submitted" : "Submit"}
+        </Button>
       </div>
       <button onClick={props.dashboard}>Back to Dashboard</button>
     </div>
   );
 };
 
-export default ParentRatingForm;
+const mapStateToProps = state => {
+  return {
+    isLoading: state.parent.isLoading,
+    error: state.parent.error
+  };
+};
+
+export default connect(mapStateToProps, { editRating })(ParentRatingForm);
+
+// export default ParentRatingForm;
