@@ -26,7 +26,7 @@ import LandingPage from "./components/SignUp_Pages/landing";
 import ClassList from "./components/Teacher-Dashboard/ClassList";
 import ParentDashboard from "./components/Parent-Dashboard/parent-dashboard";
 import ParentRatingForm from "./components/Parent-Dashboard/ENG/RatingForm";
-
+import AddStudentForm from "./components/Teacher-Single-Class-Dashboard/AddStudentFormFormik";
 import AddChildForm from "./components/Parent-Dashboard/ENG/AddChildForm";
 //data
 // import { sampleQuestions, sampleStudentData } from "./data";
@@ -89,6 +89,11 @@ function App() {
               component={QuestionResult}
             />
             <Route exact path="/teacher/addclass" component={AddClassForm} />
+            <Route
+              exact
+              path="/teacher/addstudent"
+              component={AddStudentForm}
+            />
             <Route exact path="/parent/dashboard" component={ParentDashboard} />
             {/* <Route
               exact

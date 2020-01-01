@@ -30,7 +30,15 @@ const AddStudentForm = ({ errors, touched, ...props }) => {
           Birthdate
           <Field type="date" name="birthdate" />
         </label>
-        <button type="">Add More Students</button>
+        <label>
+          Student ID
+          <Field type="text" name="studentId" placeholder="Student ID" />
+        </label>
+
+        <label>
+          Class <Field type="option"></Field>
+        </label>
+        <button type="">Add Student</button>
       </Form>
     </div>
   );
