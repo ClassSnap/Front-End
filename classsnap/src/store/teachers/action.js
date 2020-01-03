@@ -15,7 +15,13 @@ import {
   DELETE_QUESTION_BY_ID_FAILURE,
   UPDATE_QUESTION_START,
   UPDATE_QUESTION_SUCCESS,
-  UPDATE_QUESTION_FAILURE
+  UPDATE_QUESTION_FAILURE,
+  ADD_STUDENT_START,
+  ADD_STUDENT_SUCCESS,
+  ADD_STUDENT_FAILURE,
+  ADD_STUDENT_TO_CLASS_START,
+  ADD_STUDENT_TO_CLASS_SUCCESS,
+  ADD_STUDENT_TO_CLASS_FAILURE
 } from "./types";
 
 //1. Add Class
@@ -135,6 +141,39 @@ export const updateQuestion = (id, question, history) => {
         });
 
         console.log("edit question");
+      });
+  };
+};
+
+//Add Student
+export const addStudent = (newStudent, classId) => {
+  return dispatch => {
+    dispatch({ type: ADD_STUDENT_START });
+
+    axiosWithAuth()
+      .post(`/api/student/`, newStudent)
+      .then(res => {
+        dispatch({ type: ADD_STUDENT_SUCCESS, payload: res.data });
+        dispatch({ type: ADD_STUDENT_TO_CLASS_START });
+        const classLearner = {
+          classId: classId,
+          learnerId: res.data.student.id
+        };
+        axiosWithAuth()
+          .post(`/api/student/class/`, classLearner)
+          .then(res => {
+            dispatch({ type: ADD_STUDENT_TO_CLASS_SUCCESS, payload: res.data });
+            console.log(res.data);
+          })
+          .catch(error => {
+            dispatch({ type: ADD_STUDENT_FAILURE, payload: error.response });
+            console.log("Error adding learner to a class", error);
+          });
+      })
+
+      .catch(error => {
+        dispatch({ type: ADD_STUDENT_FAILURE, payload: error.response });
+        console.log("Error adding student to learner table", error);
       });
   };
 };
