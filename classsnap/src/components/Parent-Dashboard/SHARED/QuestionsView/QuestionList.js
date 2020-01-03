@@ -39,7 +39,3 @@ const QuestionList = props => {
 // )(QuestionList);
 
 export default QuestionList;
-//To-do
-//1. Fetch data from either redux or useEffect axios call
-//2. Make sure that all cards populates
-//3. Card may need edit and delete function as well.
