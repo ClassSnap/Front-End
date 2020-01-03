@@ -2,16 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Rating } from "semantic-ui-react";
 
 const QuestionResult = props => {
-  console.log(props.results);
-
   const [learnerId, setLearnerId] = useState();
   const [rating, setRating] = useState([]);
-  console.log(props.results);
 
   useEffect(() => {
     setRating(props.results[0]);
   }, []);
-  console.log(rating);
+
   return (
     <div
       className={
