@@ -142,6 +142,9 @@ const TeacherDashboard = props => {
             <Link to="/teacher/addquestion">
               <Button>Add Question</Button>
             </Link>
+            <Link to="/teacher/addstudent">
+              <Button>Add Student</Button>
+            </Link>
           </div>
         </div>
         {/* Display Results  */}
