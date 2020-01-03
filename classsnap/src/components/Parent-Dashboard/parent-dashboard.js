@@ -6,7 +6,7 @@ import axiosWithParentAuth from "../../utils/axiosWithParentAuth";
 
 //component
 import ChildList from "./SHARED/ChildrenInfoView/ChildList";
-import AddChildForm from "./ENG/AddChildForm";
+import AddChildForm from "./ENG/AddChildFormWithFormiks";
 
 import UnansweredQuestionList from "../Parent-Dashboard/SHARED/UnansweredQuestionList";
 
