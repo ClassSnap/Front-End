@@ -18,7 +18,6 @@ const UnansweredQuestionList = props => {
       axiosWithParentAuth()
         .get(`/api/ssrating/parent/${parentId}`)
         .then(ratings => {
-          console.log(ratings.data);
           const reverse = ratings.data.reverse();
           const filterRating = reverse.filter(rating => !rating.rating);
           setBlankRatings(...blankRatings, filterRating);

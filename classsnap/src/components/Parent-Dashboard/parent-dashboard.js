@@ -24,7 +24,7 @@ const ParentDashboard = props => {
   const [session, setSession] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState();
   const [allRating, setAllRating] = useState([]);
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState({});
   const [showSession, setShowSession] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
   const [showUnanswered, setUnanswered] = useState(true);
@@ -85,10 +85,9 @@ const ParentDashboard = props => {
 
   const handleQuestionClick = async (id, question) => {
     await axiosWithParentAuth()
-      .get(`/api/ssrating/${id}`)
+      .get(`/api/ssrating/question/${id}`)
       .then(res => {
-        setResults(res.data);
-        console.log(res.data);
+        setResults(res.data.filter(rating => rating.learnerId === learnerId));
         setCurrentQuestion(question);
         setShowResults(true);
         setShowQuestion(false);
@@ -168,6 +167,7 @@ const ParentDashboard = props => {
             question={currentQuestion}
             learnerId={learnerId}
             dashboard={returnToDashboard}
+            learnerId={learnerId}
           />
           <UnansweredQuestionList
             showUnanswered={showUnanswered}

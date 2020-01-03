@@ -2,10 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Rating } from "semantic-ui-react";
 
 const QuestionResult = props => {
-  const getRating = props.results.filter(
-    info => info.learnerId === props.learnerId
-  )[0];
+  console.log(props.results);
 
+  const [learnerId, setLearnerId] = useState();
+  const [rating, setRating] = useState([]);
+  console.log(props.results);
+
+  useEffect(() => {
+    setRating(props.results[0]);
+  }, []);
+  console.log(rating);
   return (
     <div
       className={
@@ -17,9 +23,10 @@ const QuestionResult = props => {
           <p>{props.question}</p>
         </div>
         <h4>Your child's rating</h4>
+
         <Rating
           maxRating={5}
-          rating={getRating === undefined ? 0 : getRating.rating}
+          rating={rating === undefined ? 0 : rating.rating}
           size="massive"
           disabled
         />
@@ -30,8 +37,3 @@ const QuestionResult = props => {
 };
 
 export default QuestionResult;
-
-//12-9-2019
-//All results are fetched from backend
-//Unable to single out results based on learner ID
-//Question Form renders on dashboard
