@@ -28,6 +28,7 @@ import ParentDashboard from "./components/Parent-Dashboard/parent-dashboard";
 import ParentRatingForm from "./components/Parent-Dashboard/ENG/RatingForm";
 import AddStudentForm from "./components/Teacher-Single-Class-Dashboard/AddStudentFormFormik";
 import AddChildForm from "./components/Parent-Dashboard/ENG/AddChildForm";
+import ViewStudentParentInfo from "./components/Teacher-Single-Class-Dashboard/ViewStudentParentInfo";
 //data
 // import { sampleQuestions, sampleStudentData } from "./data";
 
@@ -72,6 +73,11 @@ function App() {
               exact
               path="/teacher/addquestion"
               component={AddQuestionForm}
+            />
+            <Route
+              exact
+              path="/teacher/viewstudent"
+              component={ViewStudentParentInfo}
             />
             <Route
               exact

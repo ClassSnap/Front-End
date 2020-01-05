@@ -40,6 +40,8 @@ const TeacherDashboard = props => {
   }, []);
 
   const handleClick = async (id, name, classCode) => {
+    setCurrentClassId(id);
+    localStorage.setItem("classId", id);
     await axiosWithAuth()
       .get(`/api/question/class/${id}`)
       .then(res => {
@@ -51,7 +53,6 @@ const TeacherDashboard = props => {
         setShowWelcome(false);
         setShowQuestion(true);
         setShowResult(false);
-        setCurrentClassId(id);
       });
   };
 
@@ -128,6 +129,7 @@ const TeacherDashboard = props => {
           classCode={classCode}
           showQuestion={showQuestion}
           handleClick={handleQuestionClick}
+          classId={currentClassId}
         />
         {/* Display Welcome Message */}
         <div
