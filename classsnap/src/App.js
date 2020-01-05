@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, HashRouter as Router, Route } from "react-router-dom";
-
+import PrivateRoute from "./utils/PrivateRoute";
+import PrivateParentRoute from "./utils/PrivateParentRoute";
 import "./App.css";
 
 //components
@@ -31,6 +32,7 @@ import AddStudentForm from "./components/Teacher-Single-Class-Dashboard/AddStude
 import AddChildForm from "./components/Parent-Dashboard/ENG/AddChildForm";
 import AddChildFormSPN from "./components/Parent-Dashboard/SPN/AddChildFormSPN";
 import ViewStudentParentInfo from "./components/Teacher-Single-Class-Dashboard/ViewStudentParentInfo";
+import helpPage from "./components/HelpPage";
 //data
 // import { sampleQuestions, sampleStudentData } from "./data";
 
@@ -49,67 +51,80 @@ function App() {
           <div className="container">
             {/* Public Route */}
             <Route exact path="/" component={LandingPage} />
-            <Route exact path="/teacherlogin" component={teacherLogin} />
-            <Route exact path="/parentlogin" component={parentLogin} />
-            <Route exact path="/teachersignup" component={teacherReg} />
-            <Route exact path="/parentsignup" component={parentReg} />
-            <Route exact path="/parentloginspn" component={parentloginspn} />
-            <Route exact path="/parentsignupspn" component={parentregspn} />
+            <Route path="/teacherlogin" component={teacherLogin} />
+            <Route path="/parentlogin" component={parentLogin} />
+            <Route path="/teachersignup" component={teacherReg} />
+            <Route path="/parentsignup" component={parentReg} />
+            <Route path="/parentloginspn" component={parentloginspn} />
+            <Route path="/parentsignupspn" component={parentregspn} />
+            <Route path="/help" component={helpPage} />
             {/* Private Route */}
             <Route
               exact
               path="/teacher/dashboard"
               render={props => <TeacherDashboard {...props} />}
             />
-            <Route
+            <PrivateRoute
               exact
               path="/teacher/classdash"
               component={SingleClassView}
             />
-            <Route
+            <PrivateRoute
               exact
               path="/teacher/add-question-demo"
               component={AddQuestionFormDemo}
             />
-            <Route
+            <PrivateRoute
               exact
               path="/teacher/addquestion"
               component={AddQuestionForm}
             />
-            <Route
+            <PrivateRoute
               exact
               path="/teacher/viewstudent"
               component={ViewStudentParentInfo}
             />
-            <Route
+            <PrivateRoute
               exact
               path="/teacher/editquestion"
               component={EditQuestionForm}
             />{" "}
-            <Route
+            <PrivateRoute
               exact
               path="/teacher/question-result-list"
               component={QuestionResultList}
             />
-            <Route
+            <PrivateRoute
               exact
               path="/teacher/question-result"
               component={QuestionResult}
             />
-            <Route exact path="/teacher/addclass" component={AddClassForm} />
-            <Route
+            <PrivateRoute
+              exact
+              path="/teacher/addclass"
+              component={AddClassForm}
+            />
+            <PrivateRoute
               exact
               path="/teacher/addstudent"
               component={AddStudentForm}
             />
-            <Route exact path="/parent/dashboard" component={ParentDashboard} />
-            <Route
+            <PrivateParentRoute
+              exact
+              path="/parent/dashboard"
+              component={ParentDashboard}
+            />
+            <PrivateParentRoute
               exact
               path="/parent/spn/dashboard"
               component={ParentDashboardSPN}
             />
-            <Route exact path="/parent/addchild" component={AddChildForm} />
-            <Route
+            <PrivateParentRoute
+              exact
+              path="/parent/addchild"
+              component={AddChildForm}
+            />
+            <PrivateParentRoute
               exact
               path="/parent/spn/addchild"
               component={AddChildFormSPN}

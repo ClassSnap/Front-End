@@ -11,8 +11,6 @@ const AddClassForm = ({ errors, touched, history, ...props }) => {
   };
   return (
     <div className="add-classform">
-      <Button onClick={clickReturn}>Back to Dashboard</Button>
-
       <Form>
         <h1>Add A Class</h1>
         <label>
@@ -65,6 +63,7 @@ const AddClassForm = ({ errors, touched, history, ...props }) => {
         </label>
         <button type="submit">Submit</button>
       </Form>
+      <Button onClick={clickReturn}>Back to Dashboard</Button>
     </div>
   );
 };

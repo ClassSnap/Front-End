@@ -6,10 +6,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={props =>
-        localStorage.getItem("token") ? (
+        localStorage.getItem("parentToken") ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/teacherlogin" />
+          <Redirect to="/parentlogin" />
         )
       }
     />
