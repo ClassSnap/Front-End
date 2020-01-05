@@ -32,7 +32,6 @@ const TeacherDashboard = props => {
       await axiosWithAuth()
         .get(`/api/teacher/${teacherId}`)
         .then(teacher => {
-          console.log(teacher);
           setList(teacher.data.classes);
         });
     }

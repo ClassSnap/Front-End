@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Rating } from "semantic-ui-react";
+import { Rating, Button } from "semantic-ui-react";
 
 const QuestionResult = props => {
   const [learnerId, setLearnerId] = useState();
@@ -19,7 +19,11 @@ const QuestionResult = props => {
         <div className="question-from-teacher">
           <p>{props.question}</p>
         </div>
-        <h4>Your child's rating</h4>
+        {localStorage.getItem("language") === "Spanish" ? (
+          <h4>Tu clasificación</h4>
+        ) : (
+          <h4>Your Rating</h4>
+        )}
 
         <Rating
           maxRating={5}
@@ -28,7 +32,11 @@ const QuestionResult = props => {
           disabled
         />
       </div>
-      <button onClick={props.dashboard}>Back to Dashboard</button>
+      {localStorage.getItem("language") === "Spanish" ? (
+        <Button onClick={props.dashboard}>Volver al tablero</Button>
+      ) : (
+        <Button onClick={props.dashboard}>Back to Dashboard</Button>
+      )}{" "}
     </div>
   );
 };

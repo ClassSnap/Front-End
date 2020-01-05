@@ -12,7 +12,8 @@ import {
 const initialState = {
   error: "",
   isLoading: false,
-  isAuth: localStorage.getItem("token") ? true : false
+  isAuth: localStorage.getItem("token") ? true : false,
+  login: false
 };
 
 const reducers = (state = initialState, action) => {
@@ -28,13 +29,15 @@ const reducers = (state = initialState, action) => {
         ...state,
         error: "",
         isLoading: false,
-        isAuth: true
+        isAuth: true,
+        login: true
       };
     case LOGIN_FAIL:
       return {
         ...state,
         error: action.payload,
-        isLoading: false
+        isLoading: false,
+        login: false
       };
 
     case LOGOUT_START:
@@ -42,13 +45,15 @@ const reducers = (state = initialState, action) => {
         ...state,
         error: "",
         isLoading: true,
-        isAuth: false
+        isAuth: false,
+        login: false
       };
     case LOGOUT_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        isAuth: false
+        isAuth: false,
+        login: false
       };
     case REGISTER_START:
       return {

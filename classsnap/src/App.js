@@ -25,9 +25,11 @@ import SingleClassView from "./components/Teacher-Single-Class-Dashboard/SingleC
 import LandingPage from "./components/SignUp_Pages/landing";
 import ClassList from "./components/Teacher-Dashboard/ClassList";
 import ParentDashboard from "./components/Parent-Dashboard/parent-dashboard";
+import ParentDashboardSPN from "./components/Parent-Dashboard/parent-dashboardSPN";
 import ParentRatingForm from "./components/Parent-Dashboard/ENG/RatingForm";
 import AddStudentForm from "./components/Teacher-Single-Class-Dashboard/AddStudentFormFormik";
 import AddChildForm from "./components/Parent-Dashboard/ENG/AddChildForm";
+import AddChildFormSPN from "./components/Parent-Dashboard/SPN/AddChildFormSPN";
 import ViewStudentParentInfo from "./components/Teacher-Single-Class-Dashboard/ViewStudentParentInfo";
 //data
 // import { sampleQuestions, sampleStudentData } from "./data";
@@ -101,27 +103,17 @@ function App() {
               component={AddStudentForm}
             />
             <Route exact path="/parent/dashboard" component={ParentDashboard} />
-            {/* <Route
+            <Route
               exact
-              path="/parent/ratingform"
-              component={ParentRatingForm}
-            /> */}
+              path="/parent/spn/dashboard"
+              component={ParentDashboardSPN}
+            />
             <Route exact path="/parent/addchild" component={AddChildForm} />
-            {/* <Route
-              exact
-              path="/parent/response-form"
-              component={ParentResponseForm}
-            />
             <Route
               exact
-              path="/parent/new-question-list"
-              component={ParentNewQuestionList}
+              path="/parent/spn/addchild"
+              component={AddChildFormSPN}
             />
-            <Route
-              exact
-              path="/parent/answered-question-list"
-              component={ParentAnsweredQuestionList}
-            /> */}
           </div>
         </Switch>
       </div>

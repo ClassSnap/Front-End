@@ -36,8 +36,12 @@ const ParentRatingForm = props => {
     >
       <div>
         <h2>{props.question}</h2>
+        {localStorage.getItem("language") === "Spanish" ? (
+          <h4>Evalua la claridad de la respuesta del alumno</h4>
+        ) : (
+          <h4>How clear is your child's response?</h4>
+        )}
 
-        <h4>How clear is your child's response?</h4>
         <Rating
           maxRating={5}
           clearable
@@ -45,6 +49,7 @@ const ParentRatingForm = props => {
           onRate={handleChange}
           value={parentRating}
         />
+
         <Button
           className={showSubmit ? "submit" : "submit off"}
           onClick={handleSubmit}
@@ -52,7 +57,11 @@ const ParentRatingForm = props => {
           {showSuccess ? "Submitted" : "Submit"}
         </Button>
       </div>
-      <button onClick={props.dashboard}>Back to Dashboard</button>
+      {localStorage.getItem("language") === "Spanish" ? (
+        <Button onClick={props.dashboard}>Volver al tablero</Button>
+      ) : (
+        <Button onClick={props.dashboard}>Back to Dashboard</Button>
+      )}
     </div>
   );
 };
