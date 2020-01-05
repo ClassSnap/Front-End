@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHome,
+  faSignOutAlt,
+  faBug,
+  faQuestion
+} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { logout } from "../store/teacherAuth/authActions";
@@ -53,6 +58,12 @@ const NavBar = props => {
     color: white;
     font-size: 18px;
   `;
+
+  const Function = styled.div`
+    display: flex;
+    justify-content: space-between;
+  `;
+
   return (
     <Nav>
       <a
@@ -70,13 +81,26 @@ const NavBar = props => {
       >
         <Logo>ClassSnap</Logo>
       </a>
-
-      <Icon className={showLogout ? "logout" : "logout off"}>
-        <Link to="/" onClick={handleLogout}>
-          <FontAwesomeIcon icon={faSignOutAlt} />
-          <span>Logout</span>
-        </Link>
-      </Icon>
+      <Function>
+        <Icon>
+          <a href="https://forms.gle/XkNUdnaqDpSwcCn9A">
+            <FontAwesomeIcon icon={faBug} />
+            <span>Report a bug</span>
+          </a>
+        </Icon>{" "}
+        <Icon>
+          <Link to="/help">
+            <FontAwesomeIcon icon={faQuestion} />
+            <span>Help</span>
+          </Link>
+        </Icon>
+        <Icon className={showLogout ? "logout" : "logout off"}>
+          <Link to="/" onClick={handleLogout}>
+            <FontAwesomeIcon icon={faSignOutAlt} />
+            <span>Logout</span>
+          </Link>
+        </Icon>
+      </Function>
     </Nav>
   );
 };
