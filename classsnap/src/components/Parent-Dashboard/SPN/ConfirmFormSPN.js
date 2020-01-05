@@ -48,10 +48,7 @@ const ConfirmForm = props => {
             </h3>
             <h3>El primer nombre:{props.confirmStudent[0].firstName}</h3>
             <h3>Apellido: {props.confirmStudent[0].lastName}</h3>
-            <h3>
-              Fecha de nacimiento{" "}
-              {props.confirmStudent[0].birthdate.slice(0, 10)}
-            </h3>
+
             <h3>Nombre de la clase: {props.confirmStudent[0].name}</h3>
             <button
               onClick={() => {
