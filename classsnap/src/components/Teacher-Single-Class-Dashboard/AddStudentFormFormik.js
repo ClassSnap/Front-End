@@ -39,10 +39,10 @@ const AddStudentForm = ({ errors, touched, ...props }) => {
             <p className="error">{errors.lastName}</p>
           )}
         </label>
-        <label>
+        {/* <label>
           Birthdate
           <Field type="date" name="birthdate" />
-        </label>
+        </label> */}
         <label>
           Student ID
           <Field type="text" name="studentId" placeholder="Student ID" />
@@ -71,7 +71,7 @@ const FormikAddStudentForm = withFormik({
     return {
       firstName: firstName || "",
       lastName: lastName || "",
-      birthdate: birthdate || "",
+      // birthdate: birthdate || "",
       studentId: studentId || "",
       sessionName: sessionName || ""
     };
@@ -84,7 +84,7 @@ const FormikAddStudentForm = withFormik({
     let newStudent = {
       lastName: values.lastName,
       firstName: values.firstName,
-      birthdate: values.birthdate,
+      // birthdate: values.birthdate,
       learnerCode: values.studentId
     };
     let classId = parseInt(values.sessionName, 10);
