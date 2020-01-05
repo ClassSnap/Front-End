@@ -9,6 +9,7 @@ import { getAllQuestions } from "../../store/teachers/action";
 import QuestionCard from "./QuestionCard";
 
 const QuestionList = props => {
+  console.log(props.classId);
   return (
     <div className={props.showQuestion ? "questionList" : "questionList off"}>
       <h2>{props.name}</h2>
@@ -19,6 +20,15 @@ const QuestionList = props => {
       <Link to="/teacher/addstudent">
         <Button>Add Students</Button>
       </Link>
+      <Link
+        to={{
+          pathname: "/teacher/viewstudent",
+          state: props.classId
+        }}
+      >
+        <Button>View Students/Parents</Button>
+      </Link>
+
       {props.questionList.map(quest => (
         <QuestionCard
           key={quest.id}
