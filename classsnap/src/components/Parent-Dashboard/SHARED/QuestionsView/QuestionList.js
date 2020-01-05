@@ -19,7 +19,11 @@ const QuestionList = props => {
           onClick={props.handleClick}
         />
       ))}
-      <button onClick={props.dashboard}>Back to Dashboard</button>
+      {localStorage.getItem("language") === "Spanish" ? (
+        <Button onClick={props.dashboard}>Volver al tablero</Button>
+      ) : (
+        <Button onClick={props.dashboard}>Back to Dashboard</Button>
+      )}{" "}
     </div>
   );
 };

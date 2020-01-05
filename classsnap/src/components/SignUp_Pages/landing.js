@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import styled from "styled-components";
 
 const LandingPage = () => {
@@ -10,7 +10,26 @@ const LandingPage = () => {
   const Buttoncontainer = styled.div`
     margin: 20px 10px;
   `;
-
+  // useEffect(() => {
+  //   async function rightPage() {
+  //     if (localStorage.getItem("token")) {
+  //       return <Redirect to="/#/teacher/dashboard" />;
+  //     } else if (
+  //       localStorage.getItem("parentToken") &&
+  //       localStorage.getItem("language") === "Spanish"
+  //     ) {
+  //       return <Redirect to="/#/parent/spn/dashboard" />;
+  //     } else if (
+  //       localStorage.getItem("parentToken") &&
+  //       localStorage.getItem("language") !== "Spanish"
+  //     ) {
+  //       return <Redirect to="/#/parent/dashboard" />;
+  //     } else {
+  //       return null;
+  //     }
+  //   }
+  //   rightPage();
+  // }, []);
   return (
     <div className="landing-page">
       <div className="onboard-top">

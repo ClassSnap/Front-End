@@ -17,9 +17,16 @@ const QuestionCard = props => {
         }}
       >
         <Card.Content>
-          <Card.Header>
-            New Question for {props.firstName} {props.lastName}
-          </Card.Header>
+          {localStorage.getItem("language") === "Spanish" ? (
+            <Card.Header>
+              Nueva pregunta para {props.firstName} {props.lastName}
+            </Card.Header>
+          ) : (
+            <Card.Header>
+              New Question for {props.firstName} {props.lastName}
+            </Card.Header>
+          )}
+
           <Card.Meta>{props.date.slice(0, 10)}</Card.Meta>
           <Card.Description>{props.question}</Card.Description>
         </Card.Content>

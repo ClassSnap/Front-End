@@ -1,85 +1,81 @@
-import React from "react";
-import { Form, Field, withFormik } from "formik";
-import { Button } from "semantic-ui-react";
-import * as Yup from "yup";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import axiosWithParentAuth from "../../../utils/axiosWithParentAuth";
 
-const AddChildFormSPN = ({ errors, touched, history, ...props }) => {
-  //   const clickReturn = () => {
-  //     history.push("/parent/dashboard");
-  //   };
+import AddChildInfo from "./AddChildInfoFormSPN";
+
+const AddChildForm = () => {
+  const [classCode, setClassCode] = useState({ classCode: "" });
+  const [message, setMessage] = useState("");
+  const [showChildInfoForm, setShowChildInfoForm] = useState(false);
+  const [classInfo, setClassInfo] = useState({});
+
+  const handleClassCodeChange = event => {
+    setClassCode({ classCode: event.target.value });
+  };
+
+  const handleClassSearchSubmit = () => {
+    axiosWithParentAuth()
+      .post(`/api/parent/findClass/`, classCode)
+      .then(confirm => {
+        console.log(confirm.data);
+        if (confirm.data.length === 0) {
+          setMessage(
+            "Código de clase no válido. Por favor, introduzca un código de clase válido. "
+          );
+          setShowChildInfoForm(false);
+        } else {
+          setMessage(
+            "Clase encontrada. Ingrese la información de su hijo para continuar"
+          );
+          setShowChildInfoForm(true);
+          setClassInfo(confirm.data[0]);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        setMessage(
+          "Código de clase no válido Vuelva a ingresar su código o consulte con el maestro de su hijo"
+        );
+      });
+  };
+
+  console.log(message);
+  console.log(classInfo);
   return (
-    <div className="add-child-form">
-      <Button>Back to Dashboard</Button>
-      <Form>
-        <h1>Ingresa alumno</h1>
-        <label>
-          Primer Nombre del alumno
-          <Field
+    <div>
+      <h1>Siga las instrucciones para agregar a su hijo</h1>
+      <div className="class-search">
+        <form className="class-search-form" onSubmit={handleClassSearchSubmit}>
+          <h3>Busque la clase de su hijo con el código de clase</h3>
+          <input
             type="text"
-            name="firstName"
-            placeholder="Primer Nombre del alumno"
-          />
-          {touched.firstName && errors.firstName && (
-            <p className="error">{errors.firstName}</p>
-          )}
-        </label>
-        <label>
-          Apellido del alumno
-          <Field
-            type="text"
-            name="lastName"
-            placeholder="Apellido del alumno"
-          />
-          {touched.lastName && errors.lastName && (
-            <p className="error">{errors.lastName}</p>
-          )}
-        </label>
-        <label>
-          Fecha de nacimiento
-          <Field type="date" name="birthdate" />
-          {touched.birthdate && errors.birthdate && (
-            <p className="error">{errors.birthdate}</p>
-          )}
-        </label>
-        <label>
-          Codigo de clase
-          <Field type="text" name="classCode" placeholder="Codigo de clase" />
-          {touched.classCode && errors.classCode && (
-            <p className="error">{errors.classCode}</p>
-          )}
-        </label>
-        <Button>Enviar</Button>
-      </Form>
+            class="classCode"
+            placeholder="Ingrese el código de clase"
+            onChange={handleClassCodeChange}
+          ></input>
+          <button type="submit">Buscar clase</button>
+          <h3>{message}</h3>
+        </form>
+      </div>
+      <div className="child-info-form">
+        <AddChildInfo
+          showChildInfoForm={showChildInfoForm}
+          classInfo={classInfo}
+        />
+      </div>
+      {localStorage.getItem("language") === "Spanish" ? (
+        <Link to="/parent/spn/dashboard">
+          {" "}
+          <h4>Volver al tablero</h4>
+        </Link>
+      ) : (
+        <Link to="/parent/dashboard">
+          <h4>Back to Dashboard</h4>
+        </Link>
+      )}
     </div>
   );
 };
 
-const FormikAddChildFormSPN = withFormik({
-  mapPropsToValues({ firstName, lastName, birthdate, classCode }) {
-    return {
-      firstName: firstName || "",
-      lastName: lastName || "",
-      birthdate: birthdate || "",
-      classCode: classCode || ""
-    };
-  },
-  validationSchema: Yup.object().shape({
-    firstName: Yup.string().required("Please enter your child's first name"),
-    lastName: Yup.string().required("Please enter your child's last name"),
-    birthdate: Yup.string().required(
-      "Please enter your child's birthdate for validation"
-    ),
-    classCode: Yup.string().required("Please enter your child's class code")
-  }),
-  handleSubmit(values, { resetForm, props }) {
-    let newStudent = {
-      firstName: values.firstName,
-      lastName: values.lastName,
-      birthdate: values.birthdate,
-      classCode: values.classCode
-    };
-    resetForm();
-  }
-})(AddChildFormSPN);
-
-export default FormikAddChildFormSPN;
+export default AddChildForm;

@@ -7,14 +7,34 @@ import { connect } from "react-redux";
 import { logout } from "../store/teacherAuth/authActions";
 import { parentlogout } from "../store/parentAuth/authActions";
 const NavBar = props => {
-  const [token, setToken] = useState();
+  const [showLogout, setShowLogout] = useState(true);
 
-  useEffect(async () => {
-    await setToken(
-      localStorage.getItem("token") || localStorage.getItem("parentToken")
-    );
-  }, []);
+  useEffect(() => {
+    function showLogout() {
+      if (
+        localStorage.getItem("token") ||
+        localStorage.getItem("parentToken")
+      ) {
+        setShowLogout(true);
+      } else {
+        setShowLogout(false);
+      }
+    }
+    showLogout();
+  });
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("teacherId");
+    localStorage.removeItem("parentToken");
+    localStorage.removeItem("parentId");
+    localStorage.removeItem("targetQuestion");
+    localStorage.removeItem("classId");
+    localStorage.removeItem("language");
+    setShowLogout(false);
+    // setToken(null);
+    // setParentToken(null);
+  };
   const Nav = styled.div`
     display: flex;
     justify-content: space-between;
@@ -35,28 +55,36 @@ const NavBar = props => {
   `;
   return (
     <Nav>
-      <a href="">
+      <a
+        href={
+          localStorage.getItem("token")
+            ? "/#/teacher/dashboard"
+            : localStorage.getItem("parentToken") &&
+              localStorage.getItem("language") === "Spanish"
+            ? "/#/parent/spn/dashboard"
+            : localStorage.getItem("parentToken") &&
+              localStorage.getItem("language") !== "Spanish"
+            ? "/#/parent/dashboard"
+            : "/"
+        }
+      >
         <Logo>ClassSnap</Logo>
       </a>
-      {props.isAuth ? (
-        <Icon>
-          {/* <a href="/#/teacher/dashboard">
-            <FontAwesomeIcon icon={faHome} />
-            <span>Dashboard</span>
-          </a> */}
-          <Link to="/" onClick={props.logout}>
-            <FontAwesomeIcon icon={faSignOutAlt} />
-            <span>Logout</span>
-          </Link>
-        </Icon>
-      ) : null}
+
+      <Icon className={showLogout ? "logout" : "logout off"}>
+        <Link to="/" onClick={handleLogout}>
+          <FontAwesomeIcon icon={faSignOutAlt} />
+          <span>Logout</span>
+        </Link>
+      </Icon>
     </Nav>
   );
 };
 
 const mapStateToProps = state => {
   return {
-    isAuth: state.teacherAuth.isAuth || state.parentAuth.isAuth
+    login: state.teacherAuth.login,
+    parentLogin: state.parentAuth.parentLogin
   };
 };
 export default connect(mapStateToProps, { logout })(NavBar);

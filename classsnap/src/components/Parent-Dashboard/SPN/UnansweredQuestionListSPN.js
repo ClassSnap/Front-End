@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axiosWithParentAuth from "../../../utils/axiosWithParentAuth";
-import QuestionCard from "./QuestionCard";
-
+import QuestionCard from "../SHARED/QuestionCard";
 const UnansweredQuestionList = props => {
   const [learners, setLearners] = useState([]);
   const [blankRatings, setBlankRatings] = useState([]);
@@ -36,9 +35,9 @@ const UnansweredQuestionList = props => {
       }
     >
       {blankRatings.length > 0 ? (
-        <h3>Unanswered Questions</h3>
+        <h3>Preguntas sin respuestas</h3>
       ) : (
-        <h3>Great Job! All questions answered.</h3>
+        <h3>¡Gran trabajo! Todas las preguntas respondidas</h3>
       )}
       {blankRatings.map(rating => (
         <QuestionCard

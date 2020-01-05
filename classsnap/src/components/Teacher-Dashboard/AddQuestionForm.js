@@ -48,7 +48,7 @@ const AddQuestionForm = () => {
             </Field>
           </div>
           <div className="date">
-            <label>Due Date</label>
+            <label>Date</label>
             <Field type="date" name="date" />
           </div>
         </div>

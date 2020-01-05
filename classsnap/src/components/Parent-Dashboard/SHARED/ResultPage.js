@@ -3,7 +3,11 @@ import React from "react";
 const ResultPage = props => {
   return (
     <div className="result-page">
-      <h2>{`${questionOne.subject} Question of ${questionOne.date}`}</h2>
+      {localStorage.getItem("language") === "Spanish" ? (
+        <h2>{`Pregunta ${questionOne.subject} del ${questionOne.date}`}</h2>
+      ) : (
+        <h2>{`${questionOne.subject} Question of ${questionOne.date}`}</h2>
+      )}
       <div className="question-from-teacher">
         <p>{questionOne.question}</p>
       </div>

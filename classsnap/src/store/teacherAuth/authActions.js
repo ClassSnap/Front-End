@@ -22,7 +22,7 @@ export const login = (credentials, history) => {
       )
       .then(res => {
         dispatch({ type: LOGIN_SUCCESS, payload: res.data });
-        console.log(res.data);
+
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("teacherId", res.data.id);
         history.push("/teacher/dashboard");
@@ -42,6 +42,8 @@ export const logout = history => {
     localStorage.removeItem("teacherId");
     localStorage.removeItem("parentToken");
     localStorage.removeItem("parentId");
+    localStorage.removeItem("targetQuestion");
+    localStorage.removeItem("classId");
     dispatch({ type: LOGOUT_SUCCESS });
     console.log("worked");
   };

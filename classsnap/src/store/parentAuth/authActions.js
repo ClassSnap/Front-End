@@ -22,10 +22,17 @@ export const login = (credentials, history) => {
       )
       .then(res => {
         dispatch({ type: LOGIN_SUCCESS, payload: res.data });
-
+        console.log(res.data.language);
         localStorage.setItem("parentToken", res.data.parentToken);
         localStorage.setItem("parentId", res.data.parentId);
-        history.push("/parent/dashboard");
+        localStorage.setItem("language", res.data.language);
+        if (res.data.language === "English") {
+          history.push("/parent/dashboard");
+        } else if (res.data.language === "Spanish") {
+          history.push("/parent/spn/dashboard");
+        } else {
+          history.push("/parent/dashboard");
+        }
       })
       .catch(err => {
         dispatch({ type: LOGIN_FAIL, payload: err.response });

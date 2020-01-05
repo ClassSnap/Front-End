@@ -59,7 +59,7 @@ export const addQuestion = (info, history) => {
           payload: res.data
         });
         const newQuestion = res.data;
-        history.push("/teacher/dashboard");
+
         axiosWithAuth()
           .get(`/api/student/classparents/${res.data.question.classId}`)
           .then(info => {
@@ -70,6 +70,7 @@ export const addQuestion = (info, history) => {
                 learnerParentId: parent.id,
                 classId: parent.classId
               };
+              console.log(newRating);
               axiosWithAuth()
                 .post("/api/rating", newRating)
                 .then(rating => {
@@ -78,6 +79,7 @@ export const addQuestion = (info, history) => {
                 .catch(error => {
                   console.log("Post Rating", error);
                 });
+              history.push("/teacher/dashboard");
             });
           });
       })

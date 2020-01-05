@@ -123,7 +123,8 @@ const FormikParentRegistrationForm = withFormik({
       parentName: values.name,
       parentEmail: values.email,
       parentPassword: values.password,
-      relationship: values.relationship
+      relationship: values.relationship,
+      language: values.language
     };
     console.log(parent);
     props.register(parent, props.history);
