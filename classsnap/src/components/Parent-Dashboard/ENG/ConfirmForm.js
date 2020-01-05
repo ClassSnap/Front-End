@@ -44,9 +44,8 @@ const ConfirmForm = props => {
             <h3>Child Found. Please Confirm the Following Information</h3>
             <h3>First Name: {props.confirmStudent[0].firstName}</h3>
             <h3>Last Name: {props.confirmStudent[0].lastName}</h3>
-            <h3>Birthdate: {props.confirmStudent[0].birthdate.slice(0, 10)}</h3>
             <h3>Class Name: {props.confirmStudent[0].name}</h3>
-            <h3>Code: {props.confirmStudent[0].id}</h3>
+
             <button
               onClick={() => {
                 handleSubmit(props.confirmStudent[0].id);
