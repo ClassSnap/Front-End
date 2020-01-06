@@ -207,3 +207,7 @@ Rating {
 #helpPage {
   margin: 20px 100px;
 }
+
+#passwordwarning {
+  color: red;
+}
