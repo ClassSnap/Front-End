@@ -74,6 +74,10 @@ const TeacherSignUpForm = ({ errors, touched, ...props }) => {
         {touched.confirmPassword && errors.confirmPassword && (
           <p className="error">{errors.confirmPassword}</p>
         )}
+        <h4 id="passwordwarning">
+          **Please write down your password as the reset password function is
+          not available yet**
+        </h4>
         {/* <button>Register</button> */}
         {props.isLoading ? (
           <Button loading>Loading</Button>

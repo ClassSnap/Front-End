@@ -18,7 +18,7 @@ const Login = ({ errors, touched, ...props }) => {
           </h4>
         </h1>
 
-        <Field type="text" name="username" placeholder="Username" />
+        <Field type="text" name="username" placeholder="E-mail" />
         {touched.username && errors.username && (
           <p className="error">{errors.username}</p>
         )}

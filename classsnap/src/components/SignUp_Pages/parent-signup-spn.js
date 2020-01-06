@@ -56,7 +56,10 @@ const ParentSignUpFormSPN = ({ errors, touched, ...props }) => {
         {touched.confirmPassword && errors.confirmPassword && (
           <p className="error">{errors.confirmPassword}</p>
         )}
-
+        <h4 id="passwordwarning">
+          **Por favor, escriba su contraseña ya que la función de
+          restablecimiento de contraseña aún no está disponible**
+        </h4>
         <label>Idioma Preferido</label>
         <Field component="select" name="language" class="option">
           <option value="Spanish">Español</option>
