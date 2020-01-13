@@ -70,7 +70,10 @@ const ParentSignUpFormSPN = ({ errors, touched, ...props }) => {
         )}
         <h4>
           Al enviar su registro, usted acepta nuestros{" "}
-          <a href="/terms">Términos y Condiciones</a>.{" "}
+          <a href="https://class-snap.netlify.com/#/terms">
+            Términos y Condiciones
+          </a>
+          .{" "}
         </h4>
         {props.isLoading ? (
           <Button loading>Loading</Button>

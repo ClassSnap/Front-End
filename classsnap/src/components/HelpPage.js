@@ -116,7 +116,8 @@ const HelpPage = () => {
         </p>
         <h3 id="help">What are the Terms of Conditions of ClassSnap?</h3>
         <p id="help">
-          To read our Terms and Conditions, click <a href="/terms">here</a>.
+          To read our Terms and Conditions, click{" "}
+          <a href="https://class-snap.netlify.com/#/terms">here</a>.
         </p>
       </div>
     </div>

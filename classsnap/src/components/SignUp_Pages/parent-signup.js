@@ -77,7 +77,10 @@ const ParentSignUpForm = ({ errors, touched, ...props }) => {
         )}
         <h4>
           By submitting registration, you are agreeing to our{" "}
-          <a href="/terms">Terms and Conditions</a>.
+          <a href="https://class-snap.netlify.com/#/terms">
+            Terms and Conditions
+          </a>
+          .
         </h4>
         {props.isLoading ? (
           <Button loading>Loading</Button>
