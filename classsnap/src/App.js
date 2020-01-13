@@ -33,6 +33,7 @@ import AddChildForm from "./components/Parent-Dashboard/ENG/AddChildForm";
 import AddChildFormSPN from "./components/Parent-Dashboard/SPN/AddChildFormSPN";
 import ViewStudentParentInfo from "./components/Teacher-Single-Class-Dashboard/ViewStudentParentInfo";
 import helpPage from "./components/HelpPage";
+import TermsandConditions from "./components/Terms";
 //data
 // import { sampleQuestions, sampleStudentData } from "./data";
 
@@ -58,6 +59,7 @@ function App() {
             <Route path="/parentloginspn" component={parentloginspn} />
             <Route path="/parentsignupspn" component={parentregspn} />
             <Route path="/help" component={helpPage} />
+            <Route path="/terms" component={TermsandConditions} />
             {/* Private Route */}
             <Route
               exact

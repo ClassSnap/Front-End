@@ -114,6 +114,10 @@ const HelpPage = () => {
           <strong>For parents,</strong> Class Codes are provided by teachers.
           Please check with your teacher for a class code.
         </p>
+        <h3 id="help">What are the Terms of Conditions of ClassSnap?</h3>
+        <p id="help">
+          To read our Terms and Conditions, click <a href="/terms">here</a>.
+        </p>
       </div>
     </div>
   );

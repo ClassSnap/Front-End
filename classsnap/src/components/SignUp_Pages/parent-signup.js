@@ -75,6 +75,10 @@ const ParentSignUpForm = ({ errors, touched, ...props }) => {
         {touched.language && errors.language && (
           <p className="error">{errors.language}</p>
         )}
+        <h4>
+          By submitting registration, you are agreeing to our{" "}
+          <a href="/terms">Terms and Conditions</a>.
+        </h4>
         {props.isLoading ? (
           <Button loading>Loading</Button>
         ) : (
