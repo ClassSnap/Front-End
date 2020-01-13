@@ -79,6 +79,12 @@ const TeacherSignUpForm = ({ errors, touched, ...props }) => {
           not available yet**
         </h4>
         {/* <button>Register</button> */}
+
+        <h4>
+          By submitting registration, you are agreeing to our{" "}
+          <a href="/terms">Terms and Conditions</a>.
+        </h4>
+
         {props.isLoading ? (
           <Button loading>Loading</Button>
         ) : (

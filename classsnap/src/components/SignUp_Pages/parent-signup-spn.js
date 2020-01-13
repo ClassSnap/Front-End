@@ -68,6 +68,10 @@ const ParentSignUpFormSPN = ({ errors, touched, ...props }) => {
         {touched.language && errors.language && (
           <p className="error">{errors.language}</p>
         )}
+        <h4>
+          Al enviar su registro, usted acepta nuestros{" "}
+          <a href="/terms">Términos y Condiciones</a>.{" "}
+        </h4>
         {props.isLoading ? (
           <Button loading>Loading</Button>
         ) : (
