@@ -1,9 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHome,
+  faSignOutAlt,
+  faBug,
+  faQuestion
+} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { logout } from "../store/teacherAuth/authActions";
+import { parentlogout } from "../store/parentAuth/authActions";
+const NavBar = props => {
+  const [showLogout, setShowLogout] = useState(true);
 
-const NavBar = () => {
+  useEffect(() => {
+    function showLogout() {
+      if (
+        localStorage.getItem("token") ||
+        localStorage.getItem("parentToken")
+      ) {
+        setShowLogout(true);
+      } else {
+        setShowLogout(false);
+      }
+    }
+    showLogout();
+  });
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("teacherId");
+    localStorage.removeItem("parentToken");
+    localStorage.removeItem("parentId");
+    localStorage.removeItem("targetQuestion");
+    localStorage.removeItem("classId");
+    localStorage.removeItem("language");
+    setShowLogout(false);
+    // setToken(null);
+    // setParentToken(null);
+  };
   const Nav = styled.div`
     display: flex;
     justify-content: space-between;
@@ -22,18 +58,57 @@ const NavBar = () => {
     color: white;
     font-size: 18px;
   `;
+
+  const Function = styled.div`
+    display: flex;
+    justify-content: space-between;
+  `;
+
   return (
     <Nav>
-      <a href="">
+      <a
+        href={
+          localStorage.getItem("token")
+            ? "/#/teacher/dashboard"
+            : localStorage.getItem("parentToken") &&
+              localStorage.getItem("language") === "Spanish"
+            ? "/#/parent/spn/dashboard"
+            : localStorage.getItem("parentToken") &&
+              localStorage.getItem("language") !== "Spanish"
+            ? "/#/parent/dashboard"
+            : "/"
+        }
+      >
         <Logo>ClassSnap</Logo>
       </a>
-      <Icon>
-        <FontAwesomeIcon icon={faHome} />
-        <span>Home</span>
-        <FontAwesomeIcon icon={faInfoCircle} />
-        <span>Help</span>
-      </Icon>
+      <Function>
+        <Icon>
+          <a href="https://forms.gle/XkNUdnaqDpSwcCn9A">
+            <FontAwesomeIcon icon={faBug} />
+            <span>Report a bug</span>
+          </a>
+        </Icon>{" "}
+        <Icon>
+          <Link to="/help">
+            <FontAwesomeIcon icon={faQuestion} />
+            <span>Help</span>
+          </Link>
+        </Icon>
+        <Icon className={showLogout ? "logout" : "logout off"}>
+          <Link to="/" onClick={handleLogout}>
+            <FontAwesomeIcon icon={faSignOutAlt} />
+            <span>Logout</span>
+          </Link>
+        </Icon>
+      </Function>
     </Nav>
   );
 };
-export default NavBar;
+
+const mapStateToProps = state => {
+  return {
+    login: state.teacherAuth.login,
+    parentLogin: state.parentAuth.parentLogin
+  };
+};
+export default connect(mapStateToProps, { logout })(NavBar);

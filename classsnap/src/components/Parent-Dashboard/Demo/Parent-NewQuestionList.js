@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
 //component
-import ParentNewQuestionCard from "./Parent-NewQuestionCard";
+// import ParentNewQuestionCard from "./Parent-NewQuestionCard";
 
 //context
 import { QuestionContext } from "../../contexts/QuestionContext";

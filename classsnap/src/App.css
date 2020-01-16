@@ -44,12 +44,16 @@ span {
 
 .container {
   margin: 0 auto;
-  max-width: 880px;
+  /* max-width: 880px; */
 }
 
 /* Question Form Styling */
 .question-form {
   margin: 25px;
+}
+
+form {
+  margin: 0 50px;
 }
 
 form {
@@ -188,4 +192,22 @@ Rating {
 
 .student-rate p {
   padding: 10px 0px;
+}
+
+.off {
+  display: none;
+}
+
+#help {
+  text-align: left;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+#helpPage {
+  margin: 20px 100px;
+}
+
+#passwordwarning {
+  color: red;
 }

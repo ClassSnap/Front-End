@@ -1,5 +1,7 @@
 import React from "react";
+import { Button } from "semantic-ui-react";
 import { Form, Field, withFormik } from "formik";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { register } from "../../store/parentAuth/authActions";
 import { connect } from "react-redux";
@@ -7,8 +9,16 @@ import { connect } from "react-redux";
 const ParentSignUpForm = ({ errors, touched, ...props }) => {
   return (
     <div className="parent-reg-form">
+      <Link to="/parentsignupspn">
+        <Button>En Español</Button>
+      </Link>
       <Form>
-        <h1>Parent Registration Here</h1>
+        <h1>
+          Parent Registration
+          <h4>
+            (Not a parent? Click <Link to="/">here</Link>)
+          </h4>
+        </h1>
         <label>
           Name
           <Field type="text" name="name" placeholder="Name" />
@@ -51,29 +61,64 @@ const ParentSignUpForm = ({ errors, touched, ...props }) => {
         {touched.confirmPassword && errors.confirmPassword && (
           <p className="error">{errors.confirmPassword}</p>
         )}
-        <button>Register</button>
+        <h4 id="passwordwarning">
+          **Please write down your password as the reset password function is
+          not available yet**
+        </h4>
+
+        <label>Preferred Language</label>
+        <Field component="select" name="language" class="option">
+          <option value="default">Please select</option>
+          <option value="English">English</option>
+          <option value="Spanish">Español</option>
+        </Field>
+        {touched.language && errors.language && (
+          <p className="error">{errors.language}</p>
+        )}
+        <h4>
+          By submitting registration, you are agreeing to our{" "}
+          <a href="https://class-snap.netlify.com/#/terms">
+            Terms and Conditions
+          </a>
+          .
+        </h4>
+        {props.isLoading ? (
+          <Button loading>Loading</Button>
+        ) : (
+          <Button type="submit">Register</Button>
+        )}
       </Form>
 
-      <h4>Have an account already? Login In Here.</h4>
+      <h4>
+        Have an account already? Login In <Link to="/parentlogin">here</Link>.
+      </h4>
     </div>
   );
 };
 
 const FormikParentRegistrationForm = withFormik({
-  mapPropsToValues({ name, relationship, email, password, confirmPassword }) {
+  mapPropsToValues({
+    name,
+    relationship,
+    email,
+    password,
+    confirmPassword,
+    language
+  }) {
     return {
       name: name || "",
       relationship: relationship || "",
       email: email || "",
       password: password || "",
       confirmPassword: confirmPassword || "",
+      language: language || ""
     };
   },
 
   validationSchema: Yup.object().shape({
     name: Yup.string().required("Please enter your name"),
     relationship: Yup.string().required(
-      "Please provide your relationship with the child",
+      "Please provide your relationship with the child"
     ),
     email: Yup.string().required("Please enter your e-mail"),
     password: Yup.string()
@@ -82,6 +127,7 @@ const FormikParentRegistrationForm = withFormik({
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Password must match")
       .required("Password confirm is required"),
+    language: Yup.string().required("Please select your preferred language")
   }),
   handleSubmit(values, { props }) {
     let parent = {
@@ -89,19 +135,20 @@ const FormikParentRegistrationForm = withFormik({
       parentEmail: values.email,
       parentPassword: values.password,
       relationship: values.relationship,
+      language: values.language
     };
+    console.log(parent);
     props.register(parent, props.history);
-  },
+  }
 })(ParentSignUpForm);
 
 const mapPropsToState = state => {
   return {
-    // isLoading: state.auth.isLoading,
-    // error: state.auth.error,
+    isLoading: state.parentAuth.isLoading,
+    error: state.parentAuth.error
   };
 };
 
-export default connect(
-  mapPropsToState,
-  { register },
-)(FormikParentRegistrationForm);
+export default connect(mapPropsToState, { register })(
+  FormikParentRegistrationForm
+);

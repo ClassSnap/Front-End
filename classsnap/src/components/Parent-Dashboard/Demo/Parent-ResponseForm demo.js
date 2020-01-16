@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Rating } from "semantic-ui-react";
 //context
-import { QuestionContext } from "../../contexts/QuestionContext";
+import { QuestionContext } from "../../../contexts/QuestionContext";
 
 const ParentResponseForm = () => {
   const { sampleQuestions } = useContext(QuestionContext);
