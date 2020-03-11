@@ -99,7 +99,7 @@ const LandingPage = () => {
                 <Link to="/teacherlogin">
                   <Button primary>Para maestros</Button>
                 </Link>
-                <Link to="/parentlogin">
+                <Link to="/parentloginspn">
                   <Button secondary>Para padres</Button>
                 </Link>
               </Buttoncontainer>
