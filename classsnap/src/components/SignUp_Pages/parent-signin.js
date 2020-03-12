@@ -44,6 +44,7 @@ const Login = ({ errors, touched, ...props }) => {
           <Button type="submit">Submit</Button>
         )}
       </Form>
+      
       <FacebookLogin
         appId="1154927471565693"
         autoLoad
@@ -55,6 +56,8 @@ const Login = ({ errors, touched, ...props }) => {
           </button>
         )}
       />
+      <div class="g-signin2" data-onsuccess="onSignIn"></div>
+         
       <h4>
         Don't have an account yet? Sign Up <Link to="/parentsignup">here</Link>
       </h4>
