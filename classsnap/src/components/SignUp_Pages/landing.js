@@ -13,10 +13,7 @@ const LandingPage = () => {
   `;
 
   const Language = styled.div`
-    margin-top: 20px;
-    margin-right: 50px;
-    margin-bottom: -30px
-    text-align: right;
+    // display: flex;
   `;
 
   const handleSpanishClick = () => {
@@ -43,66 +40,68 @@ const LandingPage = () => {
     } else {
       return (
         <div className="landing-page">
-          <Language className={spanish ? "show-spn off" : "show-spn"}>
-            <Button color="light-blue" onClick={handleSpanishClick}>
+        <div className="language-button-box">
+          <div className={spanish ? "show-spn off" : "show-spn"}>
+            <button className="language-button" onClick={handleSpanishClick}>
               Español
-            </Button>
-          </Language>
-          <Language className={spanish ? "show-eng" : "show-eng off"}>
-            <Button color="light-blue" onClick={handleEnglishClick}>
+            </button>
+          </div>
+          <div className={spanish ? "show-eng" : "show-eng off"}>
+            <button className="language-button" onClick={handleEnglishClick}>
               English
-            </Button>
-          </Language>
+            </button>
+          </div>
+         </div>
           <div className={spanish ? "landing off" : "landing"}>
             <div className="onboard-top">
-              <h2>Welcome to ClassSnap</h2>
-              <h3>Get Started with selecting your user type</h3>
-              <Buttoncontainer>
+              <h1>Welcome to ClassSnap</h1>
+              <h2>Get Started with selecting your user type</h2>
+              <div className="button-container">
                 <Link to="/teachersignup">
-                  <Button primary>Teacher Register</Button>
+                <button className="teacher-button">Teacher Register</button>
                 </Link>
                 <Link to="/parentsignup">
-                  <Button secondary>Parent Register</Button>
+                  <button className="parent-button">Parent Register</button>
                 </Link>
-              </Buttoncontainer>
+              </div>
             </div>
             <Divider />
             <div className="onboard-bottom">
-              <h3>Already have an account? Login below.</h3>
-              <Buttoncontainer>
+              <h2>Already have an account? Login below.</h2>
+              <div className="button-container">
                 <Link to="/teacherlogin">
-                  <Button primary>Teacher Login</Button>
+                  <button className="teacher-button">Teacher Login</button>
                 </Link>
                 <Link to="/parentlogin">
-                  <Button secondary>Parent Login</Button>
+                  <button className="parent-button">Parent Login</button>
                 </Link>
-              </Buttoncontainer>
+              </div>
             </div>
           </div>
           <div className={spanish ? "landing" : "landing off"}>
             <div className="onboard-top">
-              <h2>Bienvenido a ClassSnap</h2>
-              <h3>Comience a seleccionar su tipo de usuario</h3>
-              <Buttoncontainer>
+              <h1>Bienvenido a ClassSnap</h1>
+              <h2>Comience a seleccionar su tipo de usuario</h2>
+              <div className="button-container">
                 <Link to="/teachersignup">
-                  <Button primary>Registro de maestros</Button>
+                  <button className="teacher-button">Registro de maestros</button>
                 </Link>
                 <Link to="/parentsignup">
-                  <Button secondary>Registro de padres</Button>
+                  <button className="parent-button">Registro de padres</button>
                 </Link>
-              </Buttoncontainer>
+              </div>
             </div>
             <Divider />
             <div className="onboard-bottom">
-              <h3>¿Tienes una cuenta? Entre aquí.</h3>
-              <Buttoncontainer>
+              <h2>¿Tienes una cuenta? Entre aquí.</h2>
+              <div className="button-container">
                 <Link to="/teacherlogin">
-                  <Button primary>Para maestros</Button>
+                  <button className="teacher-button">Para maestros</button>
                 </Link>
                 <Link to="/parentloginspn">
-                  <Button secondary>Para padres</Button>
+                  <button className="parent-button">Para padres</button>
                 </Link>
-              </Buttoncontainer>
+              </div>
             </div>
           </div>
         </div>
