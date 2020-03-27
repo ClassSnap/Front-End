@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import FacebookLogin from "react-facebook-login";
+
 import { Form, Field, withFormik } from "formik";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -8,6 +10,18 @@ import axios from "axios";
 import * as Yup from "yup";
 
 const LoginSPN = ({ errors, touched, ...props }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [credentials, setCredentials] = useState({
+    userId: "",
+    name: "",
+    email: "",
+    picture: ""
+  });
+
+  const responseFacebook = response => {
+    console.log(response);
+  };
+  
   return (
     <div className="sign-in-form">
       <Form>
@@ -27,7 +41,17 @@ const LoginSPN = ({ errors, touched, ...props }) => {
           <Button type="submit">Enviar</Button>
         )}
       </Form>
-
+      <FacebookLogin
+        appId="1154927471565693"
+        autoLoad
+        callback={responseFacebook}
+        fields="name,email,picture"
+        render={renderProps => (
+          <button onClick={renderProps.onClick}>
+            This is my custom FB button
+          </button>
+        )}
+      />
       <h4>
         ¿No tienes cuenta? Registrarte <Link to="/parentsignup">aquí</Link>
       </h4>
@@ -56,7 +80,7 @@ const FormikLoginFormSPN = withFormik({
       parentEmail: values.username,
       parentPassword: values.password
     };
-    console.log("form submitted", credentials);
+    // console.log("form submitted", credentials);
     props.login(credentials, props.history);
     resetForm();
   }
