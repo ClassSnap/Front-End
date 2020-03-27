@@ -41,16 +41,16 @@ const LandingPage = () => {
       return (
         <div className="landing-page">
         <div className="language-button-box">
-          <div className={spanish ? "show-spn off" : "show-spn"}>
-            <button className="language-button" onClick={handleSpanishClick}>
+          {/* <div className={spanish ? "show-spn off" : "show-spn"}> */}
+            <button className={spanish? "off":"language-button"} onClick={handleSpanishClick}>
               Español
             </button>
-          </div>
-          <div className={spanish ? "show-eng" : "show-eng off"}>
-            <button className="language-button" onClick={handleEnglishClick}>
+          {/* </div> */}
+          {/* <div className={spanish ? "show-eng" : "show-eng off"}> */}
+            <button className={spanish? "language-button":"off"} onClick={handleEnglishClick}>
               English
             </button>
-          </div>
+          {/* </div> */}
          </div>
           <div className={spanish ? "landing off" : "landing"}>
             <div className="onboard-top">

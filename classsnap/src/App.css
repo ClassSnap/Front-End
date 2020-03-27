@@ -299,13 +299,13 @@ div .language-button-box {
   margin: 1%;
 }
 
-.language-button {
+.language-button  {
   background-color: beige;
   color: black;
-  padding: 10%;
-  margin: 5%;
+  width:20%;
   
 }
+
 
 /* Styling for Landing Page */
 .button-container {
@@ -314,6 +314,8 @@ div .language-button-box {
   flex-direction: row;
   justify-content: center;
 }
+
+
 
 
 @media (max-width:500px) {
@@ -357,10 +359,11 @@ div .language-button-box {
   .language-button {
     background-color: beige;
     color: black;
-    padding:10% 15%;
+  
     font-size: 18px;
     white-space: normal;
-    width: 100%;
-    margin-right: 50px;
+    width: 80%;
+    margin: 2% 10%;
+  
   }
 }
