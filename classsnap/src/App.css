@@ -125,6 +125,36 @@ h2 {
   
 }
 
+@media (max-width: 1080px) {
+  .signin-field {
+    width:50%;
+  }
+
+  .signin-field-button {
+    width: 25%;
+  }
+}
+
+@media (max-width: 760px) {
+  .signin-field {
+    width:70%;
+  }
+
+  .signin-field-button {
+    width: 35%;
+  }
+}
+
+@media (max-width: 500px) {
+  .signin-field {
+    width:95%;
+  }
+
+  .signin-field-button {
+    width: 45%;
+  }
+}
+
 .sign-in-note {
   margin-top: 25px;
 }
