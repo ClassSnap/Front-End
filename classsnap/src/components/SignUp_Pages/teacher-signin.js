@@ -10,33 +10,36 @@ import * as Yup from "yup";
 const Login = ({ errors, touched, ...props }) => {
   return (
     <div className="sign-in-form">
-      <Form>
-        <h1>
-          Teacher Sign In
+      <div className="form-header">
+       <h1 className="topic">
+          Teacher Sign In</h1>
           <h4>
             (Not a teacher? Click <Link to="/">here</Link>)
           </h4>
-        </h1>
+     </div>
+      <Form className="input-field">
+       
 
-        <Field type="text" name="username" placeholder="E-mail" />
+        <Field type="text" name="username" placeholder="E-mail" className="signin-field"/>
         {touched.username && errors.username && (
           <p className="error">{errors.username}</p>
         )}
-        <Field type="password" name="password" placeholder="Password" />
+        <Field type="password" name="password" placeholder="Password" className="signin-field"/>
         {touched.password && errors.password && (
           <p className="error">{errors.password}</p>
         )}
         {props.isLoading ? (
-          <Button loading>Loading</Button>
+          <Button loading className="signin-field-button">Loading</Button>
         ) : (
-          <Button type="submit">Submit</Button>
+          <Button type="submit" className="signin-field-button">Submit</Button>
         )}
       </Form>
-
-      <h4>
+      
+        <h4 className="sign-in-note">
         Don't have an account yet? Sign Up <Link to="/teachersignup">here</Link>
         .
-      </h4>
+      < /h4>
+      
     </div>
   );
 };
