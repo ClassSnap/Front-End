@@ -24,23 +24,29 @@ const LoginSPN = ({ errors, touched, ...props }) => {
   
   return (
     <div className="sign-in-form">
-      <Form>
-        <h1>Cuenta de acceso</h1>
+      <div className="form-header">
+       <h1 className="topic">
+          Cuenta de acceso</h1> 
+     </div>
 
-        <Field type="text" name="username" placeholder="Correo electrónico" />
+      <Form className="input-field">
+        
+
+        <Field type="text" name="username" placeholder="Correo electrónico" className="signin-field" />
         {touched.username && errors.username && (
           <p className="error">{errors.username}</p>
         )}
-        <Field type="password" name="password" placeholder="Contraseña" />
+        <Field type="password" name="password" placeholder="Contraseña" className="signin-field"/>
         {touched.password && errors.password && (
           <p className="error">{errors.password}</p>
         )}
         {props.isLoading ? (
-          <Button loading>Loading</Button>
+          <Button loading className="signin-field-button">Loading</Button>
         ) : (
-          <Button type="submit">Enviar</Button>
+          <Button type="submit" className="signin-field-button">Enviar</Button>
         )}
       </Form>
+      <div className="Oauth">
       <FacebookLogin
         appId="1154927471565693"
         autoLoad
@@ -51,8 +57,8 @@ const LoginSPN = ({ errors, touched, ...props }) => {
             This is my custom FB button
           </button>
         )}
-      />
-      <h4>
+      />></div>
+      <h4 className="sign-in-note">
         ¿No tienes cuenta? Registrarte <Link to="/parentsignup">aquí</Link>
       </h4>
     </div>
@@ -69,10 +75,10 @@ const FormikLoginFormSPN = withFormik({
   },
 
   validationSchema: Yup.object().shape({
-    username: Yup.string().required("Username is required"),
+    username: Yup.string().required("Se requiere correo electronico"),
     password: Yup.string()
       .min(6)
-      .required("Password with at least 6 characters is required.")
+      .required("Se requiere contraseña con al menos 6 caracteres")
   }),
 
   handleSubmit(values, { resetForm, props }) {
