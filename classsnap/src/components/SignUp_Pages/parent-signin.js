@@ -22,43 +22,45 @@ const Login = ({ errors, touched, ...props }) => {
   };
   return (
     <div className="sign-in-form">
-      <Form>
-        <h1>
-          Parent Sign In
+      <div className="form-header">
+       <h1 className="topic">
+          Parent Sign In</h1>
           <h4>
             (Not a parent? Click <Link to="/">here</Link>)
           </h4>
-        </h1>
-
-        <Field type="text" name="username" placeholder="E-mail" />
+     </div>
+      <Form className="input-field">
+        
+        <Field type="text" name="username" placeholder="E-mail" className="signin-field"/>
         {touched.username && errors.username && (
           <p className="error">{errors.username}</p>
         )}
-        <Field type="password" name="password" placeholder="Password" />
+        <Field type="password" name="password" placeholder="Password" className="signin-field"/>
         {touched.password && errors.password && (
           <p className="error">{errors.password}</p>
         )}
         {props.isLoading ? (
-          <Button loading>Loading</Button>
+          <Button loading className="signin-field-button">Loading</Button>
         ) : (
-          <Button type="submit">Submit</Button>
+          <Button type="submit" className="signin-field-button">Submit</Button>
         )}
       </Form>
-      
+      <div className="Oauth">
       <FacebookLogin
+  
         appId="1154927471565693"
         autoLoad
         callback={responseFacebook}
         fields="name,email,picture"
         render={renderProps => (
-          <button onClick={renderProps.onClick}>
+          <button onClick={renderProps.onClick} >
             This is my custom FB button
           </button>
         )}
       />
       <div class="g-signin2" data-onsuccess="onSignIn"></div>
-         
-      <h4>
+         </div>
+      <h4 className="sign-in-note">
         Don't have an account yet? Sign Up <Link to="/parentsignup">here</Link>
       </h4>
     </div>

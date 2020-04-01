@@ -99,7 +99,7 @@ h2 {
 }
 
 
-/* Teacher sign in page Styling */
+/* Teacher and Parent sign in page Styling */
 
 
 .topic h1 {
@@ -157,6 +157,10 @@ h2 {
 
 .sign-in-note {
   margin-top: 25px;
+}
+
+.Oauth {
+  display: none;
 }
 
 span {

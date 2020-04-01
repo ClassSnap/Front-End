@@ -38,7 +38,7 @@ const Login = ({ errors, touched, ...props }) => {
         <h4 className="sign-in-note">
         Don't have an account yet? Sign Up <Link to="/teachersignup">here</Link>
         .
-      < /h4>
+      </h4>
       
     </div>
   );
